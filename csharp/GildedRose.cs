@@ -45,21 +45,17 @@ namespace csharp
                 return;
 
             if (item.Name != ProductNames.AgedBrie && item.Name != ProductNames.BackstagePasses)
-            {
                 DecreaseQuality(item);
-            }
             else
-            {
                 IncreaseQuality(item);
 
-                if (item.Name == ProductNames.BackstagePasses)
-                {
-                    if (item.SellIn < BackstagePassesThresholdDoubleQuality)
-                        IncreaseQuality(item);
+            if (item.Name == ProductNames.BackstagePasses)
+            {
+                if (item.SellIn < BackstagePassesThresholdDoubleQuality)
+                    IncreaseQuality(item);
 
-                    if (item.SellIn < BackstagePassesThresholdTripleQuality)
-                        IncreaseQuality(item);
-                }
+                if (item.SellIn < BackstagePassesThresholdTripleQuality)
+                    IncreaseQuality(item);
             }
         }
 
