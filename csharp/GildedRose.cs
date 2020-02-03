@@ -4,6 +4,7 @@ namespace csharp
 {
     public static class ProductNames
     {
+        public const string Conjured = "Conjured";
         public const string AgedBrie = "Aged Brie";
         public const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
         public const string Sulfuras = "Sulfuras, Hand of Ragnaros";
@@ -83,7 +84,12 @@ namespace csharp
 
         private static void DecreaseQuality(Item item)
         {
-            if (item.Quality > MinQuality) item.Quality -= QualityDecreaseStep;
+            item.Quality -= QualityDecreaseStep;
+
+            if (item.Name == ProductNames.Conjured)
+                item.Quality -= QualityDecreaseStep;
+
+            if (item.Quality < MinQuality) item.Quality = MinQuality;
         }
     }
 }
