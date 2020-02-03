@@ -221,7 +221,7 @@ namespace csharp
             var expectedSellIn = actualSellIn - 1;
 
             var actualQuality = 10;
-            var expectedQuality = actualQuality - 2 * GildedRose.QualityDecreaseStep;
+            var expectedQuality = actualQuality - 2 * DecreasingQuality.QualityDecreaseStep;
 
             var item = new Item
             {
@@ -247,7 +247,7 @@ namespace csharp
             var expectedSellIn = actualSellIn - 1;
 
             var actualQuality = 10;
-            var expectedQuality = actualQuality - 3 * GildedRose.QualityDecreaseStep;
+            var expectedQuality = actualQuality - 3 * DecreasingQuality.QualityDecreaseStep;
 
             var item = new Item
             {
@@ -273,7 +273,7 @@ namespace csharp
             var expectedSellIn = actualSellIn - 1;
 
             var actualQuality = 10;
-            var expectedQuality = actualQuality + 3 * GildedRose.QualityDecreaseStep;
+            var expectedQuality = actualQuality + 3 * DecreasingQuality.QualityDecreaseStep;
 
             var item = new Item
             {

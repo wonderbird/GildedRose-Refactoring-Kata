@@ -17,12 +17,8 @@ namespace csharp
 
     public class GildedRose
     {
-        public const int MaxQuality = 50;
         public const int BackstagePassesThresholdDoubleQuality = 11;
         public const int BackstagePassesThresholdTripleQuality = 6;
-        public const int MinQuality = 0;
-        public const int QualityDecreaseStep = 1;
-        public const int QualityIncreaseStep = 1;
         public const int SellInDecreaseStep = 1;
         private readonly IList<Item> Items;
 
@@ -51,17 +47,15 @@ namespace csharp
                 return;
 
             if (item.Name != ProductNames.AgedBrie && item.Name != ProductNames.BackstagePasses)
-                DecreaseQuality(item);
+                item.DecreaseQuality();
             else
-                IncreaseQuality(item);
+                item.IncreaseQuality();
 
             if (item.Name == ProductNames.BackstagePasses)
             {
-                if (item.SellIn < BackstagePassesThresholdDoubleQuality)
-                    IncreaseQuality(item);
+                if (item.SellIn < BackstagePassesThresholdDoubleQuality) item.IncreaseQuality();
 
-                if (item.SellIn < BackstagePassesThresholdTripleQuality)
-                    IncreaseQuality(item);
+                if (item.SellIn < BackstagePassesThresholdTripleQuality) item.IncreaseQuality();
             }
         }
 
@@ -70,34 +64,15 @@ namespace csharp
             if (item.SellIn >= 0) return;
 
             if (item.Name == ProductNames.AgedBrie)
-                IncreaseQuality(item);
+                item.IncreaseQuality();
             else if (item.Name == ProductNames.BackstagePasses)
-                item.Quality = MinQuality;
-            else if (item.Name != ProductNames.Sulfuras)
-                DecreaseQuality(item);
+                item.Quality = Item.MinQuality;
+            else if (item.Name != ProductNames.Sulfuras) item.DecreaseQuality();
         }
 
         private static void ReduceSellInDays(Item item)
         {
             if (item.Name != ProductNames.Sulfuras) item.SellIn -= SellInDecreaseStep;
-        }
-
-        private static void IncreaseQuality(Item item)
-        {
-            if (item.Quality < MaxQuality) item.Quality += QualityIncreaseStep;
-        }
-
-        private static void DecreaseQuality(Item item)
-        {
-            item.Quality -= QualityDecreaseStep;
-
-            if (item.Name == ProductNames.Conjured)
-                item.Quality -= QualityDecreaseStep;
-
-            if (item.Name.Contains(ProductAttributes.Summoned))
-                item.Quality -= 2 * QualityDecreaseStep;
-
-            if (item.Quality < MinQuality) item.Quality = MinQuality;
         }
     }
 }

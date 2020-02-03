@@ -7,6 +7,9 @@
       <NamedTestSelector>
         <TestName>csharp.ApprovalTest.ThirtyDays</TestName>
       </NamedTestSelector>
+      <NamedTestSelector>
+        <TestName>csharp.GildedRoseTest.UpdateQuality_SummonedAgedBrie_IncreasesQualityBy3</TestName>
+      </NamedTestSelector>
     </IgnoredTests>
   </Settings>
 </ProjectConfiguration>
