@@ -96,8 +96,6 @@ namespace csharp
         [Test]
         public void UpdateQuality_AgedBrie_IncreasesInQuality()
         {
-            var agedBrie = "Aged Brie";
-
             var actualSellIn = 5;
             var expectedSellIn = actualSellIn - 1;
 
@@ -106,7 +104,7 @@ namespace csharp
 
             var item = new Item
             {
-                Name = agedBrie,
+                Name = ProductNames.AgedBrie,
                 Quality = actualQuality,
                 SellIn = actualSellIn
             };
@@ -122,8 +120,6 @@ namespace csharp
         [Test]
         public void UpdateQuality_AgedBrieQuality50_QualityStays50()
         {
-            var agedBrie = "Aged Brie";
-
             var actualSellIn = 5;
             var expectedSellIn = actualSellIn - 1;
 
@@ -132,7 +128,7 @@ namespace csharp
 
             var item = new Item
             {
-                Name = agedBrie,
+                Name = ProductNames.AgedBrie,
                 Quality = actualQuality,
                 SellIn = actualSellIn
             };
@@ -148,8 +144,6 @@ namespace csharp
         [Test]
         public void UpdateQuality_AgedBrieWithSellIn0_QualityIncreasesBy2()
         {
-            var agedBrie = "Aged Brie";
-
             var actualSellIn = 0;
             var expectedSellIn = actualSellIn - 1;
 
@@ -158,7 +152,7 @@ namespace csharp
 
             var item = new Item
             {
-                Name = agedBrie,
+                Name = ProductNames.AgedBrie,
                 Quality = actualQuality,
                 SellIn = actualSellIn
             };
@@ -174,8 +168,6 @@ namespace csharp
         [Test]
         public void UpdateQuality_Sulfuras_DoesNotDecreaseQuality()
         {
-            var sulfuras = "Sulfuras, Hand of Ragnaros";
-
             var actualSellIn = 5;
             var expectedSellIn = actualSellIn;
 
@@ -184,7 +176,7 @@ namespace csharp
 
             var item = new Item
             {
-                Name = sulfuras,
+                Name = ProductNames.Sulfuras,
                 Quality = actualQuality,
                 SellIn = actualSellIn
             };
@@ -205,11 +197,9 @@ namespace csharp
         [TestCase(0, -1, 20, 0)]
         public void UpdateQuality_BackstagePasses_QualityAsExpected(int actualSellIn, int expectedSellIn, int actualQuality, int expectedQuality)
         {
-            var backstagePasses = "Backstage passes to a TAFKAL80ETC concert";
-
             var item = new Item
             {
-                Name = backstagePasses,
+                Name = ProductNames.BackstagePasses,
                 Quality = actualQuality,
                 SellIn = actualSellIn
             };
