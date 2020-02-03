@@ -10,6 +10,11 @@ namespace csharp
         public const string Sulfuras = "Sulfuras, Hand of Ragnaros";
     }
 
+    public class ProductAttributes
+    {
+        public static string Summoned = "Summoned";
+    }
+
     public class GildedRose
     {
         public const int MaxQuality = 50;
@@ -88,6 +93,9 @@ namespace csharp
 
             if (item.Name == ProductNames.Conjured)
                 item.Quality -= QualityDecreaseStep;
+
+            if (item.Name.Contains(ProductAttributes.Summoned))
+                item.Quality -= 2 * QualityDecreaseStep;
 
             if (item.Quality < MinQuality) item.Quality = MinQuality;
         }

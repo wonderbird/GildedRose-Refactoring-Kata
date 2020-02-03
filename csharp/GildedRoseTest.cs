@@ -236,6 +236,32 @@ namespace csharp
 
             Assert.AreEqual(expectedSellIn, item.SellIn);
             Assert.AreEqual(expectedQuality, item.Quality);
+        }       
+        
+        [Test]
+        public void UpdateQuality_ItemIsSummoned_DegradesQualityBy3()
+        {
+            var summonedItemName = ProductAttributes.Summoned + " Something";
+
+            var actualSellIn = 5;
+            var expectedSellIn = actualSellIn - 1;
+
+            var actualQuality = 10;
+            var expectedQuality = actualQuality - 3 * GildedRose.QualityDecreaseStep;
+
+            var item = new Item
+            {
+                Name = summonedItemName,
+                Quality = actualQuality,
+                SellIn = actualSellIn
+            };
+            var items = new List<Item> { item };
+
+            var rose = new GildedRose(items);
+            rose.UpdateQuality();
+
+            Assert.AreEqual(expectedSellIn, item.SellIn);
+            Assert.AreEqual(expectedQuality, item.Quality);
         }
     }
 }
