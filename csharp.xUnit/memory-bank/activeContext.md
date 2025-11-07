@@ -1,32 +1,46 @@
 # Active Context
 
 ## Current Work Focus
-Test characterization phase COMPLETE! All mutants in covered code killed. Ready to begin refactoring phase.
+**Test Readability Refactoring Phase** - Improving test code for junior developer comprehension before refactoring production code.
 
 ## Recent Changes
-- ✅ Added test 23: `Sulfuras_NeverChanges_WithNegativeSellIn`
-- ✅ Killed the last surviving mutant by testing Sulfuras with negative SellIn
-- ✅ The last mutant was at line 68: string mutation of "Sulfuras, Hand of Ragnaros" to ""
-- ✅ All tests passing (23 tests total)
-- 🎉🎉🎉 **100% OF COVERED CODE MUTANTS KILLED!** - Perfect test effectiveness!
-  - **Mutation Score: 57%** (57 killed out of 100 valid testable mutants)
-  - **0 mutants survived in covered code!**
-  - 43 mutants no coverage (in Program.cs - console app entry point, not part of business logic)
-  - 25 mutants ignored (block removal filter)
-  - 4 mutants compile errors
+- ✅ Test characterization phase COMPLETE (23 tests, 100% mutation coverage of business logic)
+- ✅ Completed review of test code for readability and junior developer friendliness
+- ✅ Identified 5 key improvement areas in test suite
+- ✅ Mutation tests re-run: 57% score confirmed (57 killed, 0 survived in covered code)
 
-## Next Steps
-1. Begin refactoring phase - can now safely refactor UpdateQuality method
-2. Extract item type behaviors into separate methods or use strategy pattern
-3. Maintain all tests green throughout refactoring
-4. Re-run mutation tests after refactoring to ensure test effectiveness maintained
+## Next Steps - Test Refactoring (Immediate)
+1. **Extract helper methods** to reduce duplication
+   - Create helper methods like `CreateItemAndUpdateQuality(name, sellIn, quality)`
+   - Consider builder pattern for complex test scenarios
+2. **Add descriptive constants** for magic numbers
+   - `MaxQuality = 50`, `MinQuality = 0`, `SulfurasQuality = 80`
+   - Item name constants (e.g., `AgedBrie`, `BackstagePasses`, `Sulfuras`)
+3. **Add test class documentation** explaining business rules
+   - Quality bounds (0-50, except Sulfuras)
+   - Sell-by date concept (SellIn = 0)
+   - Item type behaviors overview
+4. **Make assertions more expressive** with named variables
+5. **Consider parameterized tests** for similar test patterns
+
+## Production Code Refactoring (After Test Improvements)
+1. Extract item type behaviors into separate methods or use strategy pattern
+2. Maintain all tests green throughout refactoring
+3. Re-run mutation tests after refactoring to ensure test effectiveness maintained
 
 ## Active Decisions
+- **New Priority**: Improve test readability BEFORE refactoring production code
+- Rationale: Clean, understandable tests are essential for maintaining confidence during production refactoring
 - Following strict TDD: red-green-refactor with commits after each phase
-- Starting with simplest possible test (SellIn decrease)
-- Building up test coverage incrementally before any refactoring
-- Running mutation tests periodically to measure progress and identify gaps
-- Focusing on normal item behavior first before moving to special items
+- Test improvements will be done in small refactoring steps with green tests maintained
+- After test improvements complete, will proceed to production code refactoring
+
+## Test Readability Issues Identified
+1. **Excessive duplication** (High Impact): Every test repeats List<Item>, GildedRose, UpdateQuality(), items[0] boilerplate
+2. **Magic numbers without context** (High Impact): Values like 20, 49, 80, 10 lack explanation of significance
+3. **Calculated assertions not self-documenting** (Medium Impact): Assert.Equal(19, ...) requires mental math from Quality=20
+4. **Missing business rules documentation** (Medium Impact): No overview of quality bounds, sell-by date, item behaviors
+5. **Long string literals repeated** (Low Impact): "Backstage passes to a TAFKAL80ETC concert" appears 9 times
 
 ## Important Patterns
 - Arrange-Act-Assert test structure
