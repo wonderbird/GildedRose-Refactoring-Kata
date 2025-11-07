@@ -4,15 +4,18 @@
 Expanding test coverage to characterize all GildedRose behaviors before refactoring.
 
 ## Recent Changes
-- ✅ Added second test: `NormalItem_DecreaseQuality_BeforeSellByDate`
-- ✅ Test verifies that normal item quality decreases by 1 per day (before sell-by date)
-- ✅ All tests passing (2 tests total)
-- 📊 Initial mutation testing: 6% mutation score (129 mutants, 6 killed, 16 survived, 78 no coverage)
+- ✅ Added third test: `NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate`
+- ✅ Test verifies quality decreases by 2 per day after sell-by date (SellIn < 0)
+- ✅ All tests passing (3 tests total)
+- ✅ Normal item behavior now well-covered (SellIn decrease, quality decrease before/after sell-by)
+- 📊 Mutation testing improved: 21% score (up from 6% baseline)
+  - 21 mutants killed (was 6) - 3.5x improvement
+  - 11 mutants survived (was 16) - 5 fewer surviving
+  - 68 mutants no coverage (was 78) - 10 more paths covered
 
 ## Next Steps
-1. Continue adding characterization tests:
-   - Normal item quality decrease acceleration after sell-by date (doubles to -2/day)
-   - Quality boundary: cannot go below 0
+1. Test quality boundaries for normal items:
+   - Quality cannot go below 0
    - Aged Brie behavior
    - Backstage passes behavior
    - Sulfuras (legendary item) behavior
@@ -22,6 +25,8 @@ Expanding test coverage to characterize all GildedRose behaviors before refactor
 - Following strict TDD: red-green-refactor with commits after each phase
 - Starting with simplest possible test (SellIn decrease)
 - Building up test coverage incrementally before any refactoring
+- Running mutation tests periodically to measure progress and identify gaps
+- Focusing on normal item behavior first before moving to special items
 
 ## Important Patterns
 - Arrange-Act-Assert test structure
