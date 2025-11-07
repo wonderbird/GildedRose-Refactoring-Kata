@@ -1,23 +1,23 @@
 # Active Context
 
 ## Current Work Focus
-Expanding test coverage to characterize all GildedRose behaviors before refactoring.
+Expanding test coverage to characterize all GildedRose behaviors before refactoring - focusing on edge cases near quality boundaries.
 
 ## Recent Changes
-- ✅ Added twelfth test: `Sulfuras_NeverChanges`
-- ✅ Test verifies Sulfuras (legendary item) never changes Quality or SellIn
-- ✅ All tests passing (12 tests total)
-- ✅ All item types now covered (Normal, Aged Brie, Backstage passes, Sulfuras)!
-- 📊 Mutation testing: 49% score (up from 47% - nearly at 50%!)
-  - 49 mutants killed (was 47) - +2 more mutants killed!
-  - 8 mutants survived (was 10) - 2 fewer survivors! 🎉🎉
+- ✅ Added thirteenth test: `BackstagePasses_QualityNeverExceedsFifty_WhenIncreasingByTwo`
+- ✅ Test verifies Backstage passes respect Quality=50 limit when increasing by 2 (SellIn=10, Quality=49)
+- ✅ All tests passing (13 tests total)
+- 🎉 Mutation testing: **50% score** - breakthrough milestone achieved!
+  - 50 mutants killed (was 49) - +1 more mutant killed!
+  - 7 mutants survived (was 8) - 1 fewer survivor! 🎉
   - 43 mutants no coverage (unchanged) - likely edge cases
 
 ## Next Steps
-1. Analyze surviving mutants to identify missing coverage
-2. Add edge case tests to improve mutation score beyond 50%
-3. Consider additional boundary conditions for special items
-4. Once satisfied with coverage, begin refactoring phase
+1. Continue adding edge case tests to improve mutation score beyond 50%
+2. Test Backstage passes with Quality near 50 and SellIn < 6 (+3 increment)
+3. Test Aged Brie after SellBy with Quality near 50
+4. Test Normal items with Quality=1 after SellBy
+5. Once satisfied with coverage, begin refactoring phase
 
 ## Active Decisions
 - Following strict TDD: red-green-refactor with commits after each phase

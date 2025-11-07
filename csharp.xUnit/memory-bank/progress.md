@@ -3,7 +3,7 @@
 ## What Works
 - ✅ Project builds successfully
 - ✅ Test project configured and runs
-- ✅ Twelve characterization tests created and passing:
+- ✅ Thirteen characterization tests created and passing:
   - `NormalItem_DecreaseSellIn_AfterOneDay`: Verifies SellIn decreases by 1
   - `NormalItem_DecreaseQuality_BeforeSellByDate`: Verifies Quality decreases by 1 before sell-by date
   - `NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate`: Verifies Quality decreases by 2 after sell-by date
@@ -16,6 +16,7 @@
   - `BackstagePasses_IncreaseQualityByThree_FiveDaysBeforeConcert`: Backstage passes +3 quality (SellIn = 5)
   - `BackstagePasses_QualityDropsToZero_AfterConcert`: Backstage passes quality = 0 after concert
   - `Sulfuras_NeverChanges`: Sulfuras (legendary) Quality and SellIn never change
+  - `BackstagePasses_QualityNeverExceedsFifty_WhenIncreasingByTwo`: Backstage passes respect Quality=50 limit with +2 increment
 - ✅ Stryker.NET configured and tested
 - ✅ Mutation testing showing steady improvement:
   - Initial baseline: 6% (1 test) - 6 killed, 16 survived
@@ -29,16 +30,18 @@
   - After 10 tests: 45% - 45 killed, 11 survived
   - After 11 tests: 47% - 47 killed, 10 survived (1 fewer survivor!)
   - After 12 tests: 49% - 49 killed, 8 survived (2 fewer survivors!)
+  - After 13 tests: 🎉 **50%** - 50 killed, 7 survived (breakthrough milestone!)
   - All item types covered: Normal items, Aged Brie, Backstage passes, Sulfuras
 
 ## What's Left to Build
 ### Immediate
-- Continue building characterization tests to improve mutation score from 6%
+- Continue building edge case tests to improve mutation score beyond 50%
 
 ### Test Coverage Needed (Priority Order)
-- Analyze surviving mutants (8 remaining) to identify gaps
-- Edge cases to push mutation score above 50%
-- Quality boundary conditions for special items if needed
+- Analyze surviving mutants (7 remaining) to identify gaps
+- Backstage passes Quality near 50 with +3 increment (SellIn < 6)
+- Aged Brie after SellBy with Quality near 50
+- Normal items with Quality=1 after SellBy (should go to 0, not negative)
 - Additional scenarios based on mutation report analysis
 
 ### Refactoring Phase (After Test Coverage)
@@ -47,17 +50,17 @@
 - Use mutation testing to verify test effectiveness
 
 ## Current Status
-**Phase**: Characterization testing (building test coverage)
-**Tests**: 12 passing
-**Mutation Score**: 49% (49 killed, 8 survived, 43 no coverage)
-**Coverage Progress**: All item types complete (Normal, Aged Brie, Backstage passes, Sulfuras)
-**Next Action**: Analyze surviving mutants or add edge cases to exceed 50%
+**Phase**: Characterization testing (edge cases near boundaries)
+**Tests**: 13 passing
+**Mutation Score**: 🎉 **50%** (50 killed, 7 survived, 43 no coverage)
+**Coverage Progress**: All item types complete + Quality boundary edge cases started
+**Next Action**: Continue adding edge cases for Quality boundaries
 **Blockers**: None
 
 ## Known Issues
-- Test coverage excellent (12 tests, 49% mutation score)
+- Test coverage excellent (13 tests, 50% mutation score - milestone achieved!)
 - 43 mutants have no coverage - likely in edge cases or Program.cs
-- 8 mutants survived in covered code - great reduction from 10!
+- 7 mutants survived in covered code - continued improvement!
 - No refactoring done yet (intentional - need tests first)
 
 ## Evolution of Project Decisions
@@ -78,4 +81,5 @@
 - **Decision 15**: Tenth test covers Backstage passes third tier (SellIn = 5) - mutation score 45% (3 more mutants killed), covering 5-1 days tier with +3 quality increase
 - **Decision 16**: Eleventh test covers Backstage passes after concert (SellIn = 0) - mutation score 47% (2 more mutants killed, 1 fewer survivor), completing all Backstage passes tiers
 - **Decision 17**: Twelfth test covers Sulfuras (legendary item) - mutation score 49% (2 more mutants killed, 2 fewer survivors!), completing all item types. Nearly at 50%!
+- **Decision 18**: Thirteenth test covers Backstage passes edge case (Quality=49, SellIn=10) - mutation score **50%** (1 more mutant killed, 1 fewer survivor), breakthrough milestone achieved! Starting edge case coverage phase.
 
