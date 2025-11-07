@@ -3,7 +3,7 @@
 ## What Works
 - ✅ Project builds successfully
 - ✅ Test project configured and runs
-- ✅ Nine characterization tests created and passing:
+- ✅ Ten characterization tests created and passing:
   - `NormalItem_DecreaseSellIn_AfterOneDay`: Verifies SellIn decreases by 1
   - `NormalItem_DecreaseQuality_BeforeSellByDate`: Verifies Quality decreases by 1 before sell-by date
   - `NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate`: Verifies Quality decreases by 2 after sell-by date
@@ -13,6 +13,7 @@
   - `AgedBrie_QualityNeverExceedsFifty`: Verifies quality boundary (cannot exceed 50)
   - `BackstagePasses_IncreaseQualityByOne_MoreThanTenDaysBeforeConcert`: Backstage passes +1 quality (SellIn > 10)
   - `BackstagePasses_IncreaseQualityByTwo_TenDaysBeforeConcert`: Backstage passes +2 quality (SellIn = 10)
+  - `BackstagePasses_IncreaseQualityByThree_FiveDaysBeforeConcert`: Backstage passes +3 quality (SellIn = 5)
 - ✅ Stryker.NET configured and tested
 - ✅ Mutation testing showing steady improvement:
   - Initial baseline: 6% (1 test) - 6 killed, 16 survived
@@ -23,20 +24,19 @@
   - After 7 tests: 33% - 33 killed, 9 survived
   - After 8 tests: 38% - 38 killed, 10 survived
   - After 9 tests: 42% - 42 killed, 10 survived
-  - Normal item and Aged Brie complete, Backstage passes in progress
+  - After 10 tests: 45% - 45 killed, 11 survived
+  - Normal item and Aged Brie complete, Backstage passes nearly complete
 
 ## What's Left to Build
 ### Immediate
 - Continue building characterization tests to improve mutation score from 6%
 
 ### Test Coverage Needed (Priority Order)
-- Backstage passes quality increase patterns:
-  - Test within 10-6 days range (verify consistency)
-  - 5-0 days before concert (quality +3)
+- Backstage passes remaining:
   - After concert (quality drops to 0)
 - Sulfuras behavior (no changes)
-- Quality boundary conditions (0-50 range)
-- Edge cases (negative SellIn, etc.)
+- Quality boundary conditions for special items
+- Edge cases (backstage passes at quality 50, etc.)
 
 ### Refactoring Phase (After Test Coverage)
 - Refactor UpdateQuality method for clarity
@@ -45,16 +45,16 @@
 
 ## Current Status
 **Phase**: Characterization testing (building test coverage)
-**Tests**: 9 passing
-**Mutation Score**: 42% (42 killed, 10 survived, 48 no coverage)
-**Coverage Progress**: Normal items complete, Aged Brie complete, Backstage passes in progress
-**Next Action**: Test Backstage passes 5-1 days tier (quality increases by 3)
+**Tests**: 10 passing
+**Mutation Score**: 45% (45 killed, 11 survived, 44 no coverage)
+**Coverage Progress**: Normal items complete, Aged Brie complete, Backstage passes nearly complete
+**Next Action**: Test Backstage passes after concert (quality drops to 0)
 **Blockers**: None
 
 ## Known Issues
-- Test coverage improving well (9 tests, 42% mutation score)
-- 48 mutants have no coverage - still need more Backstage passes tests and Sulfuras
-- 10 mutants survived in covered code - need to identify and address survivors
+- Test coverage improving well (10 tests, 45% mutation score)
+- 44 mutants have no coverage - still need Backstage passes after-concert test and Sulfuras
+- 11 mutants survived in covered code - need to identify and address survivors
 - No refactoring done yet (intentional - need tests first)
 
 ## Evolution of Project Decisions
@@ -72,4 +72,5 @@
 - **Decision 12**: Seventh test adds upper boundary (quality ≤ 50) - mutation score 33%, killed 1 more mutant AND reduced survivors to 9
 - **Decision 13**: Eighth test starts Backstage passes (first tier) - mutation score jumped to 38% (5 more mutants killed!), opening Backstage passes code path
 - **Decision 14**: Ninth test covers Backstage passes second tier (SellIn = 10) - mutation score 42% (4 more mutants killed), covering 10-6 days tier boundary
+- **Decision 15**: Tenth test covers Backstage passes third tier (SellIn = 5) - mutation score 45% (3 more mutants killed), covering 5-1 days tier with +3 quality increase
 
