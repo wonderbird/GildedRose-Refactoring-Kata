@@ -4,19 +4,19 @@
 Expanding test coverage to characterize all GildedRose behaviors before refactoring.
 
 ## Recent Changes
-- ✅ Added fourth test: `NormalItem_QualityNeverNegative`
-- ✅ Test verifies quality boundary: quality stays at 0, never goes negative
-- ✅ All tests passing (4 tests total)
-- ✅ Normal item behavior comprehensively covered: SellIn, quality degradation, and lower boundary
-- 📊 Mutation testing: 22% score (up from 21%)
-  - 22 mutants killed (was 21) - boundary test killed 1 more mutant
-  - 10 mutants survived (was 11) - 1 fewer surviving
-  - 68 mutants no coverage (unchanged - still need special item tests)
+- ✅ Added fifth test: `AgedBrie_IncreaseQuality_BeforeSellByDate`
+- ✅ Test verifies Aged Brie quality increases by 1 per day (opposite of normal items)
+- ✅ All tests passing (5 tests total)
+- ✅ Started covering special item behavior (Aged Brie)
+- 📊 Mutation testing: 28% score (up from 22% - significant jump!)
+  - 28 mutants killed (was 22) - Aged Brie test killed 6 more mutants!
+  - 10 mutants survived (unchanged)
+  - 62 mutants no coverage (was 68) - 6 fewer uncovered
 
 ## Next Steps
-1. Begin testing special item types:
-   - Aged Brie: quality increases over time
-   - Aged Brie: quality increases faster after sell-by date
+1. Continue testing Aged Brie behavior:
+   - Aged Brie: quality increases faster after sell-by date (by 2 per day)
+   - Aged Brie: quality cannot exceed 50
    - Backstage passes behavior
    - Sulfuras (legendary item) behavior
    - Edge cases (quality bounds, etc.)
