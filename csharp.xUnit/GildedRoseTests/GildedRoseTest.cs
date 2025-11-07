@@ -6,18 +6,25 @@ namespace GildedRoseTests;
 
 public class GildedRoseTest
 {
+    /// <summary>
+    /// Helper method to create an item, run UpdateQuality once, and return the updated item.
+    /// </summary>
+    private Item UpdateItem(string name, int sellIn, int quality)
+    {
+        var items = new List<Item> { new Item { Name = name, SellIn = sellIn, Quality = quality } };
+        var app = new GildedRose(items);
+        app.UpdateQuality();
+        return items[0];
+    }
+
     [Fact]
     public void NormalItem_DecreaseSellIn_AfterOneDay()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = 10, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Normal Item", sellIn: 10, quality: 20);
         
         // Assert
-        Assert.Equal(9, items[0].SellIn);
+        Assert.Equal(9, item.SellIn);
     }
 
     [Fact]
