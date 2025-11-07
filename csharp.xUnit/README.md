@@ -22,3 +22,17 @@ GildedRose/bin/Debug/net8.0/GildedRose 10
 ``` cmd
 dotnet test
 ```
+
+## Run mutation tests with Stryker Mutator
+
+If this is the first time you want to run [Stryker Mutator](https://stryker-mutator.io), then [install the dotnet tool dotnet-stryker](https://stryker-mutator.io/docs/stryker-net/getting-started/) first:
+
+``` cmd
+dotnet tool restore
+```
+
+Once you have installed dotnet-stryker, you can start mutation testing
+
+``` cmd
+dotnet stryker
+```
