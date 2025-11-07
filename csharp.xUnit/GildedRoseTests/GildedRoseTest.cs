@@ -75,4 +75,18 @@ public class GildedRoseTest
         // Assert
         Assert.Equal(21, items[0].Quality);
     }
+
+    [Fact]
+    public void AgedBrie_IncreaseQualityFaster_AfterSellByDate()
+    {
+        // Arrange
+        var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 0, Quality = 20 } };
+        var app = new GildedRose(items);
+        
+        // Act
+        app.UpdateQuality();
+        
+        // Assert
+        Assert.Equal(22, items[0].Quality);
+    }
 }

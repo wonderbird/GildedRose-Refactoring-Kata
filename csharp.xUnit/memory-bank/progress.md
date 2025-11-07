@@ -3,27 +3,28 @@
 ## What Works
 - ✅ Project builds successfully
 - ✅ Test project configured and runs
-- ✅ Five characterization tests created and passing:
+- ✅ Six characterization tests created and passing:
   - `NormalItem_DecreaseSellIn_AfterOneDay`: Verifies SellIn decreases by 1
   - `NormalItem_DecreaseQuality_BeforeSellByDate`: Verifies Quality decreases by 1 before sell-by date
   - `NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate`: Verifies Quality decreases by 2 after sell-by date
   - `NormalItem_QualityNeverNegative`: Verifies quality boundary (cannot go below 0)
   - `AgedBrie_IncreaseQuality_BeforeSellByDate`: Verifies Aged Brie quality increases by 1
+  - `AgedBrie_IncreaseQualityFaster_AfterSellByDate`: Verifies Aged Brie quality increases by 2 after sell-by
 - ✅ Stryker.NET configured and tested
 - ✅ Mutation testing showing steady improvement:
   - Initial baseline: 6% (1 test) - 6 killed, 16 survived
   - After 3 tests: 21% - 21 killed, 11 survived
   - After 4 tests: 22% - 22 killed, 10 survived
   - After 5 tests: 28% - 28 killed, 10 survived
-  - Normal item behavior fully characterized, Aged Brie started
+  - After 6 tests: 32% - 32 killed, 10 survived
+  - Normal item and Aged Brie behaviors fully characterized
 
 ## What's Left to Build
 ### Immediate
 - Continue building characterization tests to improve mutation score from 6%
 
 ### Test Coverage Needed (Priority Order)
-- Aged Brie quality increase (after sell-by date - increases faster by 2)
-- Aged Brie quality cap at 50
+- Aged Brie quality cap at 50 (upper boundary test)
 - Aged Brie behavior after sell-by date
 - Backstage passes quality increase patterns:
   - More than 10 days before concert
@@ -41,16 +42,16 @@
 
 ## Current Status
 **Phase**: Characterization testing (building test coverage)
-**Tests**: 5 passing
-**Mutation Score**: 28% (28 killed, 10 survived, 62 no coverage)
-**Coverage Progress**: Normal items complete, Aged Brie in progress
-**Next Action**: Test Aged Brie quality increase after sell-by date
+**Tests**: 6 passing
+**Mutation Score**: 32% (32 killed, 10 survived, 58 no coverage)
+**Coverage Progress**: Normal items complete, Aged Brie complete (basic behavior)
+**Next Action**: Test Aged Brie quality cap at 50 (upper boundary)
 **Blockers**: None
 
 ## Known Issues
-- Test coverage improving (5 tests, 28% mutation score - good progress)
-- 62 mutants have no coverage - still need tests for Backstage passes and Sulfuras
-- 10 mutants survived in covered code - edge cases likely need more tests
+- Test coverage improving well (6 tests, 32% mutation score)
+- 58 mutants have no coverage - still need tests for Backstage passes and Sulfuras
+- 10 mutants survived in covered code - likely edge cases (quality boundaries at 50?)
 - No refactoring done yet (intentional - need tests first)
 
 ## Evolution of Project Decisions
@@ -64,4 +65,5 @@
 - **Decision 8**: Fourth test adds boundary condition (quality cannot go below 0) - completing normal item test coverage before moving to special items
 - **Decision 9**: Ran mutation tests after 4th test - score 22% (up from 21%), killed 1 more mutant, 1 fewer survivor
 - **Decision 10**: Fifth test covers Aged Brie (first special item) - mutation score jumped to 28% (6 more mutants killed), opening new code path
+- **Decision 11**: Sixth test covers Aged Brie after sell-by date - mutation score 32% (4 more mutants killed), completing basic Aged Brie behavior
 
