@@ -4,21 +4,20 @@
 Expanding test coverage to characterize all GildedRose behaviors before refactoring.
 
 ## Recent Changes
-- ✅ Added eleventh test: `BackstagePasses_QualityDropsToZero_AfterConcert`
-- ✅ Test verifies Backstage passes quality drops to 0 after concert (SellIn = 0)
-- ✅ All tests passing (11 tests total)
-- ✅ Backstage passes coverage complete!
-- 📊 Mutation testing: 47% score (up from 45% - nearly halfway!)
-  - 47 mutants killed (was 45) - +2 more mutants killed!
-  - 10 mutants survived (was 11) - 1 fewer survivor! 🎉
-  - 43 mutants no coverage (was 44) - 1 fewer uncovered
+- ✅ Added twelfth test: `Sulfuras_NeverChanges`
+- ✅ Test verifies Sulfuras (legendary item) never changes Quality or SellIn
+- ✅ All tests passing (12 tests total)
+- ✅ All item types now covered (Normal, Aged Brie, Backstage passes, Sulfuras)!
+- 📊 Mutation testing: 49% score (up from 47% - nearly at 50%!)
+  - 49 mutants killed (was 47) - +2 more mutants killed!
+  - 8 mutants survived (was 10) - 2 fewer survivors! 🎉🎉
+  - 43 mutants no coverage (unchanged) - likely edge cases
 
 ## Next Steps
-1. Sulfuras (legendary item) behavior:
-   - Quality never changes
-   - SellIn never changes
-2. Edge cases and boundary conditions
-3. Additional coverage to reduce surviving mutants
+1. Analyze surviving mutants to identify missing coverage
+2. Add edge case tests to improve mutation score beyond 50%
+3. Consider additional boundary conditions for special items
+4. Once satisfied with coverage, begin refactoring phase
 
 ## Active Decisions
 - Following strict TDD: red-green-refactor with commits after each phase

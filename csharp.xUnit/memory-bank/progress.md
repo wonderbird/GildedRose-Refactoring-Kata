@@ -3,7 +3,7 @@
 ## What Works
 - ✅ Project builds successfully
 - ✅ Test project configured and runs
-- ✅ Eleven characterization tests created and passing:
+- ✅ Twelve characterization tests created and passing:
   - `NormalItem_DecreaseSellIn_AfterOneDay`: Verifies SellIn decreases by 1
   - `NormalItem_DecreaseQuality_BeforeSellByDate`: Verifies Quality decreases by 1 before sell-by date
   - `NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate`: Verifies Quality decreases by 2 after sell-by date
@@ -15,6 +15,7 @@
   - `BackstagePasses_IncreaseQualityByTwo_TenDaysBeforeConcert`: Backstage passes +2 quality (SellIn = 10)
   - `BackstagePasses_IncreaseQualityByThree_FiveDaysBeforeConcert`: Backstage passes +3 quality (SellIn = 5)
   - `BackstagePasses_QualityDropsToZero_AfterConcert`: Backstage passes quality = 0 after concert
+  - `Sulfuras_NeverChanges`: Sulfuras (legendary) Quality and SellIn never change
 - ✅ Stryker.NET configured and tested
 - ✅ Mutation testing showing steady improvement:
   - Initial baseline: 6% (1 test) - 6 killed, 16 survived
@@ -27,17 +28,18 @@
   - After 9 tests: 42% - 42 killed, 10 survived
   - After 10 tests: 45% - 45 killed, 11 survived
   - After 11 tests: 47% - 47 killed, 10 survived (1 fewer survivor!)
-  - Normal item, Aged Brie, and Backstage passes complete
+  - After 12 tests: 49% - 49 killed, 8 survived (2 fewer survivors!)
+  - All item types covered: Normal items, Aged Brie, Backstage passes, Sulfuras
 
 ## What's Left to Build
 ### Immediate
 - Continue building characterization tests to improve mutation score from 6%
 
 ### Test Coverage Needed (Priority Order)
-- Sulfuras behavior (legendary item - no changes)
-- Quality boundary conditions for special items
-- Edge cases to reduce surviving mutants
-- Additional scenarios if mutation score indicates gaps
+- Analyze surviving mutants (8 remaining) to identify gaps
+- Edge cases to push mutation score above 50%
+- Quality boundary conditions for special items if needed
+- Additional scenarios based on mutation report analysis
 
 ### Refactoring Phase (After Test Coverage)
 - Refactor UpdateQuality method for clarity
@@ -46,16 +48,16 @@
 
 ## Current Status
 **Phase**: Characterization testing (building test coverage)
-**Tests**: 11 passing
-**Mutation Score**: 47% (47 killed, 10 survived, 43 no coverage)
-**Coverage Progress**: Normal items complete, Aged Brie complete, Backstage passes complete
-**Next Action**: Test Sulfuras (legendary item - no changes)
+**Tests**: 12 passing
+**Mutation Score**: 49% (49 killed, 8 survived, 43 no coverage)
+**Coverage Progress**: All item types complete (Normal, Aged Brie, Backstage passes, Sulfuras)
+**Next Action**: Analyze surviving mutants or add edge cases to exceed 50%
 **Blockers**: None
 
 ## Known Issues
-- Test coverage improving well (11 tests, 47% mutation score)
-- 43 mutants have no coverage - still need Sulfuras tests
-- 10 mutants survived in covered code - reduced from 11!
+- Test coverage excellent (12 tests, 49% mutation score)
+- 43 mutants have no coverage - likely in edge cases or Program.cs
+- 8 mutants survived in covered code - great reduction from 10!
 - No refactoring done yet (intentional - need tests first)
 
 ## Evolution of Project Decisions
@@ -75,4 +77,5 @@
 - **Decision 14**: Ninth test covers Backstage passes second tier (SellIn = 10) - mutation score 42% (4 more mutants killed), covering 10-6 days tier boundary
 - **Decision 15**: Tenth test covers Backstage passes third tier (SellIn = 5) - mutation score 45% (3 more mutants killed), covering 5-1 days tier with +3 quality increase
 - **Decision 16**: Eleventh test covers Backstage passes after concert (SellIn = 0) - mutation score 47% (2 more mutants killed, 1 fewer survivor), completing all Backstage passes tiers
+- **Decision 17**: Twelfth test covers Sulfuras (legendary item) - mutation score 49% (2 more mutants killed, 2 fewer survivors!), completing all item types. Nearly at 50%!
 
