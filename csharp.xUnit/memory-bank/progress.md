@@ -3,19 +3,19 @@
 ## What Works
 - ✅ Project builds successfully
 - ✅ Test project configured and runs
-- ✅ First characterization test created, passing, and committed:
+- ✅ Two characterization tests created and passing:
   - `NormalItem_DecreaseSellIn_AfterOneDay`: Verifies SellIn decreases by 1
-- ✅ Stryker.NET configured for mutation testing
-- ✅ Git commit completed: `feat: enable mutation testing with Stryker`
+  - `NormalItem_DecreaseQuality_BeforeSellByDate`: Verifies Quality decreases by 1 before sell-by date
+- ✅ Stryker.NET configured and tested
+- ✅ Mutation testing baseline: 6% score (need to improve)
 
 ## What's Left to Build
 ### Immediate
-- Run Stryker mutation tests to verify setup and assess test quality
-- Add more characterization tests based on mutation testing gaps
+- Continue building characterization tests to improve mutation score from 6%
 
-### Test Coverage Needed
-- Normal item quality degradation (before sell-by date)
-- Normal item quality degradation (after sell-by date)
+### Test Coverage Needed (Priority Order)
+- Normal item quality degradation (after sell-by date - doubles to -2/day)
+- Quality boundary: cannot go below 0
 - Aged Brie quality increase
 - Aged Brie behavior after sell-by date
 - Backstage passes quality increase patterns:
@@ -34,18 +34,21 @@
 
 ## Current Status
 **Phase**: Characterization testing (building test coverage)
-**Commit Status**: Clean working tree - last commit done
-**Next Action**: Run mutation tests to guide test creation
+**Tests**: 2 passing
+**Mutation Score**: 6% (baseline established)
+**Next Action**: Add test for quality degradation after sell-by date
 **Blockers**: None
 
 ## Known Issues
-- Only one test exists so far
-- Mutation testing not yet verified
+- Low test coverage (only 2 tests, 6% mutation score)
+- 78 mutants have no coverage (large parts of UpdateQuality untested)
+- 16 mutants survived in covered code (tests need to be more thorough)
 - No refactoring done yet (intentional - need tests first)
 
 ## Evolution of Project Decisions
 - **Decision 1**: Start with simplest possible test (SellIn decrease) rather than quality changes, to establish testing pattern with least complexity
 - **Decision 2**: Create memory bank structure before proceeding further to ensure proper documentation from the start
 - **Decision 3**: First test committed successfully using conventional commit format with Co-authored-by trailer
-- **Decision 4**: Next step is mutation testing to identify gaps in test coverage before adding more tests
+- **Decision 4**: Ran mutation testing early (after 1 test) to establish baseline - 6% score with 129 mutants identified
+- **Decision 5**: Second test focuses on quality decrease for normal items - building coverage incrementally for normal item behavior first
 

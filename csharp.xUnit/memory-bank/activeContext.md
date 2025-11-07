@@ -4,16 +4,15 @@
 Expanding test coverage to characterize all GildedRose behaviors before refactoring.
 
 ## Recent Changes
-- ✅ Created and committed first test: `NormalItem_DecreaseSellIn_AfterOneDay`
-- ✅ Test verifies that a normal item's SellIn property decreases by 1 after calling UpdateQuality()
-- ✅ Committed with: `feat: enable mutation testing with Stryker`
-- ✅ All tests passing (1 test total)
+- ✅ Added second test: `NormalItem_DecreaseQuality_BeforeSellByDate`
+- ✅ Test verifies that normal item quality decreases by 1 per day (before sell-by date)
+- ✅ All tests passing (2 tests total)
+- 📊 Initial mutation testing: 6% mutation score (129 mutants, 6 killed, 16 survived, 78 no coverage)
 
 ## Next Steps
-1. Run Stryker mutation tests to verify setup and assess current test quality
-2. Add more tests to characterize other behaviors:
-   - Normal item quality decrease
-   - Quality decrease acceleration after sell-by date
+1. Continue adding characterization tests:
+   - Normal item quality decrease acceleration after sell-by date (doubles to -2/day)
+   - Quality boundary: cannot go below 0
    - Aged Brie behavior
    - Backstage passes behavior
    - Sulfuras (legendary item) behavior

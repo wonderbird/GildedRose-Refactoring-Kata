@@ -19,4 +19,18 @@ public class GildedRoseTest
         // Assert
         Assert.Equal(9, items[0].SellIn);
     }
+
+    [Fact]
+    public void NormalItem_DecreaseQuality_BeforeSellByDate()
+    {
+        // Arrange
+        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = 10, Quality = 20 } };
+        var app = new GildedRose(items);
+        
+        // Act
+        app.UpdateQuality();
+        
+        // Assert
+        Assert.Equal(19, items[0].Quality);
+    }
 }
