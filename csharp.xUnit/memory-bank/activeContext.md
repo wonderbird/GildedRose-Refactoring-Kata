@@ -1,23 +1,27 @@
 # Active Context
 
 ## Current Work Focus
-Expanding test coverage to characterize all GildedRose behaviors before refactoring - focusing on edge cases near quality boundaries.
+Expanding test coverage to characterize all GildedRose behaviors before refactoring - targeting the last surviving mutant to achieve maximum test effectiveness.
 
 ## Recent Changes
-- ✅ Added fifteenth test: `AgedBrie_QualityNeverExceedsFifty_AfterSellByDate`
-- ✅ Test verifies Aged Brie respects Quality=50 limit when increasing by 2 after SellBy (SellIn=0, Quality=49)
-- ✅ All tests passing (15 tests total)
-- 🎉 Mutation testing: **52% score** - continuing improvement!
-  - 52 mutants killed (was 51) - +1 more mutant killed!
-  - 5 mutants survived (was 6) - 1 fewer survivor! 🎉
-  - 43 mutants no coverage (unchanged) - likely edge cases
+- ✅ Added tests 16-22 covering critical edge cases and boundaries
+- ✅ Test 16: `NormalItem_QualityNeverNegative_AfterSellByDateWithQualityOne` - Quality=1 at SellIn=0
+- ✅ Test 17: `BackstagePasses_IncreaseQualityByTwo_SixDaysBeforeConcert` - SellIn=6 boundary
+- ✅ Test 18: `BackstagePasses_IncreaseQualityByTwo_ElevenDaysBeforeConcert` - SellIn=11 boundary
+- ✅ Test 19: `NormalItem_QualityNeverNegative_AfterSellByDateWithQualityZero` - Quality=0 at SellIn=0
+- ✅ Test 20: `BackstagePasses_IncreaseQualityByThree_OneDayBeforeConcert` - SellIn=1 edge case
+- ✅ Test 21: `AgedBrie_IncreaseQualityFaster_WellPastSellByDate` - Negative SellIn=-5
+- ✅ Test 22: `NormalItem_DecreaseQualityTwiceAsFast_WellPastSellByDate` - Negative SellIn=-5
+- ✅ All tests passing (22 tests total)
+- 🎉🎉 Mutation testing: **56% score** - Outstanding progress!
+  - 56 mutants killed (was 52) - +4 more mutants killed!
+  - **Only 1 mutant survived!** (was 5) - 4 fewer survivors! 🎉🎉
+  - 43 mutants no coverage (unchanged) - likely in Program.cs
 
 ## Next Steps
-1. Continue adding edge case tests to improve mutation score beyond 50%
-2. Test Backstage passes with Quality near 50 and SellIn < 6 (+3 increment)
-3. Test Aged Brie after SellBy with Quality near 50
-4. Test Normal items with Quality=1 after SellBy
-5. Once satisfied with coverage, begin refactoring phase
+1. Identify and kill the last surviving mutant to maximize mutation score
+2. Analyze mutation report to understand what the last mutant is testing
+3. Once mutation score is maximized for covered code, begin refactoring phase
 
 ## Active Decisions
 - Following strict TDD: red-green-refactor with commits after each phase
