@@ -3,23 +3,25 @@
 ## What Works
 - ✅ Project builds successfully
 - ✅ Test project configured and runs
-- ✅ Three characterization tests created and passing:
+- ✅ Four characterization tests created and passing:
   - `NormalItem_DecreaseSellIn_AfterOneDay`: Verifies SellIn decreases by 1
   - `NormalItem_DecreaseQuality_BeforeSellByDate`: Verifies Quality decreases by 1 before sell-by date
   - `NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate`: Verifies Quality decreases by 2 after sell-by date
+  - `NormalItem_QualityNeverNegative`: Verifies quality boundary (cannot go below 0)
 - ✅ Stryker.NET configured and tested
-- ✅ Mutation testing showing strong improvement:
-  - Initial baseline: 6% (1 test)
-  - Current score: 21% (3 tests)
-  - 21 mutants killed, 11 survived, 68 no coverage
+- ✅ Mutation testing showing steady improvement:
+  - Initial baseline: 6% (1 test) - 6 killed, 16 survived
+  - After 3 tests: 21% - 21 killed, 11 survived
+  - After 4 tests: 22% - 22 killed, 10 survived
+  - Normal item behavior fully characterized
 
 ## What's Left to Build
 ### Immediate
 - Continue building characterization tests to improve mutation score from 6%
 
 ### Test Coverage Needed (Priority Order)
-- Quality boundary: cannot go below 0 (for normal items)
-- Aged Brie quality increase
+- Aged Brie quality increase (before sell-by date)
+- Aged Brie quality increase (after sell-by date - increases faster)
 - Aged Brie behavior after sell-by date
 - Backstage passes quality increase patterns:
   - More than 10 days before concert
@@ -37,17 +39,16 @@
 
 ## Current Status
 **Phase**: Characterization testing (building test coverage)
-**Tests**: 3 passing
-**Mutation Score**: 21% (improved from 6% baseline - 3.5x increase)
-**Coverage Progress**: Normal item logic well-covered, special items not yet tested
-**Next Action**: Test quality boundary (cannot go below 0)
+**Tests**: 4 passing
+**Mutation Score**: 22% (22 killed, 10 survived, 68 no coverage)
+**Coverage Progress**: Normal item logic fully covered, moving to special items (Aged Brie)
+**Next Action**: Test Aged Brie quality increase behavior
 **Blockers**: None
 
 ## Known Issues
-- Test coverage improving but still low (3 tests, 21% mutation score)
+- Test coverage improving but still low (4 tests, 22% mutation score)
 - 68 mutants have no coverage - large parts still untested (Aged Brie, Backstage passes, Sulfuras)
-- 11 mutants survived in covered code - may indicate edge cases or boundary conditions missing
-- Quality boundaries not yet tested
+- 10 mutants survived in covered code - will address as we add more tests
 - No refactoring done yet (intentional - need tests first)
 
 ## Evolution of Project Decisions
@@ -58,4 +59,6 @@
 - **Decision 5**: Second test focuses on quality decrease for normal items - building coverage incrementally for normal item behavior first
 - **Decision 6**: Third test covers accelerated quality degradation after sell-by date - completing basic normal item behavior coverage
 - **Decision 7**: Re-ran mutation tests after 3 tests - score improved from 6% to 21% (3.5x), validating our incremental approach
+- **Decision 8**: Fourth test adds boundary condition (quality cannot go below 0) - completing normal item test coverage before moving to special items
+- **Decision 9**: Ran mutation tests after 4th test - score 22% (up from 21%), killed 1 more mutant, 1 fewer survivor
 
