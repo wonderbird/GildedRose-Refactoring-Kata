@@ -314,4 +314,19 @@ public class GildedRoseTest
         // Assert
         Assert.Equal(18, items[0].Quality);
     }
+
+    [Fact]
+    public void Sulfuras_NeverChanges_WithNegativeSellIn()
+    {
+        // Arrange
+        var items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80 } };
+        var app = new GildedRose(items);
+        
+        // Act
+        app.UpdateQuality();
+        
+        // Assert
+        Assert.Equal(80, items[0].Quality);
+        Assert.Equal(-1, items[0].SellIn);
+    }
 }

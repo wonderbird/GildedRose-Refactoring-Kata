@@ -3,3 +3,9 @@ description: Mutation Score Update
 alwaysApply: true
 ---
 Before you prepare a memory bank update, you must run the mutation tests so that you can consider the latest test results.
+
+To use the JSON reporter, execute
+
+```shell
+dotnet stryker --reporter json
+```
