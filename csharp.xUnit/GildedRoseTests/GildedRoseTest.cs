@@ -89,4 +89,18 @@ public class GildedRoseTest
         // Assert
         Assert.Equal(22, items[0].Quality);
     }
+
+    [Fact]
+    public void AgedBrie_QualityNeverExceedsFifty()
+    {
+        // Arrange
+        var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 10, Quality = 50 } };
+        var app = new GildedRose(items);
+        
+        // Act
+        app.UpdateQuality();
+        
+        // Assert
+        Assert.Equal(50, items[0].Quality);
+    }
 }
