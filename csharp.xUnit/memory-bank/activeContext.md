@@ -4,12 +4,12 @@
 Expanding test coverage to characterize all GildedRose behaviors before refactoring - focusing on edge cases near quality boundaries.
 
 ## Recent Changes
-- ✅ Added thirteenth test: `BackstagePasses_QualityNeverExceedsFifty_WhenIncreasingByTwo`
-- ✅ Test verifies Backstage passes respect Quality=50 limit when increasing by 2 (SellIn=10, Quality=49)
-- ✅ All tests passing (13 tests total)
-- 🎉 Mutation testing: **50% score** - breakthrough milestone achieved!
-  - 50 mutants killed (was 49) - +1 more mutant killed!
-  - 7 mutants survived (was 8) - 1 fewer survivor! 🎉
+- ✅ Added fourteenth test: `BackstagePasses_QualityNeverExceedsFifty_WhenIncreasingByThree`
+- ✅ Test verifies Backstage passes respect Quality=50 limit when increasing by 3 (SellIn=5, Quality=48)
+- ✅ All tests passing (14 tests total)
+- 🎉 Mutation testing: **51% score** - continuing improvement!
+  - 51 mutants killed (was 50) - +1 more mutant killed!
+  - 6 mutants survived (was 7) - 1 fewer survivor! 🎉
   - 43 mutants no coverage (unchanged) - likely edge cases
 
 ## Next Steps
