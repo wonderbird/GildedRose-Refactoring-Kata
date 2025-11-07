@@ -3,7 +3,7 @@
 ## What Works
 - ✅ Project builds successfully
 - ✅ Test project configured and runs
-- ✅ Fourteen characterization tests created and passing:
+- ✅ Fifteen characterization tests created and passing:
   - `NormalItem_DecreaseSellIn_AfterOneDay`: Verifies SellIn decreases by 1
   - `NormalItem_DecreaseQuality_BeforeSellByDate`: Verifies Quality decreases by 1 before sell-by date
   - `NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate`: Verifies Quality decreases by 2 after sell-by date
@@ -18,6 +18,7 @@
   - `Sulfuras_NeverChanges`: Sulfuras (legendary) Quality and SellIn never change
   - `BackstagePasses_QualityNeverExceedsFifty_WhenIncreasingByTwo`: Backstage passes respect Quality=50 limit with +2 increment
   - `BackstagePasses_QualityNeverExceedsFifty_WhenIncreasingByThree`: Backstage passes respect Quality=50 limit with +3 increment
+  - `AgedBrie_QualityNeverExceedsFifty_AfterSellByDate`: Aged Brie respects Quality=50 limit with +2 increment after SellBy
 - ✅ Stryker.NET configured and tested
 - ✅ Mutation testing showing steady improvement:
   - Initial baseline: 6% (1 test) - 6 killed, 16 survived
@@ -33,6 +34,7 @@
   - After 12 tests: 49% - 49 killed, 8 survived (2 fewer survivors!)
   - After 13 tests: 🎉 **50%** - 50 killed, 7 survived (breakthrough milestone!)
   - After 14 tests: **51%** - 51 killed, 6 survived (continued improvement!)
+  - After 15 tests: **52%** - 52 killed, 5 survived
   - All item types covered: Normal items, Aged Brie, Backstage passes, Sulfuras
 
 ## What's Left to Build
@@ -40,8 +42,7 @@
 - Continue building edge case tests to improve mutation score beyond 50%
 
 ### Test Coverage Needed (Priority Order)
-- Analyze surviving mutants (6 remaining) to identify gaps
-- Aged Brie after SellBy with Quality near 50 (Quality=49 should become 50, not exceed)
+- Analyze surviving mutants (5 remaining) to identify gaps
 - Normal items with Quality=1 after SellBy (should go to 0, not negative)
 - Additional edge cases for Quality boundaries
 - Additional scenarios based on mutation report analysis
@@ -53,16 +54,16 @@
 
 ## Current Status
 **Phase**: Characterization testing (edge cases near boundaries)
-**Tests**: 14 passing
-**Mutation Score**: **51%** (51 killed, 6 survived, 43 no coverage)
+**Tests**: 15 passing
+**Mutation Score**: **52%** (52 killed, 5 survived, 43 no coverage)
 **Coverage Progress**: All item types complete + Quality boundary edge cases in progress
-**Next Action**: Continue adding edge cases for Quality boundaries (Aged Brie, Normal items)
+**Next Action**: Continue adding edge cases for Quality boundaries (Normal items)
 **Blockers**: None
 
 ## Known Issues
-- Test coverage excellent (14 tests, 51% mutation score - over 50%!)
+- Test coverage excellent (15 tests, 52% mutation score - over 50%!)
 - 43 mutants have no coverage - likely in edge cases or Program.cs
-- 6 mutants survived in covered code - continued improvement!
+- 5 mutants survived in covered code - continued improvement!
 - No refactoring done yet (intentional - need tests first)
 
 ## Evolution of Project Decisions
@@ -85,4 +86,5 @@
 - **Decision 17**: Twelfth test covers Sulfuras (legendary item) - mutation score 49% (2 more mutants killed, 2 fewer survivors!), completing all item types. Nearly at 50%!
 - **Decision 18**: Thirteenth test covers Backstage passes edge case (Quality=49, SellIn=10) - mutation score **50%** (1 more mutant killed, 1 fewer survivor), breakthrough milestone achieved! Starting edge case coverage phase.
 - **Decision 19**: Fourteenth test covers Backstage passes edge case (Quality=48, SellIn=5) - mutation score **51%** (1 more mutant killed, 1 fewer survivor), testing +3 increment boundary.
+- **Decision 20**: Fifteenth test covers Aged Brie edge case after SellBy (Quality=49, SellIn=0) - mutation score **52%** (1 more mutant killed, 1 fewer survivor), testing +2 increment boundary after sell-by date.
 
