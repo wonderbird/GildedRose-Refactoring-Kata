@@ -30,310 +30,222 @@ public class GildedRoseTest
     [Fact]
     public void NormalItem_DecreaseQuality_BeforeSellByDate()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = 10, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Normal Item", sellIn: 10, quality: 20);
         
         // Assert
-        Assert.Equal(19, items[0].Quality);
+        Assert.Equal(19, item.Quality);
     }
 
     [Fact]
     public void NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = 0, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Normal Item", sellIn: 0, quality: 20);
         
         // Assert
-        Assert.Equal(18, items[0].Quality);
+        Assert.Equal(18, item.Quality);
     }
 
     [Fact]
     public void NormalItem_QualityNeverNegative()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = 5, Quality = 0 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Normal Item", sellIn: 5, quality: 0);
         
         // Assert
-        Assert.Equal(0, items[0].Quality);
+        Assert.Equal(0, item.Quality);
     }
 
     [Fact]
     public void AgedBrie_IncreaseQuality_BeforeSellByDate()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 10, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Aged Brie", sellIn: 10, quality: 20);
         
         // Assert
-        Assert.Equal(21, items[0].Quality);
+        Assert.Equal(21, item.Quality);
     }
 
     [Fact]
     public void AgedBrie_IncreaseQualityFaster_AfterSellByDate()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 0, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Aged Brie", sellIn: 0, quality: 20);
         
         // Assert
-        Assert.Equal(22, items[0].Quality);
+        Assert.Equal(22, item.Quality);
     }
 
     [Fact]
     public void AgedBrie_QualityNeverExceedsFifty()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 10, Quality = 50 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Aged Brie", sellIn: 10, quality: 50);
         
         // Assert
-        Assert.Equal(50, items[0].Quality);
+        Assert.Equal(50, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_IncreaseQualityByOne_MoreThanTenDaysBeforeConcert()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 15, quality: 20);
         
         // Assert
-        Assert.Equal(21, items[0].Quality);
+        Assert.Equal(21, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_IncreaseQualityByTwo_TenDaysBeforeConcert()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 10, quality: 20);
         
         // Assert
-        Assert.Equal(22, items[0].Quality);
+        Assert.Equal(22, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_IncreaseQualityByThree_FiveDaysBeforeConcert()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 5, quality: 20);
         
         // Assert
-        Assert.Equal(23, items[0].Quality);
+        Assert.Equal(23, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_QualityDropsToZero_AfterConcert()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 0, quality: 20);
         
         // Assert
-        Assert.Equal(0, items[0].Quality);
+        Assert.Equal(0, item.Quality);
     }
 
     [Fact]
     public void Sulfuras_NeverChanges()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 10, Quality = 80 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Sulfuras, Hand of Ragnaros", sellIn: 10, quality: 80);
         
         // Assert
-        Assert.Equal(80, items[0].Quality);
-        Assert.Equal(10, items[0].SellIn);
+        Assert.Equal(80, item.Quality);
+        Assert.Equal(10, item.SellIn);
     }
 
     [Fact]
     public void BackstagePasses_QualityNeverExceedsFifty_WhenIncreasingByTwo()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 49 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 10, quality: 49);
         
         // Assert
-        Assert.Equal(50, items[0].Quality);
+        Assert.Equal(50, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_QualityNeverExceedsFifty_WhenIncreasingByThree()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 48 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 5, quality: 48);
         
         // Assert
-        Assert.Equal(50, items[0].Quality);
+        Assert.Equal(50, item.Quality);
     }
 
     [Fact]
     public void AgedBrie_QualityNeverExceedsFifty_AfterSellByDate()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 0, Quality = 49 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Aged Brie", sellIn: 0, quality: 49);
         
         // Assert
-        Assert.Equal(50, items[0].Quality);
+        Assert.Equal(50, item.Quality);
     }
 
     [Fact]
     public void NormalItem_QualityNeverNegative_AfterSellByDateWithQualityOne()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = 0, Quality = 1 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Normal Item", sellIn: 0, quality: 1);
         
         // Assert
-        Assert.Equal(0, items[0].Quality);
+        Assert.Equal(0, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_IncreaseQualityByTwo_SixDaysBeforeConcert()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 6, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 6, quality: 20);
         
         // Assert
-        Assert.Equal(22, items[0].Quality);
+        Assert.Equal(22, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_IncreaseQualityByTwo_ElevenDaysBeforeConcert()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 11, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 11, quality: 20);
         
         // Assert
-        Assert.Equal(21, items[0].Quality);
+        Assert.Equal(21, item.Quality);
     }
 
     [Fact]
     public void NormalItem_QualityNeverNegative_AfterSellByDateWithQualityZero()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = 0, Quality = 0 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Normal Item", sellIn: 0, quality: 0);
         
         // Assert
-        Assert.Equal(0, items[0].Quality);
+        Assert.Equal(0, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_IncreaseQualityByThree_OneDayBeforeConcert()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 1, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Backstage passes to a TAFKAL80ETC concert", sellIn: 1, quality: 20);
         
         // Assert
-        Assert.Equal(23, items[0].Quality);
+        Assert.Equal(23, item.Quality);
     }
 
     [Fact]
     public void AgedBrie_IncreaseQualityFaster_WellPastSellByDate()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Aged Brie", SellIn = -5, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Aged Brie", sellIn: -5, quality: 20);
         
         // Assert
-        Assert.Equal(22, items[0].Quality);
+        Assert.Equal(22, item.Quality);
     }
 
     [Fact]
     public void NormalItem_DecreaseQualityTwiceAsFast_WellPastSellByDate()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = -5, Quality = 20 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Normal Item", sellIn: -5, quality: 20);
         
         // Assert
-        Assert.Equal(18, items[0].Quality);
+        Assert.Equal(18, item.Quality);
     }
 
     [Fact]
     public void Sulfuras_NeverChanges_WithNegativeSellIn()
     {
-        // Arrange
-        var items = new List<Item> { new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = -1, Quality = 80 } };
-        var app = new GildedRose(items);
-        
-        // Act
-        app.UpdateQuality();
+        // Arrange & Act
+        var item = UpdateItem("Sulfuras, Hand of Ragnaros", sellIn: -1, quality: 80);
         
         // Assert
-        Assert.Equal(80, items[0].Quality);
-        Assert.Equal(-1, items[0].SellIn);
+        Assert.Equal(80, item.Quality);
+        Assert.Equal(-1, item.SellIn);
     }
 }
