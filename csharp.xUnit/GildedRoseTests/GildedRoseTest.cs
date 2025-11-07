@@ -300,4 +300,18 @@ public class GildedRoseTest
         // Assert
         Assert.Equal(22, items[0].Quality);
     }
+
+    [Fact]
+    public void NormalItem_DecreaseQualityTwiceAsFast_WellPastSellByDate()
+    {
+        // Arrange
+        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = -5, Quality = 20 } };
+        var app = new GildedRose(items);
+        
+        // Act
+        app.UpdateQuality();
+        
+        // Assert
+        Assert.Equal(18, items[0].Quality);
+    }
 }
