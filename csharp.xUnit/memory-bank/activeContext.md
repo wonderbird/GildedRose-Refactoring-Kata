@@ -4,20 +4,21 @@
 Expanding test coverage to characterize all GildedRose behaviors before refactoring.
 
 ## Recent Changes
-- ✅ Added tenth test: `BackstagePasses_IncreaseQualityByThree_FiveDaysBeforeConcert`
-- ✅ Test verifies Backstage passes quality increases by 3 when SellIn = 5
-- ✅ All tests passing (10 tests total)
-- ✅ Backstage passes third tier coverage (5-1 days before concert)
-- 📊 Mutation testing: 45% score (up from 42% - steady progress!)
-  - 45 mutants killed (was 42) - +3 more mutants killed!
-  - 11 mutants survived (was 10) - +1 survivor
-  - 44 mutants no coverage (was 48) - 4 fewer uncovered
+- ✅ Added eleventh test: `BackstagePasses_QualityDropsToZero_AfterConcert`
+- ✅ Test verifies Backstage passes quality drops to 0 after concert (SellIn = 0)
+- ✅ All tests passing (11 tests total)
+- ✅ Backstage passes coverage complete!
+- 📊 Mutation testing: 47% score (up from 45% - nearly halfway!)
+  - 47 mutants killed (was 45) - +2 more mutants killed!
+  - 10 mutants survived (was 11) - 1 fewer survivor! 🎉
+  - 43 mutants no coverage (was 44) - 1 fewer uncovered
 
 ## Next Steps
-1. Complete Backstage passes behavior:
-   - After concert (SellIn < 0): quality drops to 0
-2. Sulfuras (legendary item) behavior
-3. Edge cases (quality bounds, backstage passes at quality 50, etc.)
+1. Sulfuras (legendary item) behavior:
+   - Quality never changes
+   - SellIn never changes
+2. Edge cases and boundary conditions
+3. Additional coverage to reduce surviving mutants
 
 ## Active Decisions
 - Following strict TDD: red-green-refactor with commits after each phase
