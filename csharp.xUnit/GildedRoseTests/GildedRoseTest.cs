@@ -258,4 +258,18 @@ public class GildedRoseTest
         // Assert
         Assert.Equal(21, items[0].Quality);
     }
+
+    [Fact]
+    public void NormalItem_QualityNeverNegative_AfterSellByDateWithQualityZero()
+    {
+        // Arrange
+        var items = new List<Item> { new Item { Name = "Normal Item", SellIn = 0, Quality = 0 } };
+        var app = new GildedRose(items);
+        
+        // Act
+        app.UpdateQuality();
+        
+        // Assert
+        Assert.Equal(0, items[0].Quality);
+    }
 }
