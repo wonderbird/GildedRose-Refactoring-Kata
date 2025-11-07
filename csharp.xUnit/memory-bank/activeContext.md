@@ -4,20 +4,19 @@
 Expanding test coverage to characterize all GildedRose behaviors before refactoring.
 
 ## Recent Changes
-- ✅ Added seventh test: `AgedBrie_QualityNeverExceedsFifty`
-- ✅ Test verifies Aged Brie quality caps at 50 (upper boundary)
-- ✅ All tests passing (7 tests total)
-- ✅ Aged Brie behavior fully covered (increase, acceleration, both boundaries)
-- 📊 Mutation testing: 33% score (up from 32%)
-  - 33 mutants killed (was 32) - +1 more mutant killed
-  - 9 mutants survived (was 10) - 1 fewer survivor!
-  - 58 mutants no coverage (unchanged - still need Backstage passes, Sulfuras)
+- ✅ Added eighth test: `BackstagePasses_IncreaseQualityByOne_MoreThanTenDaysBeforeConcert`
+- ✅ Test verifies Backstage passes quality increases by 1 when SellIn > 10
+- ✅ All tests passing (8 tests total)
+- ✅ Started Backstage passes coverage (first tier of quality increase)
+- 📊 Mutation testing: 38% score (up from 33% - big jump!)
+  - 38 mutants killed (was 33) - +5 more mutants killed!
+  - 10 mutants survived (was 9) - 1 additional survivor
+  - 52 mutants no coverage (was 58) - 6 fewer uncovered
 
 ## Next Steps
-1. Move to Backstage passes (complex behavior with multiple tiers):
-   - More than 10 days: quality increases by 1
-   - 10-6 days: quality increases by 2
-   - 5-1 days: quality increases by 3
+1. Continue Backstage passes tiered behavior:
+   - 10-6 days before concert: quality increases by 2
+   - 5-1 days before concert: quality increases by 3
    - After concert (SellIn < 0): quality drops to 0
    - Backstage passes behavior
    - Sulfuras (legendary item) behavior
