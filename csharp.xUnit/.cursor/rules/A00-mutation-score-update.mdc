@@ -1,6 +1,6 @@
 ---
 description: Use before updating the memory bank
-alwaysApply: true
+alwaysApply: false
 ---
 # Mutation Score Update
 
