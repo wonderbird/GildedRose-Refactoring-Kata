@@ -2,6 +2,10 @@
 description: Use before updating the memory bank
 alwaysApply: true
 ---
+# Mutation Score Update
+
+## Update Mutation Score before Memory Bank
+
 Before you prepare a memory bank update, you must run the mutation tests so that you can consider the latest test results.
 
 To use the JSON reporter, execute
@@ -9,3 +13,7 @@ To use the JSON reporter, execute
 ```shell
 dotnet stryker --reporter json
 ```
+
+## Happiness
+
+🧟‍♂️
