@@ -75,30 +75,33 @@ public class GildedRoseTest
     public void NormalItem_DecreaseSellIn_AfterOneDay()
     {
         // Arrange & Act
-        var item = UpdateItem(NormalItem, sellIn: 10, quality: 20);
+        const int initialSellIn = 10;
+        var item = UpdateItem(NormalItem, sellIn: initialSellIn, quality: 20);
         
         // Assert
-        Assert.Equal(9, item.SellIn);
+        Assert.Equal(initialSellIn - 1, item.SellIn);
     }
 
     [Fact]
     public void NormalItem_DecreaseQuality_BeforeSellByDate()
     {
         // Arrange & Act
-        var item = UpdateItem(NormalItem, sellIn: 10, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(NormalItem, sellIn: 10, quality: initialQuality);
         
         // Assert
-        Assert.Equal(19, item.Quality);
+        Assert.Equal(initialQuality - 1, item.Quality);
     }
 
     [Fact]
     public void NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate()
     {
         // Arrange & Act
-        var item = UpdateItem(NormalItem, sellIn: 0, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(NormalItem, sellIn: 0, quality: initialQuality);
         
         // Assert
-        Assert.Equal(18, item.Quality);
+        Assert.Equal(initialQuality - 2, item.Quality);
     }
 
     [Fact]
@@ -115,20 +118,22 @@ public class GildedRoseTest
     public void AgedBrie_IncreaseQuality_BeforeSellByDate()
     {
         // Arrange & Act
-        var item = UpdateItem(AgedBrie, sellIn: 10, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(AgedBrie, sellIn: 10, quality: initialQuality);
         
         // Assert
-        Assert.Equal(21, item.Quality);
+        Assert.Equal(initialQuality + 1, item.Quality);
     }
 
     [Fact]
     public void AgedBrie_IncreaseQualityFaster_AfterSellByDate()
     {
         // Arrange & Act
-        var item = UpdateItem(AgedBrie, sellIn: 0, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(AgedBrie, sellIn: 0, quality: initialQuality);
         
         // Assert
-        Assert.Equal(22, item.Quality);
+        Assert.Equal(initialQuality + 2, item.Quality);
     }
 
     [Fact]
@@ -145,30 +150,33 @@ public class GildedRoseTest
     public void BackstagePasses_IncreaseQualityByOne_MoreThanTenDaysBeforeConcert()
     {
         // Arrange & Act
-        var item = UpdateItem(BackstagePasses, sellIn: 15, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(BackstagePasses, sellIn: 15, quality: initialQuality);
         
         // Assert
-        Assert.Equal(21, item.Quality);
+        Assert.Equal(initialQuality + 1, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_IncreaseQualityByTwo_TenDaysBeforeConcert()
     {
         // Arrange & Act
-        var item = UpdateItem(BackstagePasses, sellIn: 10, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(BackstagePasses, sellIn: 10, quality: initialQuality);
         
         // Assert
-        Assert.Equal(22, item.Quality);
+        Assert.Equal(initialQuality + 2, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_IncreaseQualityByThree_FiveDaysBeforeConcert()
     {
         // Arrange & Act
-        var item = UpdateItem(BackstagePasses, sellIn: 5, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(BackstagePasses, sellIn: 5, quality: initialQuality);
         
         // Assert
-        Assert.Equal(23, item.Quality);
+        Assert.Equal(initialQuality + 3, item.Quality);
     }
 
     [Fact]
@@ -236,20 +244,22 @@ public class GildedRoseTest
     public void BackstagePasses_IncreaseQualityByTwo_SixDaysBeforeConcert()
     {
         // Arrange & Act
-        var item = UpdateItem(BackstagePasses, sellIn: 6, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(BackstagePasses, sellIn: 6, quality: initialQuality);
         
         // Assert
-        Assert.Equal(22, item.Quality);
+        Assert.Equal(initialQuality + 2, item.Quality);
     }
 
     [Fact]
     public void BackstagePasses_IncreaseQualityByTwo_ElevenDaysBeforeConcert()
     {
         // Arrange & Act
-        var item = UpdateItem(BackstagePasses, sellIn: 11, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(BackstagePasses, sellIn: 11, quality: initialQuality);
         
         // Assert
-        Assert.Equal(21, item.Quality);
+        Assert.Equal(initialQuality + 1, item.Quality);
     }
 
     [Fact]
@@ -266,30 +276,33 @@ public class GildedRoseTest
     public void BackstagePasses_IncreaseQualityByThree_OneDayBeforeConcert()
     {
         // Arrange & Act
-        var item = UpdateItem(BackstagePasses, sellIn: 1, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(BackstagePasses, sellIn: 1, quality: initialQuality);
         
         // Assert
-        Assert.Equal(23, item.Quality);
+        Assert.Equal(initialQuality + 3, item.Quality);
     }
 
     [Fact]
     public void AgedBrie_IncreaseQualityFaster_WellPastSellByDate()
     {
         // Arrange & Act
-        var item = UpdateItem(AgedBrie, sellIn: -5, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(AgedBrie, sellIn: -5, quality: initialQuality);
         
         // Assert
-        Assert.Equal(22, item.Quality);
+        Assert.Equal(initialQuality + 2, item.Quality);
     }
 
     [Fact]
     public void NormalItem_DecreaseQualityTwiceAsFast_WellPastSellByDate()
     {
         // Arrange & Act
-        var item = UpdateItem(NormalItem, sellIn: -5, quality: 20);
+        const int initialQuality = 20;
+        var item = UpdateItem(NormalItem, sellIn: -5, quality: initialQuality);
         
         // Assert
-        Assert.Equal(18, item.Quality);
+        Assert.Equal(initialQuality - 2, item.Quality);
     }
 
     [Fact]
