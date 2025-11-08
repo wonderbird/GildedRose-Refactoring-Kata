@@ -4,6 +4,49 @@ using GildedRoseKata;
 
 namespace GildedRoseTests;
 
+/// <summary>
+/// Tests for the Gilded Rose inventory management system.
+/// 
+/// BUSINESS RULES OVERVIEW:
+/// 
+/// Items have three properties:
+/// - Name: Identifies the item type
+/// - SellIn: Days remaining until the sell-by date (decrements daily, except Sulfuras)
+/// - Quality: Value/quality of the item
+/// 
+/// QUALITY BOUNDS:
+/// - Normal items: Quality ranges from 0 to 50
+/// - Sulfuras (legendary): Quality is always 80 (never changes)
+/// 
+/// SELL-BY DATE CONCEPT:
+/// - When SellIn reaches 0 or below, the item is past its sell-by date
+/// - Quality degradation typically accelerates after the sell-by date
+/// 
+/// ITEM TYPE BEHAVIORS:
+/// 
+/// 1. Normal Items:
+///    - Quality decreases by 1 per day before sell-by date
+///    - Quality decreases by 2 per day after sell-by date
+///    - Quality never goes below 0
+/// 
+/// 2. Aged Brie:
+///    - Quality increases by 1 per day before sell-by date
+///    - Quality increases by 2 per day after sell-by date
+///    - Quality never exceeds 50
+/// 
+/// 3. Backstage Passes (to a TAFKAL80ETC concert):
+///    - Quality increases as concert approaches:
+///      * +1 per day when SellIn > 10
+///      * +2 per day when SellIn is 6-10
+///      * +3 per day when SellIn is 1-5
+///    - Quality drops to 0 immediately after concert (SellIn ≤ 0)
+///    - Quality never exceeds 50 before concert
+/// 
+/// 4. Sulfuras (legendary item):
+///    - Quality never changes (always 80)
+///    - SellIn never changes
+///    - Immune to all degradation rules
+/// </summary>
 public class GildedRoseTest
 {
     // Item name constants
