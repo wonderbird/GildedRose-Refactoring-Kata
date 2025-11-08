@@ -15,17 +15,23 @@ public class GildedRose
         this.Items = Items;
     }
 
+    private bool IsAgedBrie(Item item) => item.Name == AgedBrie;
+    
+    private bool IsBackstagePass(Item item) => item.Name == BackstagePasses;
+    
+    private bool IsSulfuras(Item item) => item.Name == Sulfuras;
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
         {
             var item = Items[i];
             
-            if (item.Name != AgedBrie && item.Name != BackstagePasses)
+            if (!IsAgedBrie(item) && !IsBackstagePass(item))
             {
                 if (item.Quality > 0)
                 {
-                    if (item.Name != Sulfuras)
+                    if (!IsSulfuras(item))
                     {
                         item.Quality = item.Quality - 1;
                     }
@@ -37,7 +43,7 @@ public class GildedRose
                 {
                     item.Quality = item.Quality + 1;
 
-                    if (item.Name == BackstagePasses)
+                    if (IsBackstagePass(item))
                     {
                         if (item.SellIn < 11)
                         {
@@ -58,20 +64,20 @@ public class GildedRose
                 }
             }
 
-            if (item.Name != Sulfuras)
+            if (!IsSulfuras(item))
             {
                 item.SellIn = item.SellIn - 1;
             }
 
             if (item.SellIn < 0)
             {
-                if (item.Name != AgedBrie)
+                if (!IsAgedBrie(item))
                 {
-                    if (item.Name != BackstagePasses)
+                    if (!IsBackstagePass(item))
                     {
                         if (item.Quality > 0)
                         {
-                            if (item.Name != Sulfuras)
+                            if (!IsSulfuras(item))
                             {
                                 item.Quality = item.Quality - 1;
                             }
