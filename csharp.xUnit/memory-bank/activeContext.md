@@ -5,7 +5,9 @@
 
 ## Recent Changes
 - ✅ RED/GREEN: Test and implementation for quality degradation by 2 before sell-by date
-- ✅ RED/GREEN: Test and implementation for quality degradation by 4 after sell-by date
+- ✅ RED/GREEN: Test and implementation for quality degradation by 4 after sell-by date  
+- ✅ RED/GREEN: Boundary condition tests revealed bug - quality could go negative when degrading by 2/4
+- ✅ Fixed implementation to clamp quality at 0 after each degradation
 
 ## Next Steps - Implement "Conjured" Items
 1.  ✅ Write a failing test for "Conjured" item quality degradation (degrades by 2) before the sell-by date.
@@ -13,8 +15,8 @@
 3.  ✅ Refactor the implementation while keeping tests green (no refactoring needed - clean implementation).
 4.  ✅ Write a failing test for "Conjured" item quality degradation (degrades by 4) after the sell-by date.
 5.  ✅ Implement the minimal code required to make the test pass.
-6.  Refactor the implementation (if needed).
-7.  Add tests for boundary conditions, such as quality never dropping below zero.
+6.  ✅ Refactor the implementation (if needed).
+7.  ✅ Add tests for boundary conditions, such as quality never dropping below zero.
 8.  Run mutation tests to ensure the new logic is fully covered.
 
 ## Active Decisions
@@ -23,8 +25,8 @@
 - The existing refactored structure of `UpdateQuality` will be extended to accommodate the new item type.
 
 ## Test Suite Quality Achieved
-- **27 passing tests** covering all business logic (including new conjured items)
-- **Mutation coverage improving** for conjured items feature (58.88% overall)
+- **30 passing tests** covering all business logic (including complete conjured items feature)
+- **Mutation score: 60.00%** - improved through boundary condition testing
 - **Self-documenting** with named constants, expressive assertions, and comprehensive documentation
 - **Maintainable** with helper methods reducing duplication
 - **Accessible** to junior developers with clear explanations

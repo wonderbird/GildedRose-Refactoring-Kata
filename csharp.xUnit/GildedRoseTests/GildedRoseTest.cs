@@ -360,4 +360,34 @@ public class GildedRoseTest
         // Assert
         Assert.Equal(initialQuality - 4, item.Quality);
     }
+
+    [Fact]
+    public void ConjuredItem_QualityNeverNegative()
+    {
+        // Arrange & Act
+        var item = UpdateItem(ConjuredItem, sellIn: 5, quality: MinQuality);
+        
+        // Assert
+        Assert.Equal(MinQuality, item.Quality);
+    }
+
+    [Fact]
+    public void ConjuredItem_QualityNeverNegative_AfterSellByDateWithQualityOne()
+    {
+        // Arrange & Act
+        var item = UpdateItem(ConjuredItem, sellIn: 0, quality: 1);
+        
+        // Assert
+        Assert.Equal(MinQuality, item.Quality);
+    }
+
+    [Fact]
+    public void ConjuredItem_QualityNeverNegative_AfterSellByDateWithQualityThree()
+    {
+        // Arrange & Act
+        var item = UpdateItem(ConjuredItem, sellIn: 0, quality: 3);
+        
+        // Assert
+        Assert.Equal(MinQuality, item.Quality);
+    }
 }

@@ -77,10 +77,10 @@
 - Consider applying patterns: Strategy, Command, or polymorphic dispatch
 
 ## Current Status
-**Phase**: ⭐ FEATURE IMPLEMENTATION ("Conjured" Items) - Core logic complete
-**Tests**: 27 passing (25 existing + 2 new conjured item tests)
-**Mutation Score**: **58.88%** (64 tested, unknown survivors) - Confirmed 2025-11-10 21:26
-**Coverage Quality**: Core conjured items logic implemented and tested.
+**Phase**: ⭐ FEATURE IMPLEMENTATION ("Conjured" Items) - COMPLETE
+**Tests**: 30 passing (25 existing + 5 new conjured item tests)
+**Mutation Score**: **60.00%** (72 tested, unknown survivors) - Confirmed 2025-11-10 21:28
+**Coverage Quality**: Complete conjured items feature with boundary condition coverage.
 **Production Refactoring Steps Completed**: All planned steps complete.
   - Step 1: Extract item name constants ✅
   - Step 2: Extract local variable for current item ✅
@@ -96,7 +96,8 @@
 **Conjured Items Implementation**:
   - ✅ RED/GREEN: Test for quality degradation by 2 before sell-by date
   - ✅ RED/GREEN: Test for quality degradation by 4 after sell-by date
-**Next Action**: Add boundary condition tests (quality never goes below 0).
+  - ✅ RED/GREEN: Boundary condition tests and bug fix (quality clamping at 0)
+**Next Action**: Update class documentation to include Conjured items behavior. Run final mutation analysis.
 **Blockers**: None
 
 ## Known Issues
@@ -157,4 +158,5 @@
 - **Decision 48**: The refactoring phase has been approved by the user. The project is now moving to implement the "Conjured" items feature, as per the kata specification. A new TDD cycle will begin.
 - **Decision 49**: Started implementing "Conjured" items using TDD. Completed RED phase (failing test) and GREEN phase (minimal implementation). Added test `ConjuredItem_DecreaseQualityByTwo_BeforeSellByDate` which verifies conjured items degrade by 2 before sell-by date. Implemented `UpdateConjuredItem` method following the same pattern as other item types. All 26 tests passing, mutation score at 56.86%.
 - **Decision 50**: Completed second TDD cycle for conjured items. Added test `ConjuredItem_DecreaseQualityByFour_AfterSellByDate` and updated `UpdateConjuredItem` to degrade quality by an additional 2 after sell-by date (total of 4 per day). Implementation follows same pattern as normal items with doubled degradation. All 27 tests passing, mutation score improved to 58.88%.
+- **Decision 51**: Added boundary condition tests for conjured items (quality never negative). Tests revealed a critical bug: when degrading by 2 or 4, quality could go negative (e.g., quality 1 - 2 = -1). Fixed by adding explicit quality clamping to 0 after each degradation step. Added 3 boundary tests total. All 30 tests passing, mutation score improved to 60.00%. This demonstrates TDD's power to catch edge cases.
 
