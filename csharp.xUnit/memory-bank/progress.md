@@ -80,6 +80,7 @@
   - Step 6: Group logic by item type in `UpdateQuality` ✅
   - Step 7: Extract `UpdateNormalItem` method ✅
   - Step 8: Separate `Aged Brie` and `Backstage Pass` logic ✅
+  - Step 9: Extract `UpdateAgedBrie` method ✅
 **Test Code Quality**: 
   - Reduced from ~230 lines to ~142 lines (38% reduction)
   - Self-documenting with named constants and expressive assertions
@@ -132,4 +133,5 @@
 - **Decision 36**: Refactored `UpdateQuality` to group logic by item type. This introduces temporary duplication of the `SellIn` decrement but isolates the logic for normal items vs. special items, making it possible to extract methods for each type in the next step.
 - **Decision 37**: Extracted the logic for handling normal items into a new private method `UpdateNormalItem`. This significantly cleans up the main `UpdateQuality` loop and makes the code more modular and easier to read.
 - **Decision 38**: Separated the logic for `Aged Brie` and `Backstage Passes` into distinct if/else blocks within `UpdateQuality`. This refactoring removes shared logic paths and prepares each for clean method extraction.
+- **Decision 39**: Extracted the logic for handling `Aged Brie` into a new private method `UpdateAgedBrie`. This continues the process of cleaning up the main `UpdateQuality` loop by encapsulating item-specific logic.
 
