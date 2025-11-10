@@ -7,6 +7,7 @@ public class GildedRose
     private const string AgedBrie = "Aged Brie";
     private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
     private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
+    private const string Conjured = "Conjured Mana Cake";
 
     IList<Item> Items;
 
@@ -20,6 +21,8 @@ public class GildedRose
     private bool IsBackstagePass(Item item) => item.Name == BackstagePasses;
     
     private bool IsSulfuras(Item item) => item.Name == Sulfuras;
+    
+    private bool IsConjured(Item item) => item.Name == Conjured;
     
     private bool IsAtMaxQuality(Item item) => item.Quality >= 50;
     
@@ -86,6 +89,16 @@ public class GildedRose
         }
     }
 
+    private void UpdateConjuredItem(Item item)
+    {
+        if (!IsAtMinQuality(item))
+        {
+            item.Quality = item.Quality - 2;
+        }
+
+        item.SellIn = item.SellIn - 1;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -105,6 +118,10 @@ public class GildedRose
             else if (IsBackstagePass(item))
             {
                 UpdateBackstagePass(item);
+            }
+            else if (IsConjured(item))
+            {
+                UpdateConjuredItem(item);
             }
             else
             {

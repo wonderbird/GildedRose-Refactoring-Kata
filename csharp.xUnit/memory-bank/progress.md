@@ -77,10 +77,10 @@
 - Consider applying patterns: Strategy, Command, or polymorphic dispatch
 
 ## Current Status
-**Phase**: ⭐ FEATURE IMPLEMENTATION ("Conjured" Items)
-**Tests**: 25 passing
-**Mutation Score**: **55.21%** (53 killed, 0 survived) - Confirmed 2025-11-10 20:44
-**Coverage Quality**: 100% mutation coverage achieved for all tested code.
+**Phase**: ⭐ FEATURE IMPLEMENTATION ("Conjured" Items) - GREEN phase completed
+**Tests**: 26 passing (25 existing + 1 new conjured item test)
+**Mutation Score**: **56.86%** (59 tested, unknown survivors) - Confirmed 2025-11-10 21:23
+**Coverage Quality**: Baseline established for conjured items feature.
 **Production Refactoring Steps Completed**: All planned steps complete.
   - Step 1: Extract item name constants ✅
   - Step 2: Extract local variable for current item ✅
@@ -93,7 +93,10 @@
   - Step 9: Extract `UpdateAgedBrie` method ✅
   - Step 10: Extract `UpdateBackstagePass` method ✅
   - Step 11: Refactor `UpdateQuality` dispatch logic to a clean if-else if-else chain ✅
-**Next Action**: Write the first failing test for "Conjured" item behavior.
+**Conjured Items Implementation**:
+  - ✅ RED: Test for quality degradation by 2 before sell-by date
+  - ✅ GREEN: Implementation of UpdateConjuredItem method
+**Next Action**: Refactor (if needed), then write test for after sell-by date (quality degrades by 4).
 **Blockers**: None
 
 ## Known Issues
@@ -152,4 +155,5 @@
 - **Decision 46**: Added a boundary test for Aged Brie (`AgedBrie_IncreaseQualityByOne_OnSellByDateBoundary`) with SellIn=1 to kill the final surviving mutant.
 - **Decision 47**: Confirmed that the final surviving mutant was killed. The mutation score is now 55.21% with 0 survivors. The refactoring phase is complete.
 - **Decision 48**: The refactoring phase has been approved by the user. The project is now moving to implement the "Conjured" items feature, as per the kata specification. A new TDD cycle will begin.
+- **Decision 49**: Started implementing "Conjured" items using TDD. Completed RED phase (failing test) and GREEN phase (minimal implementation). Added test `ConjuredItem_DecreaseQualityByTwo_BeforeSellByDate` which verifies conjured items degrade by 2 before sell-by date. Implemented `UpdateConjuredItem` method following the same pattern as other item types. All 26 tests passing, mutation score at 56.86%.
 
