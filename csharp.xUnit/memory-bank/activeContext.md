@@ -16,6 +16,7 @@
     - Combined nested conditions into logical AND expressions
     - Used else-if chains to flatten after-sell-by-date logic
   - **Step 6**: Group logic by item type in `UpdateQuality` to prepare for method extraction
+  - **Step 7**: Extract `UpdateNormalItem` method to encapsulate normal item logic
   - All 23 tests passing after each step
   - Mutation score: 50.00% (43 tested mutants, 0 survivors - 100% coverage maintained!)
 - ✅ **Test Readability Improvements**:

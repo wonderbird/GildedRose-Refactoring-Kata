@@ -25,6 +25,24 @@ public class GildedRose
     
     private bool IsAtMinQuality(Item item) => item.Quality <= 0;
 
+    private void UpdateNormalItem(Item item)
+    {
+        if (!IsAtMinQuality(item))
+        {
+            item.Quality = item.Quality - 1;
+        }
+
+        item.SellIn = item.SellIn - 1;
+
+        if (item.SellIn < 0)
+        {
+            if (!IsAtMinQuality(item))
+            {
+                item.Quality = item.Quality - 1;
+            }
+        }
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -39,20 +57,7 @@ public class GildedRose
 
             if (!IsAgedBrie(item) && !IsBackstagePass(item))
             {
-                if (!IsAtMinQuality(item))
-                {
-                    item.Quality = item.Quality - 1;
-                }
-
-                item.SellIn = item.SellIn - 1;
-
-                if (item.SellIn < 0)
-                {
-                    if (!IsAtMinQuality(item))
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
-                }
+                UpdateNormalItem(item);
             }
             else
             {
