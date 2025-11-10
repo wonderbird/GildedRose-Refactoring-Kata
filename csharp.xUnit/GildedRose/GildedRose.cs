@@ -61,6 +61,31 @@ public class GildedRose
         }
     }
 
+    private void UpdateBackstagePass(Item item)
+    {
+        if (!IsAtMaxQuality(item))
+        {
+            item.Quality = item.Quality + 1;
+
+            if (item.SellIn < 11 && !IsAtMaxQuality(item))
+            {
+                item.Quality = item.Quality + 1;
+            }
+
+            if (item.SellIn < 6 && !IsAtMaxQuality(item))
+            {
+                item.Quality = item.Quality + 1;
+            }
+        }
+
+        item.SellIn = item.SellIn - 1;
+
+        if (item.SellIn < 0)
+        {
+            item.Quality = item.Quality - item.Quality;
+        }
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -85,30 +110,7 @@ public class GildedRose
                 }
                 else // IsBackstagePass
                 {
-                    if (!IsAtMaxQuality(item))
-                    {
-                        item.Quality = item.Quality + 1;
-
-                        if (IsBackstagePass(item)) // This check is redundant but harmless. I'll remove it in the next step.
-                        {
-                            if (item.SellIn < 11 && !IsAtMaxQuality(item))
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
-
-                            if (item.SellIn < 6 && !IsAtMaxQuality(item))
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
-                        }
-                    }
-
-                    item.SellIn = item.SellIn - 1;
-
-                    if (item.SellIn < 0)
-                    {
-                        item.Quality = item.Quality - item.Quality;
-                    }
+                    UpdateBackstagePass(item);
                 }
             }
         }
