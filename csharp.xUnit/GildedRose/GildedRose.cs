@@ -36,9 +36,25 @@ public class GildedRose
             {
                 continue;
             }
-            
-            // Update quality before sell-by date
-            if (IsAgedBrie(item) || IsBackstagePass(item))
+
+            if (!IsAgedBrie(item) && !IsBackstagePass(item))
+            {
+                if (!IsAtMinQuality(item))
+                {
+                    item.Quality = item.Quality - 1;
+                }
+
+                item.SellIn = item.SellIn - 1;
+
+                if (item.SellIn < 0)
+                {
+                    if (!IsAtMinQuality(item))
+                    {
+                        item.Quality = item.Quality - 1;
+                    }
+                }
+            }
+            else
             {
                 if (!IsAtMaxQuality(item))
                 {
@@ -57,39 +73,21 @@ public class GildedRose
                         }
                     }
                 }
-            }
-            else
-            {
-                // Normal items
-                if (!IsAtMinQuality(item))
-                {
-                    item.Quality = item.Quality - 1;
-                }
-            }
 
-            // Decrease SellIn for all items except Sulfuras (already handled)
-            item.SellIn = item.SellIn - 1;
+                item.SellIn = item.SellIn - 1;
 
-            // Update quality after sell-by date
-            if (item.SellIn < 0)
-            {
-                if (IsAgedBrie(item))
+                if (item.SellIn < 0)
                 {
-                    if (!IsAtMaxQuality(item))
+                    if (IsAgedBrie(item))
                     {
-                        item.Quality = item.Quality + 1;
+                        if (!IsAtMaxQuality(item))
+                        {
+                            item.Quality = item.Quality + 1;
+                        }
                     }
-                }
-                else if (IsBackstagePass(item))
-                {
-                    item.Quality = item.Quality - item.Quality;
-                }
-                else
-                {
-                    // Normal items
-                    if (!IsAtMinQuality(item))
+                    else if (IsBackstagePass(item))
                     {
-                        item.Quality = item.Quality - 1;
+                        item.Quality = item.Quality - item.Quality;
                     }
                 }
             }

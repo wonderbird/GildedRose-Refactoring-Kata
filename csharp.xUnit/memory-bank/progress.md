@@ -77,6 +77,7 @@
   - Step 3: Extract item type helper methods ✅
   - Step 4: Extract quality boundary helper methods ✅
   - Step 5: Simplify nested conditionals (max depth: 5→3 levels) ✅
+  - Step 6: Group logic by item type in `UpdateQuality` ✅
 **Test Code Quality**: 
   - Reduced from ~230 lines to ~142 lines (38% reduction)
   - Self-documenting with named constants and expressive assertions
@@ -126,4 +127,5 @@
 - **Decision 33**: Step 3: Extract item type identification helper methods (IsAgedBrie, IsBackstagePass, IsSulfuras). Updated all 8 call sites in UpdateQuality. Makes intent explicit and improves readability. All 23 tests passing. Mutation tests show score at 54.74% (52 tested mutants, down from 57) - code simplification through extracted methods reduced number of mutants, which is expected and positive.
 - **Decision 34**: Step 4: Extract quality boundary checking helper methods (IsAtMaxQuality, IsAtMinQuality). Updated all 6 call sites in UpdateQuality. Replaces raw numeric comparisons (Quality > 0, Quality < 50) with named methods that express intent. Makes quality boundary logic explicit and prepares for further refactoring. All 23 tests passing.
 - **Decision 35**: Step 5: Simplify nested conditionals using early returns and guard clauses. Introduced early continue for Sulfuras (it never changes), reduced maximum nesting depth from 5 to 3 levels, combined nested conditions into logical AND expressions (e.g., `item.SellIn < 11 && !IsAtMaxQuality(item)`), and used else-if chains to flatten after-sell-by-date logic. Code is now significantly more linear and easier to follow. All 23 tests passing. Mutation score at 50.00% (43 tested, 0 survivors) - code simplification reduced mutant count from 52 to 43, which is positive.
+- **Decision 36**: Refactored `UpdateQuality` to group logic by item type. This introduces temporary duplication of the `SellIn` decrement but isolates the logic for normal items vs. special items, making it possible to extract methods for each type in the next step.
 

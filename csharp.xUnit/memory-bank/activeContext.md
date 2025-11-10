@@ -15,6 +15,7 @@
     - Reduced maximum nesting depth from 5 to 3 levels
     - Combined nested conditions into logical AND expressions
     - Used else-if chains to flatten after-sell-by-date logic
+  - **Step 6**: Group logic by item type in `UpdateQuality` to prepare for method extraction
   - All 23 tests passing after each step
   - Mutation score: 50.00% (43 tested mutants, 0 survivors - 100% coverage maintained!)
 - ✅ **Test Readability Improvements**:
@@ -46,9 +47,10 @@
 2. ✅ ~~Extract item type identification methods~~ COMPLETE
 3. ✅ ~~Extract quality boundary checking methods~~ COMPLETE
 4. ✅ ~~Simplify nested conditionals using early returns or guard clauses~~ COMPLETE
-5. **Extract methods for each item type's behavior** (UpdateNormalItem, UpdateAgedBrie, etc.)
-6. **Consider strategy pattern** if method extraction isn't sufficient
-7. **Final verification**: Re-run mutation tests to ensure 100% coverage maintained
+5. ✅ ~~Group logic by item type to prepare for method extraction~~ COMPLETE
+6. **Extract methods for each item type's behavior** (UpdateNormalItem, UpdateAgedBrie, etc.)
+7. **Consider strategy pattern** if method extraction isn't sufficient
+8. **Final verification**: Re-run mutation tests to ensure 100% coverage maintained
 
 ## Active Decisions
 - **Test readability phase COMPLETE**: Test suite is now highly readable and maintainable
