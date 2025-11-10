@@ -54,6 +54,7 @@ public class GildedRoseTest
     private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
     private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
     private const string NormalItem = "Normal Item";
+    private const string ConjuredItem = "Conjured Mana Cake";
 
     // Quality boundary constants
     private const int MinQuality = 0;
@@ -336,5 +337,16 @@ public class GildedRoseTest
         // Assert
         Assert.Equal(SulfurasQuality, item.Quality);
         Assert.Equal(-1, item.SellIn);
+    }
+
+    [Fact]
+    public void ConjuredItem_DecreaseQualityByTwo_BeforeSellByDate()
+    {
+        // Arrange & Act
+        const int initialQuality = 20;
+        var item = UpdateItem(ConjuredItem, sellIn: 10, quality: initialQuality);
+        
+        // Assert
+        Assert.Equal(initialQuality - 2, item.Quality);
     }
 }
