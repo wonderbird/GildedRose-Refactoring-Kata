@@ -97,6 +97,14 @@ public class GildedRose
         }
 
         item.SellIn = item.SellIn - 1;
+
+        if (item.SellIn < 0)
+        {
+            if (!IsAtMinQuality(item))
+            {
+                item.Quality = item.Quality - 2;
+            }
+        }
     }
 
     public void UpdateQuality()
