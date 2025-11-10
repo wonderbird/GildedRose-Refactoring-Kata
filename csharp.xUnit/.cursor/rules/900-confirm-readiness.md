@@ -1,1 +1,0 @@
-../../../../ai-agent-workspace/.cursor/rules/900-confirm-readiness.md
