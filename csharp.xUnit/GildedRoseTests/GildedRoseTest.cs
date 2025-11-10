@@ -46,6 +46,11 @@ namespace GildedRoseTests;
 ///    - Quality never changes (always 80)
 ///    - SellIn never changes
 ///    - Immune to all degradation rules
+/// 
+/// 5. Conjured Items:
+///    - Quality decreases by 2 per day before sell-by date (twice as fast as normal)
+///    - Quality decreases by 4 per day after sell-by date (twice as fast as normal)
+///    - Quality never goes below 0
 /// </summary>
 public class GildedRoseTest
 {
