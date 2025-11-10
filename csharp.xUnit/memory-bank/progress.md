@@ -82,7 +82,8 @@
   - Step 8: Separate `Aged Brie` and `Backstage Pass` logic ✅
   - Step 9: Extract `UpdateAgedBrie` method ✅
   - Step 10: Extract `UpdateBackstagePass` method ✅
-**Test Code Quality**: 
+  - Step 11: Refactor `UpdateQuality` dispatch logic to a clean if-else if-else chain ✅
+**Test Code Quality**:
   - Reduced from ~230 lines to ~142 lines (38% reduction)
   - Self-documenting with named constants and expressive assertions
   - Comprehensive documentation explaining all business rules
@@ -136,4 +137,5 @@
 - **Decision 38**: Separated the logic for `Aged Brie` and `Backstage Passes` into distinct if/else blocks within `UpdateQuality`. This refactoring removes shared logic paths and prepares each for clean method extraction.
 - **Decision 39**: Extracted the logic for handling `Aged Brie` into a new private method `UpdateAgedBrie`. This continues the process of cleaning up the main `UpdateQuality` loop by encapsulating item-specific logic.
 - **Decision 40**: Extracted the logic for handling `Backstage Passes` into a new private method `UpdateBackstagePass`. With this final extraction, the main `UpdateQuality` loop is now a clean dispatcher, delegating to specific methods for each item type.
+- **Decision 41**: Performed a final cleanup of the `UpdateQuality` method's main loop, converting the nested `if/else` structure into a flattened, more readable `if-else if-else` chain. This completes the method extraction phase.
 

@@ -20,6 +20,7 @@
   - **Step 8**: Separate `Aged Brie` and `Backstage Pass` logic into distinct blocks
   - **Step 9**: Extract `UpdateAgedBrie` method to encapsulate Aged Brie logic
   - **Step 10**: Extract `UpdateBackstagePass` method to encapsulate Backstage Pass logic
+  - **Step 11**: Refactor `UpdateQuality` dispatch logic to a clean if-else if-else chain
   - All 23 tests passing after each step
   - Mutation score: 50.00% (43 tested mutants, 0 survivors - 100% coverage maintained!)
 - ✅ **Test Readability Improvements**:

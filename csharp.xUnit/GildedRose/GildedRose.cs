@@ -98,20 +98,17 @@ public class GildedRose
                 continue;
             }
 
-            if (!IsAgedBrie(item) && !IsBackstagePass(item))
+            if (IsAgedBrie(item))
             {
-                UpdateNormalItem(item);
+                UpdateAgedBrie(item);
+            }
+            else if (IsBackstagePass(item))
+            {
+                UpdateBackstagePass(item);
             }
             else
             {
-                if (IsAgedBrie(item))
-                {
-                    UpdateAgedBrie(item);
-                }
-                else // IsBackstagePass
-                {
-                    UpdateBackstagePass(item);
-                }
+                UpdateNormalItem(item);
             }
         }
     }
