@@ -93,11 +93,7 @@ public class GildedRose
     {
         if (!IsAtMinQuality(item))
         {
-            item.Quality = item.Quality - 2;
-            if (item.Quality < 0)
-            {
-                item.Quality = 0;
-            }
+            item.Quality = System.Math.Max(0, item.Quality - 2);
         }
 
         item.SellIn = item.SellIn - 1;
@@ -106,11 +102,7 @@ public class GildedRose
         {
             if (!IsAtMinQuality(item))
             {
-                item.Quality = item.Quality - 2;
-                if (item.Quality < 0)
-                {
-                    item.Quality = 0;
-                }
+                item.Quality = System.Math.Max(0, item.Quality - 2);
             }
         }
     }
