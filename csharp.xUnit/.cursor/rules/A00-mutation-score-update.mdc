@@ -1,5 +1,5 @@
 ---
-description: Use before updating the memory bank
+description: Use when updating the memory bank to update the mutation score
 alwaysApply: false
 ---
 # Mutation Score Update

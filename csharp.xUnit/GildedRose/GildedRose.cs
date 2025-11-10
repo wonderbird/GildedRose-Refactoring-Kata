@@ -31,17 +31,14 @@ public class GildedRose
         {
             var item = Items[i];
             
-            if (!IsAgedBrie(item) && !IsBackstagePass(item))
+            // Sulfuras never changes
+            if (IsSulfuras(item))
             {
-                if (!IsAtMinQuality(item))
-                {
-                    if (!IsSulfuras(item))
-                    {
-                        item.Quality = item.Quality - 1;
-                    }
-                }
+                continue;
             }
-            else
+            
+            // Update quality before sell-by date
+            if (IsAgedBrie(item) || IsBackstagePass(item))
             {
                 if (!IsAtMaxQuality(item))
                 {
@@ -49,54 +46,50 @@ public class GildedRose
 
                     if (IsBackstagePass(item))
                     {
-                        if (item.SellIn < 11)
+                        if (item.SellIn < 11 && !IsAtMaxQuality(item))
                         {
-                            if (!IsAtMaxQuality(item))
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
+                            item.Quality = item.Quality + 1;
                         }
 
-                        if (item.SellIn < 6)
+                        if (item.SellIn < 6 && !IsAtMaxQuality(item))
                         {
-                            if (!IsAtMaxQuality(item))
-                            {
-                                item.Quality = item.Quality + 1;
-                            }
+                            item.Quality = item.Quality + 1;
                         }
                     }
                 }
             }
-
-            if (!IsSulfuras(item))
+            else
             {
-                item.SellIn = item.SellIn - 1;
+                // Normal items
+                if (!IsAtMinQuality(item))
+                {
+                    item.Quality = item.Quality - 1;
+                }
             }
 
+            // Decrease SellIn for all items except Sulfuras (already handled)
+            item.SellIn = item.SellIn - 1;
+
+            // Update quality after sell-by date
             if (item.SellIn < 0)
             {
-                if (!IsAgedBrie(item))
-                {
-                    if (!IsBackstagePass(item))
-                    {
-                        if (!IsAtMinQuality(item))
-                        {
-                            if (!IsSulfuras(item))
-                            {
-                                item.Quality = item.Quality - 1;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        item.Quality = item.Quality - item.Quality;
-                    }
-                }
-                else
+                if (IsAgedBrie(item))
                 {
                     if (!IsAtMaxQuality(item))
                     {
                         item.Quality = item.Quality + 1;
+                    }
+                }
+                else if (IsBackstagePass(item))
+                {
+                    item.Quality = item.Quality - item.Quality;
+                }
+                else
+                {
+                    // Normal items
+                    if (!IsAtMinQuality(item))
+                    {
+                        item.Quality = item.Quality - 1;
                     }
                 }
             }

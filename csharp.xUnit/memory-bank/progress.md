@@ -69,19 +69,20 @@
 ## Current Status
 **Phase**: 🔄 PRODUCTION CODE REFACTORING IN PROGRESS
 **Tests**: 23 passing
-**Mutation Score**: **54.74%** (52 tested, 43 no coverage) - Confirmed 2025-11-08 10:07
-**Coverage Quality**: Code simplified through refactoring (reduced from 57 to 52 testable mutants)
-**Production Refactoring Steps Completed**: 4 of ~7 planned
+**Mutation Score**: **50.00%** (43 tested, 43 no coverage, 20 ignored, 0 survivors) - Confirmed 2025-11-10 17:43
+**Coverage Quality**: Code significantly simplified through refactoring (reduced from 52 to 43 testable mutants)
+**Production Refactoring Steps Completed**: 5 of ~7 planned
   - Step 1: Extract item name constants ✅
   - Step 2: Extract local variable for current item ✅
   - Step 3: Extract item type helper methods ✅
   - Step 4: Extract quality boundary helper methods ✅
+  - Step 5: Simplify nested conditionals (max depth: 5→3 levels) ✅
 **Test Code Quality**: 
   - Reduced from ~230 lines to ~142 lines (38% reduction)
   - Self-documenting with named constants and expressive assertions
   - Comprehensive documentation explaining all business rules
   - Accessible to junior developers
-**Next Action**: Simplify nested conditionals using early returns or guard clauses
+**Next Action**: Extract methods for each item type's behavior (UpdateNormalItem, UpdateAgedBrie, etc.)
 **Blockers**: None
 
 ## Known Issues
@@ -124,4 +125,5 @@
 - **Decision 32**: Step 2: Extract local variable 'item' for Items[i] to reduce clutter and improve readability throughout UpdateQuality method. All 23 tests passing.
 - **Decision 33**: Step 3: Extract item type identification helper methods (IsAgedBrie, IsBackstagePass, IsSulfuras). Updated all 8 call sites in UpdateQuality. Makes intent explicit and improves readability. All 23 tests passing. Mutation tests show score at 54.74% (52 tested mutants, down from 57) - code simplification through extracted methods reduced number of mutants, which is expected and positive.
 - **Decision 34**: Step 4: Extract quality boundary checking helper methods (IsAtMaxQuality, IsAtMinQuality). Updated all 6 call sites in UpdateQuality. Replaces raw numeric comparisons (Quality > 0, Quality < 50) with named methods that express intent. Makes quality boundary logic explicit and prepares for further refactoring. All 23 tests passing.
+- **Decision 35**: Step 5: Simplify nested conditionals using early returns and guard clauses. Introduced early continue for Sulfuras (it never changes), reduced maximum nesting depth from 5 to 3 levels, combined nested conditions into logical AND expressions (e.g., `item.SellIn < 11 && !IsAtMaxQuality(item)`), and used else-if chains to flatten after-sell-by-date logic. Code is now significantly more linear and easier to follow. All 23 tests passing. Mutation score at 50.00% (43 tested, 0 survivors) - code simplification reduced mutant count from 52 to 43, which is positive.
 
