@@ -20,6 +20,10 @@ public class GildedRose
     private bool IsBackstagePass(Item item) => item.Name == BackstagePasses;
     
     private bool IsSulfuras(Item item) => item.Name == Sulfuras;
+    
+    private bool IsAtMaxQuality(Item item) => item.Quality >= 50;
+    
+    private bool IsAtMinQuality(Item item) => item.Quality <= 0;
 
     public void UpdateQuality()
     {
@@ -29,7 +33,7 @@ public class GildedRose
             
             if (!IsAgedBrie(item) && !IsBackstagePass(item))
             {
-                if (item.Quality > 0)
+                if (!IsAtMinQuality(item))
                 {
                     if (!IsSulfuras(item))
                     {
@@ -39,7 +43,7 @@ public class GildedRose
             }
             else
             {
-                if (item.Quality < 50)
+                if (!IsAtMaxQuality(item))
                 {
                     item.Quality = item.Quality + 1;
 
@@ -47,7 +51,7 @@ public class GildedRose
                     {
                         if (item.SellIn < 11)
                         {
-                            if (item.Quality < 50)
+                            if (!IsAtMaxQuality(item))
                             {
                                 item.Quality = item.Quality + 1;
                             }
@@ -55,7 +59,7 @@ public class GildedRose
 
                         if (item.SellIn < 6)
                         {
-                            if (item.Quality < 50)
+                            if (!IsAtMaxQuality(item))
                             {
                                 item.Quality = item.Quality + 1;
                             }
@@ -75,7 +79,7 @@ public class GildedRose
                 {
                     if (!IsBackstagePass(item))
                     {
-                        if (item.Quality > 0)
+                        if (!IsAtMinQuality(item))
                         {
                             if (!IsSulfuras(item))
                             {
@@ -90,7 +94,7 @@ public class GildedRose
                 }
                 else
                 {
-                    if (item.Quality < 50)
+                    if (!IsAtMaxQuality(item))
                     {
                         item.Quality = item.Quality + 1;
                     }
