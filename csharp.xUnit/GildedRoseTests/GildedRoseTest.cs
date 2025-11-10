@@ -349,4 +349,15 @@ public class GildedRoseTest
         // Assert
         Assert.Equal(initialQuality - 2, item.Quality);
     }
+
+    [Fact]
+    public void ConjuredItem_DecreaseQualityByFour_AfterSellByDate()
+    {
+        // Arrange & Act
+        const int initialQuality = 20;
+        var item = UpdateItem(ConjuredItem, sellIn: 0, quality: initialQuality);
+        
+        // Assert
+        Assert.Equal(initialQuality - 4, item.Quality);
+    }
 }
