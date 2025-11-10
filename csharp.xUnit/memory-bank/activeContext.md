@@ -54,14 +54,16 @@
 4. ✅ ~~Simplify nested conditionals using early returns or guard clauses~~ COMPLETE
 5. ✅ ~~Group logic by item type to prepare for method extraction~~ COMPLETE
 6. ✅ ~~Extract methods for each item type's behavior~~ COMPLETE
-7. **Consider strategy pattern** if method extraction isn't sufficient
-8. **Final verification**: Re-run mutation tests to ensure 100% coverage maintained
+7. **Final verification**: Re-run mutation tests to ensure 100% coverage maintained
+8. **Restore 100% mutation coverage** by killing the 2 surviving mutants.
+9. **Consider strategy pattern** if method extraction isn't sufficient
 
 ## Active Decisions
 - **Test readability phase COMPLETE**: Test suite is now highly readable and maintainable
 - **Ready for production refactoring**: Confidence in tests enables safe refactoring of legacy code
 - Following strict TDD: red-green-refactor with commits after each phase
 - All refactoring will maintain green tests and 100% mutation coverage
+- **New Plan**: After refactoring revealed 2 surviving mutants, a new, more deliberate plan has been formulated to kill them one by one.
 
 ## Test Suite Quality Achieved
 - **23 passing tests** covering all business logic

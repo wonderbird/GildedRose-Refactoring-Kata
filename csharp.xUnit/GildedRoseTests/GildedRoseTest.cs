@@ -315,4 +315,26 @@ public class GildedRoseTest
         Assert.Equal(SulfurasQuality, item.Quality);
         Assert.Equal(-1, item.SellIn);
     }
+
+    [Fact]
+    public void NormalItem_QualityDecreasesByOne_OnSellByDate()
+    {
+        // Arrange & Act
+        const int initialQuality = 20;
+        var item = UpdateItem(NormalItem, sellIn: 1, quality: initialQuality);
+        
+        // Assert
+        Assert.Equal(initialQuality - 1, item.Quality);
+    }
+
+    [Fact]
+    public void AgedBrie_QualityIncreasesByOne_OnSellByDate()
+    {
+        // Arrange & Act
+        const int initialQuality = 20;
+        var item = UpdateItem(AgedBrie, sellIn: 1, quality: initialQuality);
+        
+        // Assert
+        Assert.Equal(initialQuality + 1, item.Quality);
+    }
 }

@@ -83,16 +83,13 @@
   - Step 9: Extract `UpdateAgedBrie` method ✅
   - Step 10: Extract `UpdateBackstagePass` method ✅
   - Step 11: Refactor `UpdateQuality` dispatch logic to a clean if-else if-else chain ✅
-**Test Code Quality**:
-  - Reduced from ~230 lines to ~142 lines (38% reduction)
-  - Self-documenting with named constants and expressive assertions
-  - Comprehensive documentation explaining all business rules
-  - Accessible to junior developers
-**Next Action**: Extract methods for each item type's behavior (UpdateNormalItem, UpdateAgedBrie, etc.)
+**Next Action**: Restore 100% mutation coverage by killing 2 surviving mutants.
 **Blockers**: None
 
 ## Known Issues
-- No issues! Test coverage is perfect for business logic
+- **2 Surviving Mutants**: Post-refactoring mutation analysis revealed 2 survivors.
+  - Mutant 1: `UpdateNormalItem`, `item.SellIn < 0` becomes `item.SellIn <= 0`
+  - Mutant 2: `UpdateAgedBrie`, `item.SellIn < 0` becomes `item.SellIn <= 0`
 - 43 mutants have no coverage - these are in Program.cs (console app entry point, not part of business logic)
 - No refactoring done yet (intentional - followed strict TDD approach: complete characterization first)
 
@@ -138,4 +135,5 @@
 - **Decision 39**: Extracted the logic for handling `Aged Brie` into a new private method `UpdateAgedBrie`. This continues the process of cleaning up the main `UpdateQuality` loop by encapsulating item-specific logic.
 - **Decision 40**: Extracted the logic for handling `Backstage Passes` into a new private method `UpdateBackstagePass`. With this final extraction, the main `UpdateQuality` loop is now a clean dispatcher, delegating to specific methods for each item type.
 - **Decision 41**: Performed a final cleanup of the `UpdateQuality` method's main loop, converting the nested `if/else` structure into a flattened, more readable `if-else if-else` chain. This completes the method extraction phase.
+- **Decision 42**: Post-refactoring mutation analysis revealed 2 survivors related to the `SellIn < 0` boundary check. Initial attempts to kill them were unsuccessful due to a flawed hypothesis and large step size. A new, more granular TDD plan has been created to address each survivor individually.
 
