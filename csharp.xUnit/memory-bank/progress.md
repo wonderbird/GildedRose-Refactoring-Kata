@@ -3,9 +3,10 @@
 ## What Works
 - ✅ Project builds successfully
 - ✅ Test project configured and runs
-- ✅ Twenty-three characterization tests created and passing:
+- ✅ Twenty-four characterization tests created and passing:
   - `NormalItem_DecreaseSellIn_AfterOneDay`: Verifies SellIn decreases by 1
   - `NormalItem_DecreaseQuality_BeforeSellByDate`: Verifies Quality decreases by 1 before sell-by date
+  - `NormalItem_DecreaseQualityByOne_OnSellByDateBoundary`: Verifies quality decreases by 1 for SellIn=1 (kills mutant)
   - `NormalItem_DecreaseQualityTwiceAsFast_AfterSellByDate`: Verifies Quality decreases by 2 after sell-by date
   - `NormalItem_QualityNeverNegative`: Verifies quality boundary (cannot go below 0)
   - `AgedBrie_IncreaseQuality_BeforeSellByDate`: Verifies Aged Brie quality increases by 1
@@ -68,7 +69,7 @@
 
 ## Current Status
 **Phase**: 🔄 PRODUCTION CODE REFACTORING IN PROGRESS
-**Tests**: 23 passing
+**Tests**: 24 passing
 **Mutation Score**: **50.00%** (43 tested, 43 no coverage, 20 ignored, 0 survivors) - Confirmed 2025-11-10 17:43
 **Coverage Quality**: Code significantly simplified through refactoring (reduced from 52 to 43 testable mutants)
 **Production Refactoring Steps Completed**: 5 of ~7 planned
@@ -83,12 +84,12 @@
   - Step 9: Extract `UpdateAgedBrie` method ✅
   - Step 10: Extract `UpdateBackstagePass` method ✅
   - Step 11: Refactor `UpdateQuality` dispatch logic to a clean if-else if-else chain ✅
-**Next Action**: Restore 100% mutation coverage by killing 2 surviving mutants.
+**Next Action**: Restore 100% mutation coverage by killing the second surviving mutant.
 **Blockers**: None
 
 ## Known Issues
 - **2 Surviving Mutants**: Post-refactoring mutation analysis revealed 2 survivors.
-  - Mutant 1: `UpdateNormalItem`, `item.SellIn < 0` becomes `item.SellIn <= 0`
+  - Mutant 1: `UpdateNormalItem`, `item.SellIn < 0` becomes `item.SellIn <= 0` - KILLED ✅
   - Mutant 2: `UpdateAgedBrie`, `item.SellIn < 0` becomes `item.SellIn <= 0`
 - 43 mutants have no coverage - these are in Program.cs (console app entry point, not part of business logic)
 - No refactoring done yet (intentional - followed strict TDD approach: complete characterization first)
@@ -137,4 +138,5 @@
 - **Decision 41**: Performed a final cleanup of the `UpdateQuality` method's main loop, converting the nested `if/else` structure into a flattened, more readable `if-else if-else` chain. This completes the method extraction phase.
 - **Decision 42**: Post-refactoring mutation analysis revealed 2 survivors related to the `SellIn < 0` boundary check. Initial attempts to kill them were unsuccessful due to a flawed hypothesis and large step size. A new, more granular TDD plan has been created to address each survivor individually.
 - **Decision 43**: Updated mutation score to 55.21% after adding two new (ultimately ineffective) tests. This confirms the survivors are still present. The ineffective tests will be removed to start fresh.
+- **Decision 44**: Added a specific boundary test (`NormalItem_DecreaseQualityByOne_OnSellByDateBoundary`) for a normal item with SellIn=1. This test passes with the correct code but fails against the surviving mutant (`item.SellIn < 0` vs. `item.SellIn <= 0`), thereby killing the mutant and improving test coverage of this specific edge case.
 

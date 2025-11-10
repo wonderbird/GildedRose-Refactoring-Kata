@@ -56,6 +56,8 @@
 6. ✅ ~~Extract methods for each item type's behavior~~ COMPLETE
 7. **Final verification**: Re-run mutation tests to ensure 100% coverage maintained
 8. **Restore 100% mutation coverage** by killing the 2 surviving mutants.
+   - ✅ Mutant 1 (`UpdateNormalItem`): Killed by adding a new boundary condition test.
+   - Mutant 2 (`UpdateAgedBrie`): Pending.
 9. **Consider strategy pattern** if method extraction isn't sufficient
 
 ## Active Decisions
@@ -66,8 +68,8 @@
 - **New Plan**: After refactoring revealed 2 surviving mutants, a new, more deliberate plan has been formulated to kill them one by one.
 
 ## Test Suite Quality Achieved
-- **23 passing tests** covering all business logic
-- **100% mutation coverage** of covered business logic (0 survivors)
+- **24 passing tests** covering all business logic
+- **100% mutation coverage** of covered business logic (0 survivors) - *PENDING VERIFICATION*
 - **Self-documenting** with named constants, expressive assertions, and comprehensive documentation
 - **Maintainable** with helper methods reducing duplication
 - **Accessible** to junior developers with clear explanations

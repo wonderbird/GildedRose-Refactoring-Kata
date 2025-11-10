@@ -105,6 +105,17 @@ public class GildedRoseTest
     }
 
     [Fact]
+    public void NormalItem_DecreaseQualityByOne_OnSellByDateBoundary()
+    {
+        // Arrange & Act
+        const int initialQuality = 20;
+        var item = UpdateItem(NormalItem, sellIn: 1, quality: initialQuality);
+        
+        // Assert
+        Assert.Equal(initialQuality - 1, item.Quality);
+    }
+
+    [Fact]
     public void NormalItem_QualityNeverNegative()
     {
         // Arrange & Act
