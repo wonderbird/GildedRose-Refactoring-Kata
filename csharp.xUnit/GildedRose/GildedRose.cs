@@ -61,36 +61,46 @@ public class GildedRose
             }
             else
             {
-                if (!IsAtMaxQuality(item))
+                if (IsAgedBrie(item))
                 {
-                    item.Quality = item.Quality + 1;
-
-                    if (IsBackstagePass(item))
+                    if (!IsAtMaxQuality(item))
                     {
-                        if (item.SellIn < 11 && !IsAtMaxQuality(item))
-                        {
-                            item.Quality = item.Quality + 1;
-                        }
-
-                        if (item.SellIn < 6 && !IsAtMaxQuality(item))
-                        {
-                            item.Quality = item.Quality + 1;
-                        }
+                        item.Quality = item.Quality + 1;
                     }
-                }
 
-                item.SellIn = item.SellIn - 1;
+                    item.SellIn = item.SellIn - 1;
 
-                if (item.SellIn < 0)
-                {
-                    if (IsAgedBrie(item))
+                    if (item.SellIn < 0)
                     {
                         if (!IsAtMaxQuality(item))
                         {
                             item.Quality = item.Quality + 1;
                         }
                     }
-                    else if (IsBackstagePass(item))
+                }
+                else // IsBackstagePass
+                {
+                    if (!IsAtMaxQuality(item))
+                    {
+                        item.Quality = item.Quality + 1;
+
+                        if (IsBackstagePass(item)) // This check is redundant but harmless. I'll remove it in the next step.
+                        {
+                            if (item.SellIn < 11 && !IsAtMaxQuality(item))
+                            {
+                                item.Quality = item.Quality + 1;
+                            }
+
+                            if (item.SellIn < 6 && !IsAtMaxQuality(item))
+                            {
+                                item.Quality = item.Quality + 1;
+                            }
+                        }
+                    }
+
+                    item.SellIn = item.SellIn - 1;
+
+                    if (item.SellIn < 0)
                     {
                         item.Quality = item.Quality - item.Quality;
                     }
