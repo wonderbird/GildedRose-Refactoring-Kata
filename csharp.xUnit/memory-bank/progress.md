@@ -54,6 +54,14 @@
   - **100% of covered code mutants killed** - ready for refactoring phase
 
 ## What's Left to Build
+### Implement "Conjured" Items
+- Write tests for "Conjured" item behavior:
+  - Quality degrades by 2 before sell-by date
+  - Quality degrades by 4 after sell-by date
+  - Quality never drops below 0
+- Implement "Conjured" item logic in `UpdateQuality`
+- Verify test coverage with mutation testing
+
 ### Test Readability Refactoring (COMPLETE ✅)
 - ✅ **Priority 1**: Extract helper methods to reduce test duplication - COMPLETE
 - ✅ **Priority 2**: Add descriptive constants for magic numbers and item names - COMPLETE
@@ -61,7 +69,7 @@
 - ✅ **Priority 4**: Make assertions more expressive with named variables - COMPLETE
 - ✅ **Priority 5**: Consider parameterized tests (decided to keep individual tests) - COMPLETE
 
-### Production Code Refactoring (READY TO START)
+### Production Code Refactoring (COMPLETE ✅)
 - Analyze UpdateQuality method to identify refactoring opportunities
 - Plan refactoring strategy (extract methods, strategy pattern, or other approach)
 - Execute refactoring in small TDD steps maintaining green tests
@@ -69,7 +77,7 @@
 - Consider applying patterns: Strategy, Command, or polymorphic dispatch
 
 ## Current Status
-**Phase**: ✅ REFACTORING COMPLETE
+**Phase**: ⭐ FEATURE IMPLEMENTATION ("Conjured" Items)
 **Tests**: 25 passing
 **Mutation Score**: **55.21%** (53 killed, 0 survived) - Confirmed 2025-11-10 20:44
 **Coverage Quality**: 100% mutation coverage achieved for all tested code.
@@ -85,7 +93,7 @@
   - Step 9: Extract `UpdateAgedBrie` method ✅
   - Step 10: Extract `UpdateBackstagePass` method ✅
   - Step 11: Refactor `UpdateQuality` dispatch logic to a clean if-else if-else chain ✅
-**Next Action**: Project is complete. Awaiting user review.
+**Next Action**: Write the first failing test for "Conjured" item behavior.
 **Blockers**: None
 
 ## Known Issues
@@ -143,4 +151,5 @@
 - **Decision 45**: Confirmed that the first surviving mutant was killed. The mutation score is now 54.17% with only one survivor remaining.
 - **Decision 46**: Added a boundary test for Aged Brie (`AgedBrie_IncreaseQualityByOne_OnSellByDateBoundary`) with SellIn=1 to kill the final surviving mutant.
 - **Decision 47**: Confirmed that the final surviving mutant was killed. The mutation score is now 55.21% with 0 survivors. The refactoring phase is complete.
+- **Decision 48**: The refactoring phase has been approved by the user. The project is now moving to implement the "Conjured" items feature, as per the kata specification. A new TDD cycle will begin.
 
