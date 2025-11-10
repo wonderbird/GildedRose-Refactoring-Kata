@@ -136,4 +136,5 @@
 - **Decision 40**: Extracted the logic for handling `Backstage Passes` into a new private method `UpdateBackstagePass`. With this final extraction, the main `UpdateQuality` loop is now a clean dispatcher, delegating to specific methods for each item type.
 - **Decision 41**: Performed a final cleanup of the `UpdateQuality` method's main loop, converting the nested `if/else` structure into a flattened, more readable `if-else if-else` chain. This completes the method extraction phase.
 - **Decision 42**: Post-refactoring mutation analysis revealed 2 survivors related to the `SellIn < 0` boundary check. Initial attempts to kill them were unsuccessful due to a flawed hypothesis and large step size. A new, more granular TDD plan has been created to address each survivor individually.
+- **Decision 43**: Updated mutation score to 55.21% after adding two new (ultimately ineffective) tests. This confirms the survivors are still present. The ineffective tests will be removed to start fresh.
 
