@@ -148,6 +148,17 @@ public class GildedRoseTest
     }
 
     [Fact]
+    public void AgedBrie_IncreaseQualityByOne_OnSellByDateBoundary()
+    {
+        // Arrange & Act
+        const int initialQuality = 20;
+        var item = UpdateItem(AgedBrie, sellIn: 1, quality: initialQuality);
+        
+        // Assert
+        Assert.Equal(initialQuality + 1, item.Quality);
+    }
+
+    [Fact]
     public void AgedBrie_QualityNeverExceedsFifty()
     {
         // Arrange & Act
