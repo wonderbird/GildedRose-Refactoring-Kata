@@ -1,8 +1,8 @@
 namespace GildedRoseKata;
 
 /// <summary>
-/// Strategy for Sulfuras (legendary item).
-/// Quality and SellIn never change - this is a no-op strategy.
+/// Update strategy for Sulfuras, the legendary item.
+/// Quality and SellIn never change (no-op implementation).
 /// </summary>
 public class SulfurasStrategy : IUpdateStrategy
 {

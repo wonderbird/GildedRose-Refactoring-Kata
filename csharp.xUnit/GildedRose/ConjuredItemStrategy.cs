@@ -1,10 +1,9 @@
 namespace GildedRoseKata;
 
 /// <summary>
-/// Strategy for Conjured items.
-/// Quality decreases by 2 per day before sell-by date (twice as fast as normal).
-/// Quality decreases by 4 per day after sell-by date (twice as fast as normal).
-/// Quality never goes below 0.
+/// Update strategy for Conjured items.
+/// Quality degrades twice as fast as normal items:
+/// by 2 per day before sell-by date, and by 4 per day after.
 /// </summary>
 public class ConjuredItemStrategy : BaseUpdateStrategy
 {

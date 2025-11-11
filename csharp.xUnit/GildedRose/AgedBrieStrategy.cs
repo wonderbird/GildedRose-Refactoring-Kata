@@ -1,9 +1,8 @@
 namespace GildedRoseKata;
 
 /// <summary>
-/// Strategy for Aged Brie.
-/// Quality increases by 1 per day before sell-by date, by 2 after.
-/// Quality never exceeds 50.
+/// Update strategy for Aged Brie.
+/// Quality improves by 1 per day before sell-by date, and by 2 per day after.
 /// </summary>
 public class AgedBrieStrategy : BaseUpdateStrategy
 {
