@@ -81,16 +81,16 @@ public class GildedRose
     {
         if (!IsAtMinQuality(item))
         {
-            item.Quality = item.Quality - 1;
+            item.Quality--;
         }
 
-        item.SellIn = item.SellIn - 1;
+        item.SellIn--;
 
         if (item.SellIn < 0)
         {
             if (!IsAtMinQuality(item))
             {
-                item.Quality = item.Quality - 1;
+                item.Quality--;
             }
         }
     }
@@ -99,16 +99,16 @@ public class GildedRose
     {
         if (!IsAtMaxQuality(item))
         {
-            item.Quality = item.Quality + 1;
+            item.Quality++;
         }
 
-        item.SellIn = item.SellIn - 1;
+        item.SellIn--;
 
         if (item.SellIn < 0)
         {
             if (!IsAtMaxQuality(item))
             {
-                item.Quality = item.Quality + 1;
+                item.Quality++;
             }
         }
     }
@@ -117,20 +117,20 @@ public class GildedRose
     {
         if (!IsAtMaxQuality(item))
         {
-            item.Quality = item.Quality + 1;
+            item.Quality++;
 
             if (item.SellIn < 11 && !IsAtMaxQuality(item))
             {
-                item.Quality = item.Quality + 1;
+                item.Quality++;
             }
 
             if (item.SellIn < 6 && !IsAtMaxQuality(item))
             {
-                item.Quality = item.Quality + 1;
+                item.Quality++;
             }
         }
 
-        item.SellIn = item.SellIn - 1;
+        item.SellIn--;
 
         if (item.SellIn < 0)
         {
@@ -145,7 +145,7 @@ public class GildedRose
             item.Quality = System.Math.Max(0, item.Quality - 2);
         }
 
-        item.SellIn = item.SellIn - 1;
+        item.SellIn--;
 
         if (item.SellIn < 0)
         {

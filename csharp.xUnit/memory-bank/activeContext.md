@@ -1,15 +1,16 @@
 # Active Context
 
 ## Current Work Focus
-**APP-Guided Refactoring in Progress** - Executing the 7-refactoring plan to reduce code mass by 25-30%. Currently on refactoring R3.1 (completed).
+**APP-Guided Refactoring in Progress** - Executing the 7-refactoring plan to reduce code mass by 25-30%. Currently on refactoring R1.1 (completed).
 
 ## Recent Changes
-- ✅ **R3.1 Complete**: Replaced for loop with foreach in UpdateQuality
-  - Changed `for (var i = 0; i < Items.Count; i++)` to `foreach (var item in Items)`
-  - Eliminated 2 assignments: loop variable `i` and counter increment
+- ✅ **R1.1 Complete**: Use increment/decrement operators for simple ±1 operations
+  - Changed all `item.Quality = item.Quality ± 1` to `item.Quality++` or `item.Quality--`
+  - Changed all `item.SellIn = item.SellIn - 1` to `item.SellIn--`
+  - Total: 10 assignments converted (7 Quality, 4 SellIn, minus 1 already removed in R1.2)
   - All 30 tests passing
-  - Mutation score: 58.49% (62 killed, 1 survived, 98.41% kill rate)
-  - Reduced total mutants from 66 to 63 (simpler code)
+  - Mutation score: **62.39%** (73 killed, 1 survived, 98.65% kill rate)
+  - Improved from 58.49% - more concise code creates better testable mutants
 
 ## Next Steps - APP-Guided Refactoring (Optional)
 See `memory-bank/refactoring-opportunities.md` for detailed analysis and plan.

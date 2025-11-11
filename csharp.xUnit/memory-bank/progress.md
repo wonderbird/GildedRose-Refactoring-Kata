@@ -109,12 +109,12 @@
 ## Current Status
 **Phase**: 🔄 APP-GUIDED REFACTORING (Optional Enhancement)
 **Tests**: 30 passing (all item types covered)
-**Mutation Score**: **58.49%** (63 tested mutants)
-  - **62 killed, 1 survived** (98.41% kill rate for tested code)
+**Mutation Score**: **62.39%** (74 tested mutants)
+  - **73 killed, 1 survived** (98.65% kill rate for tested code)
   - **43 mutants with no coverage** (in Program.cs - console app, not business logic)
-**APP Refactorings Completed**: 2 of 7 (R1.2, R3.1)
-**Current Refactoring**: R3.1 - Replace for loop with foreach ✅
-**Next Refactoring**: R1.1 - Use compound operators
+**APP Refactorings Completed**: 3 of 7 (R1.2, R3.1, R1.1)
+**Current Refactoring**: R1.1 - Use increment/decrement operators ✅
+**Next Refactoring**: R1.3 - Extract quality adjustment methods
 **Blockers**: None
 
 ## Known Issues
@@ -179,4 +179,5 @@
 - **Decision 54**: Final mutation analysis complete. Achieved excellent results: 59.63% mutation score with 98.48% kill rate for tested code (65 killed out of 66 tested mutants). The single surviving mutant represents less than 2% of tested code. The 43 mutants with no coverage are in Program.cs (console app entry point), not in business logic. Project complete with production-quality test coverage.
 - **Decision 55**: Started APP-guided refactoring phase. First refactoring R1.2: Simplified quality reset to zero in UpdateBackstagePass method. Changed `item.Quality = item.Quality - item.Quality` to direct assignment `item.Quality = 0`. This reduces assignment mass from 6 to 1 (5-point improvement per occurrence). All 30 tests passing, mutation score maintained at 59.63% (65 killed, 1 survived).
 - **Decision 56**: R3.1: Replaced for loop with foreach in UpdateQuality method. Changed `for (var i = 0; i < Items.Count; i++)` to `foreach (var item in Items)`. Eliminated 2 assignments (loop variable i and increment), simplifying the iteration. All 30 tests passing. Mutation score: 58.49% (62 killed, 1 survived, 98.41% kill rate). Total mutants reduced from 66 to 63 - the code is simpler with fewer opportunities for mutations, which is positive.
+- **Decision 57**: R1.1: Use increment/decrement operators for simple ±1 operations. Converted 10 assignments: all `item.Quality = item.Quality ± 1` to `item.Quality++`/`item.Quality--` and all `item.SellIn = item.SellIn - 1` to `item.SellIn--`. This makes the code more idiomatic and concise. All 30 tests passing. Mutation score improved to **62.39%** (73 killed, 1 survived, 98.65% kill rate). The score increased because the simpler syntax creates more testable mutants - a positive outcome showing better code quality.
 
