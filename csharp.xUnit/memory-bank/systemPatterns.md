@@ -1,10 +1,11 @@
 # System Patterns
 
 ## Architecture
-Object-oriented design using Strategy pattern:
+Object-oriented design using Strategy pattern with Template Method:
 - **Item**: Data class holding item properties (Name, SellIn, Quality)
 - **GildedRose**: Orchestrator class delegating to strategies
 - **IUpdateStrategy**: Interface defining update behavior contract
+- **BaseUpdateStrategy**: Abstract base class with shared constants and helpers
 - **Concrete Strategies**: NormalItemStrategy, AgedBrieStrategy, BackstagePassStrategy, ConjuredItemStrategy, SulfurasStrategy
 - **IStrategySelector**: Interface for selecting appropriate strategy
 - **NameBasedStrategySelector**: Selects strategy based on item name
@@ -13,7 +14,9 @@ Object-oriented design using Strategy pattern:
 - GildedRose operates on a list of items passed to constructor
 - UpdateQuality delegates to strategies for item-specific logic
 - Strategy selection based on item name (encapsulated in selector)
-- Each strategy encapsulates its own business rules, helpers, and constants
+- BaseUpdateStrategy eliminates duplication via Template Method pattern
+- Each strategy inherits shared helpers from base class
+- Strategies override UpdateItem to implement item-specific logic
 - No return value from UpdateQuality (void method)
 - Item properties are mutable (get/set)
 - Strategies mutate items in place
@@ -24,8 +27,14 @@ Object-oriented design using Strategy pattern:
 - Each item type has its own strategy implementation
 - GildedRose delegates to strategies via IStrategySelector
 - Eliminates conditional logic for type dispatch
-- Each strategy is self-contained with its own helper methods and constants
 - Easy to add new item types without modifying existing code (Open/Closed Principle)
+
+**Template Method Pattern** (base class):
+- BaseUpdateStrategy provides shared constants (MaxQuality, MinQuality)
+- BaseUpdateStrategy provides shared helper methods (IsPastSellByDate, IsAtMaxQuality, IsAtMinQuality, DecrementSellIn, IncreaseQuality, DecreaseQuality)
+- Concrete strategies inherit and override UpdateItem method
+- Eliminates ~75 lines of duplicated code (40% reduction)
+- Each strategy contains only item-specific logic
 
 **Factory Pattern** (selector):
 - NameBasedStrategySelector acts as a strategy factory
