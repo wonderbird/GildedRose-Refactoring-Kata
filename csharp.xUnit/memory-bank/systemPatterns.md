@@ -24,7 +24,7 @@ Current implementation uses procedural conditional logic:
 
 Using Absolute Priority Premise (APP) mass values to identify refactoring opportunities:
 
-### Current Mass Distribution (After R2.1)
+### Current Mass Distribution (After R4.1)
 - **Assignments (Mass 6)**: 3 total (reduced from 15) - down 80%!
   - Conjured item quality adjustments: `item.Quality = Math.Max(0, item.Quality - 2)` (2 occurrences)
   - Backstage pass quality reset: `item.Quality = 0` (1 occurrence)
@@ -45,7 +45,7 @@ Using Absolute Priority Premise (APP) mass values to identify refactoring opport
 3. ~~**Quality Adjustment with Boundary**~~ (ELIMINATED in R1.3): Was 13 occurrences - now in helper methods
 
 Future refactoring opportunities:
-- Extract magic number constants (quality bounds, backstage tier boundaries)
+- ~~Extract magic number constants~~ (COMPLETED in R4.1): Quality bounds and backstage tier boundaries now named constants
 - Consider extracting after-sell-by-date adjustment pattern
 - Consider Strategy pattern for polymorphic dispatch (long-term, defer unless needed)
 

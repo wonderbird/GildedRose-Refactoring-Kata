@@ -58,6 +58,11 @@ public class GildedRose
     private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
     private const string Conjured = "Conjured Mana Cake";
 
+    private const int MaxQuality = 50;
+    private const int MinQuality = 0;
+    private const int BackstageFirstTierBoundary = 11;
+    private const int BackstageSecondTierBoundary = 6;
+
     IList<Item> Items;
 
     public GildedRose(IList<Item> Items)
@@ -73,9 +78,9 @@ public class GildedRose
     
     private bool IsConjured(Item item) => item.Name == Conjured;
     
-    private bool IsAtMaxQuality(Item item) => item.Quality >= 50;
+    private bool IsAtMaxQuality(Item item) => item.Quality >= MaxQuality;
     
-    private bool IsAtMinQuality(Item item) => item.Quality <= 0;
+    private bool IsAtMinQuality(Item item) => item.Quality <= MinQuality;
 
     private void DecreaseQuality(Item item)
     {
@@ -126,12 +131,12 @@ public class GildedRose
     {
         IncreaseQuality(item);
 
-        if (item.SellIn < 11)
+        if (item.SellIn < BackstageFirstTierBoundary)
         {
             IncreaseQuality(item);
         }
 
-        if (item.SellIn < 6)
+        if (item.SellIn < BackstageSecondTierBoundary)
         {
             IncreaseQuality(item);
         }
@@ -140,7 +145,7 @@ public class GildedRose
 
         if (item.SellIn < 0)
         {
-            item.Quality = 0;
+            item.Quality = MinQuality;
         }
     }
 
@@ -148,7 +153,7 @@ public class GildedRose
     {
         if (!IsAtMinQuality(item))
         {
-            item.Quality = System.Math.Max(0, item.Quality - 2);
+            item.Quality = System.Math.Max(MinQuality, item.Quality - 2);
         }
 
         DecrementSellIn(item);
@@ -157,7 +162,7 @@ public class GildedRose
         {
             if (!IsAtMinQuality(item))
             {
-                item.Quality = System.Math.Max(0, item.Quality - 2);
+                item.Quality = System.Math.Max(MinQuality, item.Quality - 2);
             }
         }
     }

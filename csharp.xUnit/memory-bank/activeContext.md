@@ -1,17 +1,17 @@
 # Active Context
 
 ## Current Work Focus
-**APP-Guided Refactoring in Progress** - Executing the 7-refactoring plan to reduce code mass by 25-30%. Completed 5 of 7 refactorings (R1.2, R3.1, R1.1, R1.3, R2.1).
+**APP-Guided Refactoring in Progress** - Executing the 7-refactoring plan to reduce code mass by 25-30%. Completed 6 of 7 refactorings (R1.2, R3.1, R1.1, R1.3, R2.1, R4.1).
 
 ## Recent Changes
-- ✅ **R2.1 Complete**: Extract SellIn decrement method (DecrementSellIn)
-  - Extracted helper method that decrements SellIn by 1
-  - Updated 4 call sites across UpdateNormalItem, UpdateAgedBrie, UpdateBackstagePass, UpdateConjuredItem
-  - Eliminated 3 duplications of `item.SellIn--`
-  - Makes SellIn decrement explicit and centralized
+- ✅ **R4.1 Complete**: Extract magic number constants
+  - Extracted 4 constants: MaxQuality (50), MinQuality (0), BackstageFirstTierBoundary (11), BackstageSecondTierBoundary (6)
+  - Replaced 8 magic number occurrences with named constants
+  - Makes quality bounds and backstage tier logic self-documenting
+  - Improves maintainability - changing boundaries requires one edit instead of multiple
   - All 30 tests passing
   - Mutation score: 58.10% (61 killed, 1 survived, 98.39% kill rate)
-  - Fewer tested mutants (62 vs 64) indicates further code simplification
+  - Mutation score maintained (same as R2.1)
 
 ## Next Steps - APP-Guided Refactoring (Optional)
 See `memory-bank/refactoring-opportunities.md` for detailed analysis and plan.
