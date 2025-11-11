@@ -1,7 +1,7 @@
 # Active Context
 
 ## Current Work Focus
-**Project Complete** - All features implemented, including the "Conjured" items feature. Documentation updated, comprehensive test coverage achieved with excellent mutation testing results.
+**Refactoring Plan Created** - All features implemented. A comprehensive refactoring plan has been created following the Absolute Priority Premise (APP) to further improve code quality by reducing complexity mass. The plan identifies 7 refactorings organized in 4 phases, targeting a 25-30% reduction in code mass.
 
 ## Recent Changes
 - ✅ RED/GREEN: Test and implementation for quality degradation by 2 before sell-by date
@@ -9,20 +9,31 @@
 - ✅ RED/GREEN: Boundary condition tests revealed bug - quality could go negative when degrading by 2/4
 - ✅ Fixed implementation to clamp quality at 0 after each degradation
 
-## Next Steps - Implement "Conjured" Items
-1.  ✅ Write a failing test for "Conjured" item quality degradation (degrades by 2) before the sell-by date.
-2.  ✅ Implement the minimal code required to make the test pass.
-3.  ✅ Refactor the implementation while keeping tests green (no refactoring needed - clean implementation).
-4.  ✅ Write a failing test for "Conjured" item quality degradation (degrades by 4) after the sell-by date.
-5.  ✅ Implement the minimal code required to make the test pass.
-6.  ✅ Refactor the implementation (if needed).
-7.  ✅ Add tests for boundary conditions, such as quality never dropping below zero.
-8.  Run mutation tests to ensure the new logic is fully covered.
+## Next Steps - APP-Guided Refactoring (Optional)
+See `memory-bank/refactoring-opportunities.md` for detailed analysis and plan.
+
+**Recommended Sequence** (7 refactorings):
+1. **R1.2**: Simplify quality reset to zero (line 137)
+2. **R3.1**: Replace for loop with foreach (reduce assignments)
+3. **R1.1**: Use compound operators for quality/SellIn changes
+4. **R1.3**: Extract quality adjustment methods (DecreaseQuality, IncreaseQuality)
+5. **R2.1**: Extract SellIn decrement method
+6. **R2.2**: Extract after-sell-by-date adjustment methods
+7. **R4.1**: Extract magic number constants
+
+**Expected Outcome**: 25-30% reduction in code mass while maintaining all tests and mutation score.
 
 ## Active Decisions
-- The implementation of "Conjured" items will follow the same strict TDD cycle (Red-Green-Refactor) that was used for the initial refactoring.
-- A new set of tests will be created specifically for "Conjured" item behavior.
-- The existing refactored structure of `UpdateQuality` will be extended to accommodate the new item type.
+- The implementation of "Conjured" items followed the same strict TDD cycle (Red-Green-Refactor) that was used for the initial refactoring.
+- A comprehensive APP (Absolute Priority Premise) analysis identified 25-30% potential mass reduction through 7 targeted refactorings.
+- Each refactoring will follow strict TDD: one step at a time, test-verified, mutation-tested, memory-bank-documented.
+- Simple Design Rule #2 (Reveals Intent) trumps APP if there's a conflict - clarity over low mass.
+
+## Refactoring Execution Approach
+**Strategy**: Prioritize by APP impact - highest mass components first
+**Sequence**: Start simple → mechanical changes → high-impact extractions
+**Guard Rails**: All 30 tests must pass, mutation score ≥ 59.63% after each step
+**Expected Outcome**: Estimated mass reduction from ~400-450 to ~310-340 (25-30%)
 
 ## Test Suite Quality Achieved
 - **30 passing tests** covering all business logic (including complete conjured items feature)

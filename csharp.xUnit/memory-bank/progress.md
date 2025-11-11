@@ -76,6 +76,36 @@
 - Verify mutation score after refactoring to ensure test effectiveness maintained
 - Consider applying patterns: Strategy, Command, or polymorphic dispatch
 
+### APP-Guided Code Quality Improvements (Optional - see refactoring-opportunities.md)
+**Phase 1: Reduce Assignment Mass** (Highest Priority)
+- R1.2: Simplify quality reset to zero (`item.Quality = item.Quality - item.Quality` → `item.Quality = 0`)
+- R1.1: Use compound operators (`item.Quality = item.Quality - 1` → `item.Quality--`)
+- R1.3: Extract quality adjustment methods (`DecreaseQuality`, `IncreaseQuality`)
+
+**Phase 2: Eliminate Duplication**
+- R2.1: Extract SellIn decrement method (removes 3 duplications)
+- R2.2: Extract after-sell-by-date adjustment methods
+
+**Phase 3: Reduce Loop Complexity**
+- R3.1: Replace `for` loop with `foreach` (eliminates 2 assignments)
+
+**Phase 4: Structural Improvements**
+- R4.1: Extract magic number constants (improves clarity)
+
+**Expected Outcomes**:
+- Mass reduction: ~400-450 → ~310-340 (25-30% reduction)
+- Reduced duplication: 4+ instances eliminated
+- Improved clarity: Quality adjustment intent more explicit
+- All 30 tests continue to pass
+- Mutation score maintained ≥ 59.63% (98%+ kill rate)
+
+**Success Criteria per Refactoring**:
+- All tests pass after each step
+- Mutation score ≥ 59.63% maintained
+- Code remains readable and maintainable
+- No new duplication introduced
+- Single, complete refactoring technique per commit
+
 ## Current Status
 **Phase**: ✅ PROJECT COMPLETE
 **Tests**: 30 passing (25 existing + 5 conjured item tests)
