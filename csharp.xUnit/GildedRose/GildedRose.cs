@@ -134,7 +134,7 @@ public class GildedRose
 
         if (item.SellIn < 0)
         {
-            item.Quality = item.Quality - item.Quality;
+            item.Quality = 0;
         }
     }
 

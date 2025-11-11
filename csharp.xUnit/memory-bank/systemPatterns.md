@@ -23,11 +23,11 @@ Current implementation uses procedural conditional logic:
 
 Using Absolute Priority Premise (APP) mass values to identify refactoring opportunities:
 
-### Current Mass Distribution
-- **Assignments (Mass 6)**: 16 total - highest priority for reduction
+### Current Mass Distribution (After R1.2)
+- **Assignments (Mass 6)**: 15 total (reduced from 16) - highest priority for reduction
   - Quality adjustments: `item.Quality = item.Quality ± 1` (14 occurrences)
   - SellIn decrements: `item.SellIn = item.SellIn - 1` (4 occurrences)
-  - Peculiar quality reset: `item.Quality = item.Quality - item.Quality` (1 occurrence, line 137)
+  - ~~Peculiar quality reset~~ (REMOVED): Changed to `item.Quality = 0` (now Constant, Mass 1)
 - **Conditionals (Mass 4)**: 17 total
   - Boundary checks: `!IsAtMinQuality(item)`, `!IsAtMaxQuality(item)` (9 occurrences)
   - SellIn checks: `item.SellIn < 0` (4 occurrences)
