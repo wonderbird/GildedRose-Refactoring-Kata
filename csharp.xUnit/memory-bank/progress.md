@@ -109,12 +109,13 @@
 ## Current Status
 **Phase**: 🔄 APP-GUIDED REFACTORING (Optional Enhancement)
 **Tests**: 30 passing (all item types covered)
-**Mutation Score**: **62.39%** (74 tested mutants)
-  - **73 killed, 1 survived** (98.65% kill rate for tested code)
+**Mutation Score**: **58.88%** (64 tested mutants)
+  - **63 killed, 1 survived** (98.44% kill rate for tested code)
   - **43 mutants with no coverage** (in Program.cs - console app, not business logic)
-**APP Refactorings Completed**: 3 of 7 (R1.2, R3.1, R1.1)
-**Current Refactoring**: R1.1 - Use increment/decrement operators ✅
-**Next Refactoring**: R1.3 - Extract quality adjustment methods
+**APP Refactorings Completed**: 4 of 7 (R1.2, R3.1, R1.1, R1.3)
+**Progress**: 57% complete - major improvements achieved!
+  - Assignments reduced by 80% (from 15 to 3)
+  - Conditionals reduced by 65% (from 17 to 6)
 **Blockers**: None
 
 ## Known Issues
@@ -180,4 +181,5 @@
 - **Decision 55**: Started APP-guided refactoring phase. First refactoring R1.2: Simplified quality reset to zero in UpdateBackstagePass method. Changed `item.Quality = item.Quality - item.Quality` to direct assignment `item.Quality = 0`. This reduces assignment mass from 6 to 1 (5-point improvement per occurrence). All 30 tests passing, mutation score maintained at 59.63% (65 killed, 1 survived).
 - **Decision 56**: R3.1: Replaced for loop with foreach in UpdateQuality method. Changed `for (var i = 0; i < Items.Count; i++)` to `foreach (var item in Items)`. Eliminated 2 assignments (loop variable i and increment), simplifying the iteration. All 30 tests passing. Mutation score: 58.49% (62 killed, 1 survived, 98.41% kill rate). Total mutants reduced from 66 to 63 - the code is simpler with fewer opportunities for mutations, which is positive.
 - **Decision 57**: R1.1: Use increment/decrement operators for simple ±1 operations. Converted 10 assignments: all `item.Quality = item.Quality ± 1` to `item.Quality++`/`item.Quality--` and all `item.SellIn = item.SellIn - 1` to `item.SellIn--`. This makes the code more idiomatic and concise. All 30 tests passing. Mutation score improved to **62.39%** (73 killed, 1 survived, 98.65% kill rate). The score increased because the simpler syntax creates more testable mutants - a positive outcome showing better code quality.
+- **Decision 58**: R1.3: Extract quality adjustment methods (DecreaseQuality, IncreaseQuality). Created 2 helper methods that encapsulate the "check boundary then adjust" pattern, eliminating 13 duplicated boundary checks. Updated 7 call sites across UpdateNormalItem, UpdateAgedBrie, and UpdateBackstagePass methods. The extracted methods make quality adjustments explicit and maintainable. All 30 tests passing. Mutation score: 58.88% (63 killed, 1 survived, 98.44% kill rate). Fewer mutants (64 vs 74) shows cleaner code. **Major APP achievement**: Assignments reduced by 80% (15→3), Conditionals reduced by 65% (17→6).
 

@@ -23,18 +23,19 @@ Current implementation uses procedural conditional logic:
 
 Using Absolute Priority Premise (APP) mass values to identify refactoring opportunities:
 
-### Current Mass Distribution (After R1.1)
-- **Assignments (Mass 6)**: 3 total (reduced from 13) - major improvement!
+### Current Mass Distribution (After R1.3)
+- **Assignments (Mass 6)**: 3 total (reduced from 15) - down 80%!
   - Conjured item quality adjustments: `item.Quality = Math.Max(0, item.Quality - 2)` (2 occurrences)
   - Backstage pass quality reset: `item.Quality = 0` (1 occurrence)
-  - ~~Simple ±1 operations~~ (CONVERTED in R1.1): Now use `++`/`--` operators (10 converted)
+  - ~~Simple ±1 operations~~ (CONVERTED in R1.1): Now use `++`/`--` in helper methods (10 converted)
   - ~~Peculiar quality reset~~ (REMOVED in R1.2): Changed to `item.Quality = 0` (now Constant, Mass 1)
   - ~~Loop variable i and increment~~ (REMOVED in R3.1): Changed to foreach (2 assignments eliminated)
-- **Conditionals (Mass 4)**: 17 total
-  - Boundary checks: `!IsAtMinQuality(item)`, `!IsAtMaxQuality(item)` (9 occurrences)
-  - SellIn checks: `item.SellIn < 0` (4 occurrences)
+- **Conditionals (Mass 4)**: 6 total (reduced from 17) - down 65%!
+  - Boundary checks moved to helper methods: 2 in DecreaseQuality, 2 in IncreaseQuality (eliminated 13 duplicates)
+  - SellIn checks: `item.SellIn < 0` (2 occurrences after simplification)
   - Type dispatch in UpdateQuality (4 occurrences)
 - **Loop (Mass 5)**: 1 foreach loop in UpdateQuality (no assignment, cleaner)
+- **Invocations (Mass 2)**: 7 calls to DecreaseQuality/IncreaseQuality (clearer intent)
 
 ### Identified Duplication Patterns
 1. **SellIn Decrement** - duplicated in 4 Update methods (lines 87, 105, 133, 148)

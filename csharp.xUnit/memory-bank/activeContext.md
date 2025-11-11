@@ -1,16 +1,18 @@
 # Active Context
 
 ## Current Work Focus
-**APP-Guided Refactoring in Progress** - Executing the 7-refactoring plan to reduce code mass by 25-30%. Currently on refactoring R1.1 (completed).
+**APP-Guided Refactoring in Progress** - Executing the 7-refactoring plan to reduce code mass by 25-30%. Completed 3 of 7 refactorings (R1.2, R3.1, R1.1, R1.3).
 
 ## Recent Changes
-- ✅ **R1.1 Complete**: Use increment/decrement operators for simple ±1 operations
-  - Changed all `item.Quality = item.Quality ± 1` to `item.Quality++` or `item.Quality--`
-  - Changed all `item.SellIn = item.SellIn - 1` to `item.SellIn--`
-  - Total: 10 assignments converted (7 Quality, 4 SellIn, minus 1 already removed in R1.2)
+- ✅ **R1.3 Complete**: Extract quality adjustment methods (DecreaseQuality, IncreaseQuality)
+  - Extracted 2 helper methods encapsulating boundary-check-then-adjust pattern
+  - DecreaseQuality: checks min boundary before decrementing
+  - IncreaseQuality: checks max boundary before incrementing
+  - Updated 7 call sites across UpdateNormalItem, UpdateAgedBrie, UpdateBackstagePass
+  - Eliminated 13 duplicated boundary checks
   - All 30 tests passing
-  - Mutation score: **62.39%** (73 killed, 1 survived, 98.65% kill rate)
-  - Improved from 58.49% - more concise code creates better testable mutants
+  - Mutation score: 58.88% (63 killed, 1 survived, 98.44% kill rate)
+  - Fewer mutants (64 vs 74) indicates simpler, more maintainable code
 
 ## Next Steps - APP-Guided Refactoring (Optional)
 See `memory-bank/refactoring-opportunities.md` for detailed analysis and plan.

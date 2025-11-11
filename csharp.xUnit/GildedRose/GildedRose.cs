@@ -77,57 +77,58 @@ public class GildedRose
     
     private bool IsAtMinQuality(Item item) => item.Quality <= 0;
 
-    private void UpdateNormalItem(Item item)
+    private void DecreaseQuality(Item item)
     {
         if (!IsAtMinQuality(item))
         {
             item.Quality--;
         }
+    }
+
+    private void IncreaseQuality(Item item)
+    {
+        if (!IsAtMaxQuality(item))
+        {
+            item.Quality++;
+        }
+    }
+
+    private void UpdateNormalItem(Item item)
+    {
+        DecreaseQuality(item);
 
         item.SellIn--;
 
         if (item.SellIn < 0)
         {
-            if (!IsAtMinQuality(item))
-            {
-                item.Quality--;
-            }
+            DecreaseQuality(item);
         }
     }
 
     private void UpdateAgedBrie(Item item)
     {
-        if (!IsAtMaxQuality(item))
-        {
-            item.Quality++;
-        }
+        IncreaseQuality(item);
 
         item.SellIn--;
 
         if (item.SellIn < 0)
         {
-            if (!IsAtMaxQuality(item))
-            {
-                item.Quality++;
-            }
+            IncreaseQuality(item);
         }
     }
 
     private void UpdateBackstagePass(Item item)
     {
-        if (!IsAtMaxQuality(item))
+        IncreaseQuality(item);
+
+        if (item.SellIn < 11)
         {
-            item.Quality++;
+            IncreaseQuality(item);
+        }
 
-            if (item.SellIn < 11 && !IsAtMaxQuality(item))
-            {
-                item.Quality++;
-            }
-
-            if (item.SellIn < 6 && !IsAtMaxQuality(item))
-            {
-                item.Quality++;
-            }
+        if (item.SellIn < 6)
+        {
+            IncreaseQuality(item);
         }
 
         item.SellIn--;
