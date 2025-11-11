@@ -1,18 +1,17 @@
 # Active Context
 
 ## Current Work Focus
-**APP-Guided Refactoring in Progress** - Executing the 7-refactoring plan to reduce code mass by 25-30%. Completed 3 of 7 refactorings (R1.2, R3.1, R1.1, R1.3).
+**APP-Guided Refactoring in Progress** - Executing the 7-refactoring plan to reduce code mass by 25-30%. Completed 5 of 7 refactorings (R1.2, R3.1, R1.1, R1.3, R2.1).
 
 ## Recent Changes
-- ✅ **R1.3 Complete**: Extract quality adjustment methods (DecreaseQuality, IncreaseQuality)
-  - Extracted 2 helper methods encapsulating boundary-check-then-adjust pattern
-  - DecreaseQuality: checks min boundary before decrementing
-  - IncreaseQuality: checks max boundary before incrementing
-  - Updated 7 call sites across UpdateNormalItem, UpdateAgedBrie, UpdateBackstagePass
-  - Eliminated 13 duplicated boundary checks
+- ✅ **R2.1 Complete**: Extract SellIn decrement method (DecrementSellIn)
+  - Extracted helper method that decrements SellIn by 1
+  - Updated 4 call sites across UpdateNormalItem, UpdateAgedBrie, UpdateBackstagePass, UpdateConjuredItem
+  - Eliminated 3 duplications of `item.SellIn--`
+  - Makes SellIn decrement explicit and centralized
   - All 30 tests passing
-  - Mutation score: 58.88% (63 killed, 1 survived, 98.44% kill rate)
-  - Fewer mutants (64 vs 74) indicates simpler, more maintainable code
+  - Mutation score: 58.10% (61 killed, 1 survived, 98.39% kill rate)
+  - Fewer tested mutants (62 vs 64) indicates further code simplification
 
 ## Next Steps - APP-Guided Refactoring (Optional)
 See `memory-bank/refactoring-opportunities.md` for detailed analysis and plan.

@@ -18,34 +18,35 @@ Current implementation uses procedural conditional logic:
 - In-place mutation of item properties
 - Helper methods for type identification (IsAgedBrie, IsSulfuras, etc.)
 - Helper methods for boundary checks (IsAtMaxQuality, IsAtMinQuality)
+- Helper methods for common operations (DecreaseQuality, IncreaseQuality, DecrementSellIn)
 
 ## Code Complexity Analysis (APP)
 
 Using Absolute Priority Premise (APP) mass values to identify refactoring opportunities:
 
-### Current Mass Distribution (After R1.3)
+### Current Mass Distribution (After R2.1)
 - **Assignments (Mass 6)**: 3 total (reduced from 15) - down 80%!
   - Conjured item quality adjustments: `item.Quality = Math.Max(0, item.Quality - 2)` (2 occurrences)
   - Backstage pass quality reset: `item.Quality = 0` (1 occurrence)
   - ~~Simple ±1 operations~~ (CONVERTED in R1.1): Now use `++`/`--` in helper methods (10 converted)
   - ~~Peculiar quality reset~~ (REMOVED in R1.2): Changed to `item.Quality = 0` (now Constant, Mass 1)
   - ~~Loop variable i and increment~~ (REMOVED in R3.1): Changed to foreach (2 assignments eliminated)
+  - ~~SellIn decrements~~ (EXTRACTED in R2.1): Now use DecrementSellIn() method (4 invocations)
 - **Conditionals (Mass 4)**: 6 total (reduced from 17) - down 65%!
   - Boundary checks moved to helper methods: 2 in DecreaseQuality, 2 in IncreaseQuality (eliminated 13 duplicates)
-  - SellIn checks: `item.SellIn < 0` (2 occurrences after simplification)
+  - SellIn checks: `item.SellIn < 0` (4 occurrences in Update methods)
   - Type dispatch in UpdateQuality (4 occurrences)
 - **Loop (Mass 5)**: 1 foreach loop in UpdateQuality (no assignment, cleaner)
-- **Invocations (Mass 2)**: 7 calls to DecreaseQuality/IncreaseQuality (clearer intent)
+- **Invocations (Mass 2)**: 11 calls total (DecreaseQuality, IncreaseQuality, DecrementSellIn) - explicit intent
 
 ### Identified Duplication Patterns
-1. **SellIn Decrement** - duplicated in 4 Update methods (lines 87, 105, 133, 148)
+1. ~~**SellIn Decrement**~~ (ELIMINATED in R2.1): Was duplicated in 4 Update methods - now centralized in DecrementSellIn()
 2. **After-Sell-By-Date Check** - duplicated pattern `if (item.SellIn < 0)` in 4 methods
-3. **Quality Adjustment with Boundary** - 13 occurrences of check-then-adjust pattern
+3. ~~**Quality Adjustment with Boundary**~~ (ELIMINATED in R1.3): Was 13 occurrences - now in helper methods
 
 Future refactoring opportunities:
-- Extract quality adjustment methods (DecreaseQuality, IncreaseQuality) to reduce assignment mass
-- Extract SellIn decrement to eliminate duplication
-- Replace for loop with foreach to reduce assignment count
+- Extract magic number constants (quality bounds, backstage tier boundaries)
+- Consider extracting after-sell-by-date adjustment pattern
 - Consider Strategy pattern for polymorphic dispatch (long-term, defer unless needed)
 
 ## Component Relationships

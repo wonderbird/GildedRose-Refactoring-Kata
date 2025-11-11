@@ -93,11 +93,16 @@ public class GildedRose
         }
     }
 
+    private void DecrementSellIn(Item item)
+    {
+        item.SellIn--;
+    }
+
     private void UpdateNormalItem(Item item)
     {
         DecreaseQuality(item);
 
-        item.SellIn--;
+        DecrementSellIn(item);
 
         if (item.SellIn < 0)
         {
@@ -109,7 +114,7 @@ public class GildedRose
     {
         IncreaseQuality(item);
 
-        item.SellIn--;
+        DecrementSellIn(item);
 
         if (item.SellIn < 0)
         {
@@ -131,7 +136,7 @@ public class GildedRose
             IncreaseQuality(item);
         }
 
-        item.SellIn--;
+        DecrementSellIn(item);
 
         if (item.SellIn < 0)
         {
@@ -146,7 +151,7 @@ public class GildedRose
             item.Quality = System.Math.Max(0, item.Quality - 2);
         }
 
-        item.SellIn--;
+        DecrementSellIn(item);
 
         if (item.SellIn < 0)
         {
