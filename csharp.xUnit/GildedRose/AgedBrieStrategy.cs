@@ -5,11 +5,9 @@ namespace GildedRoseKata;
 /// Quality increases by 1 per day before sell-by date, by 2 after.
 /// Quality never exceeds 50.
 /// </summary>
-public class AgedBrieStrategy : IUpdateStrategy
+public class AgedBrieStrategy : BaseUpdateStrategy
 {
-    private const int MaxQuality = 50;
-
-    public void UpdateItem(Item item)
+    public override void UpdateItem(Item item)
     {
         IncreaseQuality(item);
 
@@ -19,23 +17,6 @@ public class AgedBrieStrategy : IUpdateStrategy
         {
             IncreaseQuality(item);
         }
-    }
-
-    private bool IsPastSellByDate(Item item) => item.SellIn < 0;
-
-    private bool IsAtMaxQuality(Item item) => item.Quality >= MaxQuality;
-
-    private void IncreaseQuality(Item item)
-    {
-        if (!IsAtMaxQuality(item))
-        {
-            item.Quality++;
-        }
-    }
-
-    private void DecrementSellIn(Item item)
-    {
-        item.SellIn--;
     }
 }
 
