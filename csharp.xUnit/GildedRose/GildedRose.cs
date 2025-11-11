@@ -53,148 +53,21 @@ namespace GildedRoseKata;
 /// </summary>
 public class GildedRose
 {
-    private const string AgedBrie = "Aged Brie";
-    private const string BackstagePasses = "Backstage passes to a TAFKAL80ETC concert";
-    private const string Sulfuras = "Sulfuras, Hand of Ragnaros";
-    private const string Conjured = "Conjured Mana Cake";
-
-    private const int MaxQuality = 50;
-    private const int MinQuality = 0;
-    private const int BackstageFirstTierBoundary = 11;
-    private const int BackstageSecondTierBoundary = 6;
-
     IList<Item> Items;
+    private readonly IStrategySelector _strategySelector;
 
     public GildedRose(IList<Item> Items)
     {
         this.Items = Items;
-    }
-
-    private bool IsAgedBrie(Item item) => item.Name == AgedBrie;
-    
-    private bool IsBackstagePass(Item item) => item.Name == BackstagePasses;
-    
-    private bool IsSulfuras(Item item) => item.Name == Sulfuras;
-    
-    private bool IsConjured(Item item) => item.Name == Conjured;
-    
-    private bool IsAtMaxQuality(Item item) => item.Quality >= MaxQuality;
-    
-    private bool IsAtMinQuality(Item item) => item.Quality <= MinQuality;
-
-    private bool IsPastSellByDate(Item item) => item.SellIn < 0;
-
-    private void DecreaseQuality(Item item)
-    {
-        if (!IsAtMinQuality(item))
-        {
-            item.Quality--;
-        }
-    }
-
-    private void IncreaseQuality(Item item)
-    {
-        if (!IsAtMaxQuality(item))
-        {
-            item.Quality++;
-        }
-    }
-
-    private void DecrementSellIn(Item item)
-    {
-        item.SellIn--;
-    }
-
-    private void UpdateNormalItem(Item item)
-    {
-        DecreaseQuality(item);
-
-        DecrementSellIn(item);
-
-        if (IsPastSellByDate(item))
-        {
-            DecreaseQuality(item);
-        }
-    }
-
-    private void UpdateAgedBrie(Item item)
-    {
-        IncreaseQuality(item);
-
-        DecrementSellIn(item);
-
-        if (IsPastSellByDate(item))
-        {
-            IncreaseQuality(item);
-        }
-    }
-
-    private void UpdateBackstagePass(Item item)
-    {
-        IncreaseQuality(item);
-
-        if (item.SellIn < BackstageFirstTierBoundary)
-        {
-            IncreaseQuality(item);
-        }
-
-        if (item.SellIn < BackstageSecondTierBoundary)
-        {
-            IncreaseQuality(item);
-        }
-
-        DecrementSellIn(item);
-
-        if (IsPastSellByDate(item))
-        {
-            item.Quality = MinQuality;
-        }
-    }
-
-    private void UpdateConjuredItem(Item item)
-    {
-        if (!IsAtMinQuality(item))
-        {
-            item.Quality = System.Math.Max(MinQuality, item.Quality - 2);
-        }
-
-        DecrementSellIn(item);
-
-        if (IsPastSellByDate(item))
-        {
-            if (!IsAtMinQuality(item))
-            {
-                item.Quality = System.Math.Max(MinQuality, item.Quality - 2);
-            }
-        }
+        _strategySelector = new NameBasedStrategySelector();
     }
 
     public void UpdateQuality()
     {
         foreach (var item in Items)
         {
-            // Sulfuras never changes
-            if (IsSulfuras(item))
-            {
-                continue;
-            }
-
-            if (IsAgedBrie(item))
-            {
-                UpdateAgedBrie(item);
-            }
-            else if (IsBackstagePass(item))
-            {
-                UpdateBackstagePass(item);
-            }
-            else if (IsConjured(item))
-            {
-                UpdateConjuredItem(item);
-            }
-            else
-            {
-                UpdateNormalItem(item);
-            }
+            var strategy = _strategySelector.GetStrategy(item);
+            strategy.UpdateItem(item);
         }
     }
 }

@@ -1,25 +1,37 @@
 # System Patterns
 
 ## Architecture
-Simple object-oriented design with two main classes:
+Object-oriented design using Strategy pattern:
 - **Item**: Data class holding item properties (Name, SellIn, Quality)
-- **GildedRose**: Business logic class with UpdateQuality method
+- **GildedRose**: Orchestrator class delegating to strategies
+- **IUpdateStrategy**: Interface defining update behavior contract
+- **Concrete Strategies**: NormalItemStrategy, AgedBrieStrategy, BackstagePassStrategy, ConjuredItemStrategy, SulfurasStrategy
+- **IStrategySelector**: Interface for selecting appropriate strategy
+- **NameBasedStrategySelector**: Selects strategy based on item name
 
 ## Key Technical Decisions
 - GildedRose operates on a list of items passed to constructor
-- UpdateQuality mutates the items in place
+- UpdateQuality delegates to strategies for item-specific logic
+- Strategy selection based on item name (encapsulated in selector)
+- Each strategy encapsulates its own business rules, helpers, and constants
 - No return value from UpdateQuality (void method)
 - Item properties are mutable (get/set)
+- Strategies mutate items in place
 
 ## Design Patterns in Use
-Current implementation uses procedural conditional logic:
-- Method extraction pattern - separate methods per item type (UpdateNormalItem, UpdateAgedBrie, etc.)
-- Item type discrimination via Name string comparison
-- In-place mutation of item properties
-- Helper methods for type identification (IsAgedBrie, IsSulfuras, etc.)
-- Helper methods for boundary checks (IsAtMaxQuality, IsAtMinQuality)
-- Helper methods for common operations (DecreaseQuality, IncreaseQuality, DecrementSellIn)
-- Helper method for sell-by date check (IsPastSellByDate)
+**Strategy Pattern** (primary pattern):
+- IUpdateStrategy interface defines the contract for all item update behaviors
+- Each item type has its own strategy implementation
+- GildedRose delegates to strategies via IStrategySelector
+- Eliminates conditional logic for type dispatch
+- Each strategy is self-contained with its own helper methods and constants
+- Easy to add new item types without modifying existing code (Open/Closed Principle)
+
+**Factory Pattern** (selector):
+- NameBasedStrategySelector acts as a strategy factory
+- Maps item names to strategy instances
+- Returns appropriate strategy for each item
+- Provides default strategy for unknown item types
 
 ## Code Complexity Analysis (APP)
 
@@ -53,8 +65,14 @@ All planned APP refactorings complete! Code quality significantly improved:
 ## Component Relationships
 ```
 GildedRose
-  └── Contains: IList<Item>
-  └── Operates on: Item properties via UpdateQuality()
+  ├── Contains: IList<Item>
+  └── Uses: IStrategySelector
+      └── Returns: IUpdateStrategy implementations
+          ├── NormalItemStrategy
+          ├── AgedBrieStrategy
+          ├── BackstagePassStrategy
+          ├── ConjuredItemStrategy
+          └── SulfurasStrategy
 
 Item
   ├── Name (string)
@@ -65,7 +83,11 @@ Item
 ## Critical Implementation Paths
 The UpdateQuality method follows this flow:
 1. Iterate through all items
-2. Adjust quality based on item type (first pass)
-3. Decrement SellIn (except for Sulfuras)
-4. Apply additional quality changes if past sell-by date
+2. For each item:
+   a. Ask selector for appropriate strategy
+   b. Delegate to strategy's UpdateItem method
+3. Each strategy encapsulates its own logic:
+   - Quality adjustments (with boundary checks)
+   - SellIn decrement
+   - Post-sell-by-date adjustments
 
