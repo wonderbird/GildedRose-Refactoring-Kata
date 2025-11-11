@@ -5,12 +5,9 @@ namespace GildedRoseKata;
 /// Quality decreases by 1 per day before sell-by date, by 2 after.
 /// Quality never goes below 0.
 /// </summary>
-public class NormalItemStrategy : IUpdateStrategy
+public class NormalItemStrategy : BaseUpdateStrategy
 {
-    private const int MaxQuality = 50;
-    private const int MinQuality = 0;
-
-    public void UpdateItem(Item item)
+    public override void UpdateItem(Item item)
     {
         DecreaseQuality(item);
 
@@ -20,23 +17,6 @@ public class NormalItemStrategy : IUpdateStrategy
         {
             DecreaseQuality(item);
         }
-    }
-
-    private bool IsPastSellByDate(Item item) => item.SellIn < 0;
-
-    private bool IsAtMinQuality(Item item) => item.Quality <= MinQuality;
-
-    private void DecreaseQuality(Item item)
-    {
-        if (!IsAtMinQuality(item))
-        {
-            item.Quality--;
-        }
-    }
-
-    private void DecrementSellIn(Item item)
-    {
-        item.SellIn--;
     }
 }
 
