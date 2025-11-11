@@ -4,11 +4,12 @@
 **DRY Refactoring In Progress** 🔄 - Eliminating duplication across strategy classes via base class extraction
 
 ## Recent Changes
-- ✅ **Step 1 Complete**: Created BaseUpdateStrategy abstract base class
-  - Extracted shared constants: MaxQuality (50), MinQuality (0)
-  - Provides foundation for consolidating duplicated helper methods
+- ✅ **Step 2 Complete**: Added all helper methods to BaseUpdateStrategy
+  - Moved 6 helper methods: IsPastSellByDate, IsAtMaxQuality, IsAtMinQuality, DecrementSellIn, IncreaseQuality, DecreaseQuality
+  - Methods currently duplicated (exist in base and strategies)
   - All 30 tests passing
-  - Mutation score: 58.33% maintained (63 killed, 1 survived)
+  - Mutation score: 51.64% (temporary drop due to uncovered base class code)
+  - Next: Update each strategy to inherit from base and remove duplication
   
 **Previous: Strategy Pattern Implementation Complete**:
   - Created IUpdateStrategy interface for polymorphic item updates
