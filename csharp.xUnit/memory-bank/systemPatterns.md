@@ -19,12 +19,13 @@ Current implementation uses procedural conditional logic:
 - Helper methods for type identification (IsAgedBrie, IsSulfuras, etc.)
 - Helper methods for boundary checks (IsAtMaxQuality, IsAtMinQuality)
 - Helper methods for common operations (DecreaseQuality, IncreaseQuality, DecrementSellIn)
+- Helper method for sell-by date check (IsPastSellByDate)
 
 ## Code Complexity Analysis (APP)
 
 Using Absolute Priority Premise (APP) mass values to identify refactoring opportunities:
 
-### Current Mass Distribution (After R4.1)
+### Current Mass Distribution (After R2.2 - FINAL)
 - **Assignments (Mass 6)**: 3 total (reduced from 15) - down 80%!
   - Conjured item quality adjustments: `item.Quality = Math.Max(0, item.Quality - 2)` (2 occurrences)
   - Backstage pass quality reset: `item.Quality = 0` (1 occurrence)
@@ -34,20 +35,20 @@ Using Absolute Priority Premise (APP) mass values to identify refactoring opport
   - ~~SellIn decrements~~ (EXTRACTED in R2.1): Now use DecrementSellIn() method (4 invocations)
 - **Conditionals (Mass 4)**: 6 total (reduced from 17) - down 65%!
   - Boundary checks moved to helper methods: 2 in DecreaseQuality, 2 in IncreaseQuality (eliminated 13 duplicates)
-  - SellIn checks: `item.SellIn < 0` (4 occurrences in Update methods)
+  - ~~SellIn checks~~ (EXTRACTED in R2.2): `item.SellIn < 0` now IsPastSellByDate() (4 invocations)
   - Type dispatch in UpdateQuality (4 occurrences)
 - **Loop (Mass 5)**: 1 foreach loop in UpdateQuality (no assignment, cleaner)
 - **Invocations (Mass 2)**: 11 calls total (DecreaseQuality, IncreaseQuality, DecrementSellIn) - explicit intent
 
-### Identified Duplication Patterns
+### Identified Duplication Patterns (ALL ELIMINATED!)
 1. ~~**SellIn Decrement**~~ (ELIMINATED in R2.1): Was duplicated in 4 Update methods - now centralized in DecrementSellIn()
-2. **After-Sell-By-Date Check** - duplicated pattern `if (item.SellIn < 0)` in 4 methods
+2. ~~**After-Sell-By-Date Check**~~ (ELIMINATED in R2.2): Was duplicated `if (item.SellIn < 0)` in 4 methods - now IsPastSellByDate()
 3. ~~**Quality Adjustment with Boundary**~~ (ELIMINATED in R1.3): Was 13 occurrences - now in helper methods
 
-Future refactoring opportunities:
+All planned APP refactorings complete! Code quality significantly improved:
 - ~~Extract magic number constants~~ (COMPLETED in R4.1): Quality bounds and backstage tier boundaries now named constants
-- Consider extracting after-sell-by-date adjustment pattern
-- Consider Strategy pattern for polymorphic dispatch (long-term, defer unless needed)
+- ~~Extract after-sell-by-date check~~ (COMPLETED in R2.2): Now uses IsPastSellByDate() helper
+- Consider Strategy pattern for polymorphic dispatch (long-term, defer unless needed - current code is clear)
 
 ## Component Relationships
 ```

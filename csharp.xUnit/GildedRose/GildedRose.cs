@@ -82,6 +82,8 @@ public class GildedRose
     
     private bool IsAtMinQuality(Item item) => item.Quality <= MinQuality;
 
+    private bool IsPastSellByDate(Item item) => item.SellIn < 0;
+
     private void DecreaseQuality(Item item)
     {
         if (!IsAtMinQuality(item))
@@ -109,7 +111,7 @@ public class GildedRose
 
         DecrementSellIn(item);
 
-        if (item.SellIn < 0)
+        if (IsPastSellByDate(item))
         {
             DecreaseQuality(item);
         }
@@ -121,7 +123,7 @@ public class GildedRose
 
         DecrementSellIn(item);
 
-        if (item.SellIn < 0)
+        if (IsPastSellByDate(item))
         {
             IncreaseQuality(item);
         }
@@ -143,7 +145,7 @@ public class GildedRose
 
         DecrementSellIn(item);
 
-        if (item.SellIn < 0)
+        if (IsPastSellByDate(item))
         {
             item.Quality = MinQuality;
         }
@@ -158,7 +160,7 @@ public class GildedRose
 
         DecrementSellIn(item);
 
-        if (item.SellIn < 0)
+        if (IsPastSellByDate(item))
         {
             if (!IsAtMinQuality(item))
             {
