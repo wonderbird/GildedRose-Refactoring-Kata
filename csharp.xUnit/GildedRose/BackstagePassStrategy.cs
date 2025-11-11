@@ -9,14 +9,12 @@ namespace GildedRoseKata;
 /// Quality drops to 0 after concert (SellIn ≤ 0).
 /// Quality never exceeds 50 before concert.
 /// </summary>
-public class BackstagePassStrategy : IUpdateStrategy
+public class BackstagePassStrategy : BaseUpdateStrategy
 {
-    private const int MaxQuality = 50;
-    private const int MinQuality = 0;
     private const int BackstageFirstTierBoundary = 11;
     private const int BackstageSecondTierBoundary = 6;
 
-    public void UpdateItem(Item item)
+    public override void UpdateItem(Item item)
     {
         IncreaseQuality(item);
 
@@ -36,23 +34,6 @@ public class BackstagePassStrategy : IUpdateStrategy
         {
             item.Quality = MinQuality;
         }
-    }
-
-    private bool IsPastSellByDate(Item item) => item.SellIn < 0;
-
-    private bool IsAtMaxQuality(Item item) => item.Quality >= MaxQuality;
-
-    private void IncreaseQuality(Item item)
-    {
-        if (!IsAtMaxQuality(item))
-        {
-            item.Quality++;
-        }
-    }
-
-    private void DecrementSellIn(Item item)
-    {
-        item.SellIn--;
     }
 }
 
