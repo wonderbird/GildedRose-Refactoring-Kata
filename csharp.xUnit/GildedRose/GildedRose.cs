@@ -93,6 +93,11 @@ public class GildedRose
         return item.Name == SULFURAS;
     }
 
+    private bool IsAgedBrie(Item item)
+    {
+        return item.Name == AGED_BRIE;
+    }
+
     /// <summary>
     /// Updates a normal item: decreases quality by 1, decrements sell-in, and decreases quality by 1 again if past sell-by date.
     /// </summary>
