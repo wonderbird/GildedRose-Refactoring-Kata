@@ -38,10 +38,87 @@ Key complexity drivers:
 **Phase 5**: Item type behavior methods (-30 to -40 mass)
 **Phase 6**: SellIn threshold constants (-2 mass)
 
-Future patterns under consideration:
-- Strategy pattern for item type behaviors
-- Dictionary-based type dispatch
-- Value object pattern for quality calculations
+### Current Pattern: Dictionary-Based Dispatch
+- Uses Dictionary<string, Action<Item>> for item type dispatch
+- Action delegates point to update methods
+- Default fallback to UpdateNormalItem for unknown types
+
+### Next Pattern: Strategy Pattern (Planned)
+
+**Goal**: Refactor to Strategy Pattern with concrete strategy classes for each item type.
+
+**Status**: Proposed for next iteration
+
+**Benefits**:
+1. **Extensibility**: Adding new item types requires only creating a new strategy class and registering it
+2. **Testability**: Each strategy can be tested independently
+3. **Maintainability**: Each item type's behavior is isolated in its own class
+4. **Single Responsibility**: Each strategy class has one clear responsibility
+5. **Open/Closed Principle**: Open for extension (new strategies), closed for modification (existing code)
+
+**Proposed Architecture**:
+```
+IItemUpdateStrategy (interface)
+  └── Update(Item item)
+  
+BaseItemUpdateStrategy (abstract class, optional)
+  └── Shared helper methods (DecreaseQuality, IncreaseQuality, etc.)
+  
+Concrete Strategies:
+  - NormalItemStrategy
+  - AgedBrieStrategy
+  - BackstagePassStrategy
+  - SulfurasStrategy
+  
+ItemUpdateStrategyRegistry (factory/registry)
+  └── Maps item names to strategy instances
+  
+GildedRose
+  └── Uses registry to get strategy and delegate Update call
+```
+
+**Constraints**:
+- Item class cannot be modified (kata constraint)
+- Must maintain backward compatibility with existing API
+- All existing tests must continue to pass
+
+**Refactoring Steps** (9 steps across 4 phases):
+
+**Phase 1: Create Strategy Infrastructure** (2 steps)
+1. Create IItemUpdateStrategy interface - Define `Update(Item item)` method
+2. Create BaseItemUpdateStrategy abstract class (optional) - Extract shared helper methods (DecreaseQuality, IncreaseQuality, DecrementSellIn, IsPastSellByDate)
+
+**Phase 2: Extract Strategy Classes** (4 steps)
+3. Create NormalItemStrategy class - Implements IItemUpdateStrategy, moves UpdateNormalItem logic
+4. Create AgedBrieStrategy class - Implements IItemUpdateStrategy, moves UpdateAgedBrie logic
+5. Create BackstagePassStrategy class - Implements IItemUpdateStrategy, moves UpdateBackstagePass and CalculateBackstagePassIncrement logic
+6. Create SulfurasStrategy class - Implements IItemUpdateStrategy, moves UpdateSulfuras logic (no-op)
+
+**Phase 3: Create Strategy Registry** (1 step)
+7. Create ItemUpdateStrategyRegistry class - Factory/registry pattern to map item names to strategies, provides GetStrategy(string itemName) method, returns default strategy for unknown items
+
+**Phase 4: Refactor GildedRose** (2 steps)
+8. Update GildedRose to use strategies - Replace dictionary of Action<Item> with registry, update UpdateQuality to use strategy registry, remove old update methods
+9. Clean up GildedRose - Remove unused constants (if strategies handle their own), simplify GildedRose to be a thin orchestrator
+
+**Expected Outcomes**:
+- Code Organization: Each item type's behavior is in its own file/class
+- Testability: Strategies can be unit tested independently
+- Extensibility: New item types require minimal changes (new strategy + registry entry)
+- Maintainability: Changes to one item type don't affect others
+- Code Mass: May increase slightly due to class overhead, but improves organization
+
+**Implementation Notes**:
+- Strategies should be stateless (or use shared state carefully)
+- Consider making strategies singletons if they're stateless
+- Base class is optional but recommended to reduce duplication
+- Registry can use dictionary internally for O(1) lookup
+- All constants can move to strategy classes or remain in GildedRose (design decision)
+
+**Testing Strategy**:
+- Unit test each strategy class independently
+- Integration tests ensure GildedRose works with all strategies
+- Existing characterization tests should continue to pass without modification
 
 ## Component Relationships
 ```
