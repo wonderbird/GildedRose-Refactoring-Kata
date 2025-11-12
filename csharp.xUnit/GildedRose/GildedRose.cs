@@ -30,7 +30,7 @@ public class GildedRose
             {
                 continue;
             }
-            else if (Items[i].Name == AGED_BRIE)
+            else if (IsAgedBrie(Items[i]))
             {
                 UpdateAgedBrie(Items[i]);
             }
