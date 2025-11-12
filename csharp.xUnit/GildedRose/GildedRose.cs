@@ -99,4 +99,16 @@ public class GildedRose
             }
         }
     }
+
+    private void IncreaseQuality(Item item, int amount)
+    {
+        if (item.Quality < MAX_QUALITY)
+        {
+            item.Quality = item.Quality + amount;
+            if (item.Quality > MAX_QUALITY)
+            {
+                item.Quality = MAX_QUALITY;
+            }
+        }
+    }
 }
