@@ -18,7 +18,16 @@ public class GildedRose
     public GildedRose(IList<Item> Items)
     {
         this.Items = Items;
-        _updateStrategies = new Dictionary<string, Action<Item>>
+        _updateStrategies = CreateUpdateStrategies();
+    }
+
+    /// <summary>
+    /// Creates the dictionary of update strategies for different item types.
+    /// </summary>
+    /// <returns>A dictionary mapping item names to their update strategies.</returns>
+    private Dictionary<string, Action<Item>> CreateUpdateStrategies()
+    {
+        return new Dictionary<string, Action<Item>>
         {
             { AGED_BRIE, UpdateAgedBrie },
             { BACKSTAGE_PASSES, UpdateBackstagePass },
