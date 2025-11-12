@@ -34,7 +34,7 @@ public class GildedRose
             {
                 UpdateAgedBrie(Items[i]);
             }
-            else if (Items[i].Name == BACKSTAGE_PASSES)
+            else if (IsBackstagePass(Items[i]))
             {
                 UpdateBackstagePass(Items[i]);
             }
