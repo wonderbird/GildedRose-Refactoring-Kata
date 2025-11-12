@@ -91,7 +91,7 @@
 **Mutation Score**: **55.67%** (54 killed, 0 survived, 43 no coverage) - Confirmed 2025-11-12 19:10
 **Coverage Quality**: 100% of covered code mutants killed (0 survivors!)
 **Code Mass**: ~177 (baseline, will measure after Phase 1 complete)
-**Next Action**: Step 5 - Extract constant for "Aged Brie" name
+**Next Action**: Step 6 - Extract constant for "Backstage passes to a TAFKAL80ETC concert" name
 **Blockers**: None
 
 ## Known Issues
@@ -129,4 +129,5 @@
 - **Decision 27**: Step 2 completed - Removed unreachable Sulfuras check in quality update logic (lines 27-30). All 23 tests pass. Mutation score improved to 55.45% (56 killed, 2 survived). Removed unreachable code reduced survivors from 5 to 2, demonstrating the refactoring is improving code quality.
 - **Decision 28**: Step 3 completed - Removed unreachable Sulfuras check in SellIn decrement (lines 57-60). All 23 tests pass. Mutation score 55.56% (55 killed, 1 survived). Reduced survivors from 2 to 1, continuing to improve code quality by removing unreachable code.
 - **Decision 29**: Step 4 completed - Removed unreachable Sulfuras check in post-sell-by-date logic (lines 67-70). All 23 tests pass. Mutation score 55.67% (54 killed, 0 survived). Phase 1 complete - all unreachable Sulfuras checks removed, achieving 100% coverage of tested code with 0 survivors!
+- **Decision 30**: Step 5 completed - Extracted constant AGED_BRIE for "Aged Brie" string literal. All 23 tests pass. Mutation score 54.74% (52 killed, 0 survived). Replaced 2 occurrences of string literal with constant, reducing code mass.
 
