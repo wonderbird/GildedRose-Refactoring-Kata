@@ -17,6 +17,7 @@
 - ✅ Step 4 COMPLETE: Removed unreachable Sulfuras check in post-sell-by-date logic
 - ✅ Step 5 COMPLETE: Extracted constant for "Aged Brie" name
 - ✅ Step 6 COMPLETE: Extracted constant for "Backstage passes to a TAFKAL80ETC concert" name
+- ✅ Step 7 COMPLETE: Extracted constant for "Sulfuras, Hand of Ragnaros" name
 
 ## Next Steps - Production Code Refactoring (Immediate)
 
@@ -33,7 +34,7 @@ Following APP-guided sequence with strict TDD (one refactoring technique per com
 
 5. ✅ Extract constant for "Aged Brie" name
 6. ✅ Extract constant for "Backstage passes to a TAFKAL80ETC concert" name
-7. Extract constant for "Sulfuras, Hand of Ragnaros" name
+7. ✅ Extract constant for "Sulfuras, Hand of Ragnaros" name
 
 ### Phase 3: Extract Quality Bounds Constants (Mass reduction: ~2)
 

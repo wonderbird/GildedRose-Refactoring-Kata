@@ -6,6 +6,7 @@ public class GildedRose
 {
     private const string AGED_BRIE = "Aged Brie";
     private const string BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
+    private const string SULFURAS = "Sulfuras, Hand of Ragnaros";
     IList<Item> Items;
 
     public GildedRose(IList<Item> Items)
@@ -17,7 +18,7 @@ public class GildedRose
     {
         for (var i = 0; i < Items.Count; i++)
         {
-            if (Items[i].Name == "Sulfuras, Hand of Ragnaros")
+            if (Items[i].Name == SULFURAS)
             {
                 continue;
             }

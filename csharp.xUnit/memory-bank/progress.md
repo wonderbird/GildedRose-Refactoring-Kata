@@ -91,7 +91,7 @@
 **Mutation Score**: **55.67%** (54 killed, 0 survived, 43 no coverage) - Confirmed 2025-11-12 19:10
 **Coverage Quality**: 100% of covered code mutants killed (0 survivors!)
 **Code Mass**: ~177 (baseline, will measure after Phase 1 complete)
-**Next Action**: Step 7 - Extract constant for "Sulfuras, Hand of Ragnaros" name
+**Next Action**: Step 8 - Extract constant for MAX_QUALITY = 50
 **Blockers**: None
 
 ## Known Issues
@@ -131,4 +131,5 @@
 - **Decision 29**: Step 4 completed - Removed unreachable Sulfuras check in post-sell-by-date logic (lines 67-70). All 23 tests pass. Mutation score 55.67% (54 killed, 0 survived). Phase 1 complete - all unreachable Sulfuras checks removed, achieving 100% coverage of tested code with 0 survivors!
 - **Decision 30**: Step 5 completed - Extracted constant AGED_BRIE for "Aged Brie" string literal. All 23 tests pass. Mutation score 54.74% (52 killed, 0 survived). Replaced 2 occurrences of string literal with constant, reducing code mass.
 - **Decision 31**: Step 6 completed - Extracted constant BACKSTAGE_PASSES for "Backstage passes to a TAFKAL80ETC concert" string literal. All 23 tests pass. Mutation score 53.26% (49 killed, 0 survived). Replaced 3 occurrences of string literal with constant, reducing code mass.
+- **Decision 32**: Step 7 completed - Extracted constant SULFURAS for "Sulfuras, Hand of Ragnaros" string literal. All 23 tests pass. Mutation score 52.75% (48 killed, 0 survived). Phase 2 complete - all item type string literals replaced with constants, reducing code mass.
 
