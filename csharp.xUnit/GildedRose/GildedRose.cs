@@ -81,6 +81,11 @@ public class GildedRose
         item.SellIn = item.SellIn - 1;
     }
 
+    private bool IsPastSellByDate(Item item)
+    {
+        return item.SellIn < 0;
+    }
+
     private bool IsSulfuras(Item item)
     {
         return item.Name == SULFURAS;
@@ -104,7 +109,7 @@ public class GildedRose
     {
         DecreaseQuality(item, 1);
         DecrementSellIn(item);
-        if (item.SellIn < 0)
+        if (IsPastSellByDate(item))
         {
             DecreaseQuality(item, 1);
         }
@@ -118,7 +123,7 @@ public class GildedRose
     {
         IncreaseQuality(item, 1);
         DecrementSellIn(item);
-        if (item.SellIn < 0)
+        if (IsPastSellByDate(item))
         {
             IncreaseQuality(item, 1);
         }
@@ -140,7 +145,7 @@ public class GildedRose
             IncreaseQuality(item, 1);
         }
         DecrementSellIn(item);
-        if (item.SellIn < 0)
+        if (IsPastSellByDate(item))
         {
             item.Quality = MIN_QUALITY;
         }
