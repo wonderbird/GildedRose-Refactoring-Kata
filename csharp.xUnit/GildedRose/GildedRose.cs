@@ -45,6 +45,11 @@ public class GildedRose
         }
     }
 
+    /// <summary>
+    /// Decreases the quality of an item by the specified amount, ensuring it does not go below the minimum quality.
+    /// </summary>
+    /// <param name="item">The item whose quality should be decreased.</param>
+    /// <param name="amount">The amount by which to decrease the quality.</param>
     private void DecreaseQuality(Item item, int amount)
     {
         if (item.Quality > MIN_QUALITY)
