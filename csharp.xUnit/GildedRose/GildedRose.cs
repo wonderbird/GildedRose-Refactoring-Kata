@@ -37,13 +37,10 @@ public class GildedRose
             {
                 continue;
             }
-            else if (IsAgedBrie(Items[i]))
+            
+            if (_updateStrategies.TryGetValue(Items[i].Name, out var updateStrategy))
             {
-                UpdateAgedBrie(Items[i]);
-            }
-            else if (IsBackstagePass(Items[i]))
-            {
-                UpdateBackstagePass(Items[i]);
+                updateStrategy(Items[i]);
             }
             else
             {
@@ -97,15 +94,6 @@ public class GildedRose
         return item.Name == SULFURAS;
     }
 
-    private bool IsAgedBrie(Item item)
-    {
-        return item.Name == AGED_BRIE;
-    }
-
-    private bool IsBackstagePass(Item item)
-    {
-        return item.Name == BACKSTAGE_PASSES;
-    }
 
     /// <summary>
     /// Updates an item with a common pattern: updates quality, decrements sell-in, and updates quality again if past sell-by date.
