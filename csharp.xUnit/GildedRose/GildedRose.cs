@@ -66,10 +66,7 @@ public class GildedRose
     /// <param name="amount">The amount by which to increase the quality.</param>
     private void IncreaseQuality(Item item, int amount)
     {
-        if (item.Quality < MAX_QUALITY)
-        {
-            item.Quality = Math.Min(MAX_QUALITY, item.Quality + amount);
-        }
+        item.Quality = Math.Min(MAX_QUALITY, item.Quality + amount);
     }
 
     /// <summary>
