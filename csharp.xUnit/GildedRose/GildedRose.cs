@@ -31,20 +31,20 @@ public class GildedRose
     /// </summary>
     public void UpdateQuality()
     {
-        for (var i = 0; i < Items.Count; i++)
+        foreach (var item in Items)
         {
-            if (IsSulfuras(Items[i]))
+            if (IsSulfuras(item))
             {
                 continue;
             }
             
-            if (_updateStrategies.TryGetValue(Items[i].Name, out var updateStrategy))
+            if (_updateStrategies.TryGetValue(item.Name, out var updateStrategy))
             {
-                updateStrategy(Items[i]);
+                updateStrategy(item);
             }
             else
             {
-                UpdateNormalItem(Items[i]);
+                UpdateNormalItem(item);
             }
         }
     }

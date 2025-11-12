@@ -32,6 +32,7 @@
 - ✅ Step 22 COMPLETE: Extracted IsPastSellByDate helper method (readability improvement, 0 mass change)
 - ✅ Step 23 COMPLETE: Extracted common pattern from UpdateNormalItem and UpdateAgedBrie (reduced duplication, ~5 mass reduction)
 - ✅ Step 24 COMPLETE: Replaced if-else chain with dictionary dispatch in UpdateQuality (~18 mass reduction)
+- ✅ Step 25 COMPLETE: Replaced for loop with foreach in UpdateQuality (modern C# style, ~2 mass reduction)
 
 ## Next Steps - APP-Guided Refactorings (Prioritized by Mass Reduction)
 
