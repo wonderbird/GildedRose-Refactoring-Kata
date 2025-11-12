@@ -13,6 +13,7 @@
 - ✅ Goal changed: Skip test refactoring, proceed directly to production refactoring
 - ✅ Step 1 COMPLETE: Extracted guard clause for Sulfuras at start of loop body
 - ✅ Step 2 COMPLETE: Removed unreachable Sulfuras check in quality update logic
+- ✅ Step 3 COMPLETE: Removed unreachable Sulfuras check in SellIn decrement
 
 ## Next Steps - Production Code Refactoring (Immediate)
 
@@ -22,7 +23,7 @@ Following APP-guided sequence with strict TDD (one refactoring technique per com
 
 1. ✅ Extract guard clause for Sulfuras at start of loop body
 2. ✅ Remove now-unreachable Sulfuras checks in quality update logic
-3. Remove now-unreachable Sulfuras check in SellIn decrement
+3. ✅ Remove now-unreachable Sulfuras check in SellIn decrement
 4. Remove now-unreachable Sulfuras check in post-sell-by-date logic
 
 ### Phase 2: Extract Item Type Constants (Mass reduction: ~3-5)
