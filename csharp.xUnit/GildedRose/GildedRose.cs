@@ -5,11 +5,16 @@ namespace GildedRoseKata;
 
 public class GildedRose
 {
+    // Item type names
     private const string AGED_BRIE = "Aged Brie";
     private const string BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     private const string SULFURAS = "Sulfuras, Hand of Ragnaros";
+    
+    // Quality bounds
     private const int MAX_QUALITY = 50;
     private const int MIN_QUALITY = 0;
+    
+    // Backstage pass thresholds
     private const int BACKSTAGE_PASS_FIRST_THRESHOLD = 11;
     private const int BACKSTAGE_PASS_SECOND_THRESHOLD = 6;
     IList<Item> Items;
