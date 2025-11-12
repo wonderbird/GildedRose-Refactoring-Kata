@@ -4,7 +4,7 @@
 
 **✅ Production Code Refactoring Phase COMPLETE** - All 19 refactoring steps completed successfully. Code is now significantly more maintainable with clear separation of concerns, extracted methods, and named constants.
 
-**Next Phase: Further Code Quality Improvements** - Implementing APP-guided refactorings to reduce code mass and improve maintainability.
+**Next Phase: Further Code Quality Improvements** - Completed 25 refactoring steps. New analysis identifies additional opportunities for mass reduction and code quality improvements.
 
 ## Recent Changes
 
@@ -33,72 +33,121 @@
 - ✅ Step 23 COMPLETE: Extracted common pattern from UpdateNormalItem and UpdateAgedBrie (reduced duplication, ~5 mass reduction)
 - ✅ Step 24 COMPLETE: Replaced if-else chain with dictionary dispatch in UpdateQuality (~18 mass reduction)
 - ✅ Step 25 COMPLETE: Replaced for loop with foreach in UpdateQuality (modern C# style, ~2 mass reduction)
+- ✅ Analysis COMPLETE: Identified 7 new refactoring opportunities prioritized by APP mass reduction potential
 
 ## Next Steps - APP-Guided Refactorings (Prioritized by Mass Reduction)
 
-### Current Code Mass Analysis
-- **UpdateQuality**: 29 mass (1 loop, 4 conditionals, 4 invocations)
-- **Update methods**: 20 mass in conditionals (3 × `SellIn < 0` checks, 2 threshold checks)
-- **DecreaseQuality/IncreaseQuality**: 40 mass (4 conditionals, 4 assignments)
-- **Estimated Total Mass**: ~120-130
+### Current Code Mass Analysis (Post-Refactoring)
+
+Detailed APP mass calculation for current codebase:
+
+**UpdateQuality**: 24 mass
+- 1 foreach loop (5)
+- 2 conditionals: IsSulfuras (4), TryGetValue (4)
+- 3 invocations: IsSulfuras (2), TryGetValue (2), updateStrategy/UpdateNormalItem (2)
+- Bindings: item, updateStrategy (2)
+
+**DecreaseQuality**: 19 mass
+- 1 conditional: item.Quality > MIN_QUALITY (4)
+- 1 assignment: item.Quality = Math.Max(...) (6)
+- 1 invocation: Math.Max (2)
+- Bindings: item, amount, MIN_QUALITY (3)
+
+**IncreaseQuality**: 19 mass
+- 1 conditional: item.Quality < MAX_QUALITY (4)
+- 1 assignment: item.Quality = Math.Min(...) (6)
+- 1 invocation: Math.Min (2)
+- Bindings: item, amount, MAX_QUALITY (3)
+
+**UpdateBackstagePass**: 43 mass
+- 3 conditionals: 2 threshold checks (8), 1 IsPastSellByDate (4)
+- 1 assignment: item.Quality = MIN_QUALITY (6)
+- 5 invocations: 3 IncreaseQuality (6), 1 DecrementSellIn (2), 1 IsPastSellByDate (2)
+- Bindings: item (1)
+
+**Other Methods**: ~20 mass (UpdateItem, UpdateNormalItem, UpdateAgedBrie, helpers)
+
+**Estimated Total Mass**: ~125 mass
 
 ### High Priority (Significant Mass Reduction)
 
-1. **Simplify DecreaseQuality/IncreaseQuality with Math.Max/Math.Min**
-   - **Mass Reduction**: 16 total
-   - **Current**: 2 conditionals + 2 assignments each = 40 mass
-   - **After**: 1 conditional + 1 assignment + Math.Max/Min = 24 mass
-   - **Impact**: Reduces conditionals, improves clarity
-   - **Steps**: Refactor DecreaseQuality, refactor IncreaseQuality (2 commits)
+1. **Remove Redundant Condition in DecreaseQuality/IncreaseQuality**
+   - **Mass Reduction**: 8 total (4 per method)
+   - **Current**: if (item.Quality > MIN_QUALITY) { Math.Max(...) } = 19 mass each
+   - **After**: Math.Max(MIN_QUALITY, item.Quality - amount) directly = 11 mass each
+   - **Rationale**: Math.Max already ensures result >= MIN_QUALITY, so the condition is redundant
+   - **Impact**: Removes unnecessary conditionals, simplifies logic
+   - **Steps**: Remove condition from DecreaseQuality, remove condition from IncreaseQuality (2 commits)
 
-2. **Replace If-Else Chain with Dictionary Dispatch**
-   - **Mass Reduction**: ~18 per call
-   - **Current**: 4 conditionals in UpdateQuality = 16 mass
-   - **After**: 1 dictionary lookup + 1 null check = ~6 mass
-   - **Impact**: High extensibility, significant mass reduction
-   - **Steps**: Extract dictionary initialization, replace if-else chain (2-3 commits)
+2. **Extract Quality Increment Calculation in UpdateBackstagePass**
+   - **Mass Reduction**: ~8-10 total
+   - **Current**: 3 separate IncreaseQuality calls with 2 conditionals = 43 mass
+   - **After**: Calculate increment amount once, single IncreaseQuality call = ~33-35 mass
+   - **Rationale**: Reduces duplication, consolidates threshold logic
+   - **Impact**: Simplifies complex method, reduces conditionals
+   - **Steps**: Extract CalculateBackstagePassIncrement method, refactor UpdateBackstagePass (2 commits)
+
+3. **Handle Sulfuras in Dictionary (Remove Guard Clause)**
+   - **Mass Reduction**: 5 total
+   - **Current**: Guard clause with continue = 6 mass
+   - **After**: Add Sulfuras to dictionary with no-op action = 1 mass (dictionary lookup)
+   - **Rationale**: Consistent dispatch pattern, removes special case
+   - **Impact**: Simplifies UpdateQuality, improves extensibility
+   - **Steps**: Add Sulfuras entry to dictionary, remove guard clause (1 commit)
 
 ### Medium Priority (Moderate Mass Reduction or Readability)
 
-3. **Extract Common Pattern from UpdateNormalItem and UpdateAgedBrie**
-   - **Mass Reduction**: 5 total
-   - **Current**: 2 methods × 10 mass = 20 mass
-   - **After**: 1 generic method + 2 specific calls = 15 mass
-   - **Impact**: Reduces duplication
-   - **Steps**: Extract generic UpdateItem method (2-3 commits)
-
-4. **Extract IsPastSellByDate Helper Method**
+4. **Extract Dictionary Initialization to Static Method**
    - **Mass Reduction**: 0 (readability improvement)
-   - **Current**: 3 conditionals `item.SellIn < 0` = 12 mass
-   - **After**: 1 method + 1 conditional + 3 invocations = 12 mass
-   - **Impact**: Reduces duplication, improves clarity
-   - **Steps**: Extract method, replace 3 occurrences (1 commit)
+   - **Current**: Dictionary initialized in constructor
+   - **After**: Static method CreateUpdateStrategies() returns dictionary
+   - **Rationale**: Separates initialization logic, improves testability
+   - **Impact**: Better organization, easier to test
+   - **Steps**: Extract static method, update constructor (1 commit)
+
+5. **Simplify DecrementSellIn with Decrement Operator**
+   - **Mass Reduction**: 0 (readability improvement)
+   - **Current**: item.SellIn = item.SellIn - 1
+   - **After**: item.SellIn--
+   - **Rationale**: More idiomatic C# syntax
+   - **Impact**: Improved readability, no mass change
+   - **Steps**: Replace assignment with decrement operator (1 commit)
 
 ### Low Priority (Minimal or Negative Mass Impact)
-
-5. **Replace For Loop with ForEach**
-   - **Mass Reduction**: 2 total
-   - **Impact**: Modern C# style
-   - **Steps**: Replace for loop with foreach (1 commit)
 
 6. **Extract Threshold Check Methods for Backstage Passes**
    - **Mass Reduction**: -8 (increases mass)
    - **Impact**: Readability only, not recommended
    - **Priority**: Skip (increases mass without benefit)
 
+7. **Group Related Constants**
+   - **Mass Reduction**: 0 (organization improvement)
+   - **Impact**: Better code organization
+   - **Steps**: Group item name constants, quality constants, threshold constants (1 commit)
+
 ### Recommended Implementation Sequence
 
 Following strict TDD and APP-guided prioritization:
-1. Simplify DecreaseQuality with Math.Max (1 commit)
-2. Simplify IncreaseQuality with Math.Min (1 commit)
-3. Extract IsPastSellByDate helper (1 commit)
-4. Extract common pattern from UpdateNormalItem/UpdateAgedBrie (2-3 commits)
-5. Replace if-else chain with dictionary dispatch (2-3 commits)
-6. Replace for loop with foreach (1 commit)
 
-**Total Expected Mass Reduction: ~41 mass**
-**Current Estimated Total Mass: ~120-130**
-**Target Mass After Refactorings: ~80-90**
+**Phase 1: Remove Redundant Conditions** (High Priority - 8 mass reduction)
+1. Remove redundant condition from DecreaseQuality (1 commit)
+2. Remove redundant condition from IncreaseQuality (1 commit)
+
+**Phase 2: Simplify UpdateBackstagePass** (High Priority - 8-10 mass reduction)
+3. Extract CalculateBackstagePassIncrement method (1 commit)
+4. Refactor UpdateBackstagePass to use calculated increment (1 commit)
+
+**Phase 3: Improve Dictionary Dispatch** (High Priority - 5 mass reduction)
+5. Add Sulfuras to dictionary, remove guard clause (1 commit)
+
+**Phase 4: Code Organization** (Medium Priority - 0 mass, readability)
+6. Extract dictionary initialization to static method (1 commit)
+7. Simplify DecrementSellIn with decrement operator (1 commit)
+8. Group related constants (1 commit)
+
+**Total Expected Mass Reduction: ~21-23 mass**
+**Current Estimated Total Mass: ~125**
+**Target Mass After Refactorings: ~102-104**
 
 ## Active Decisions
 
