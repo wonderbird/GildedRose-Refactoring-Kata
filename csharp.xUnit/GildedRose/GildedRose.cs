@@ -113,4 +113,22 @@ public class GildedRose
             IncreaseQuality(item, 1);
         }
     }
+
+    private void UpdateBackstagePass(Item item)
+    {
+        IncreaseQuality(item, 1);
+        if (item.SellIn < 11)
+        {
+            IncreaseQuality(item, 1);
+        }
+        if (item.SellIn < 6)
+        {
+            IncreaseQuality(item, 1);
+        }
+        item.SellIn = item.SellIn - 1;
+        if (item.SellIn < 0)
+        {
+            item.Quality = item.Quality - item.Quality;
+        }
+    }
 }

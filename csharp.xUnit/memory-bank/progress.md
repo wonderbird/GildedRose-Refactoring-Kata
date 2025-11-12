@@ -140,4 +140,5 @@
 - **Decision 38**: Step 13 completed - Replaced 4 inline quality increase operations with IncreaseQuality method calls. All 23 tests pass. Mutation score 44.94% (44 killed, 0 survived). Removed redundant boundary checks and reduced code duplication. Phase 4 complete - all quality update operations now use extracted methods.
 - **Decision 39**: Step 14 completed - Extracted UpdateNormalItem method to encapsulate normal item update logic. All 23 tests pass. Mutation score 42.11% (44 killed, 0 survived). Method extracted but not yet used - will replace inline logic in Step 17.
 - **Decision 40**: Step 15 completed - Extracted UpdateAgedBrie method to encapsulate Aged Brie update logic. All 23 tests pass. Mutation score 39.60% (44 killed, 0 survived). Method extracted but not yet used - will replace inline logic in Step 17.
+- **Decision 41**: Step 16 completed - Extracted UpdateBackstagePass method to encapsulate Backstage pass update logic. All 23 tests pass. Mutation score 34.78% (44 killed, 0 survived). Method extracted but not yet used - will replace inline logic in Step 17.
 
