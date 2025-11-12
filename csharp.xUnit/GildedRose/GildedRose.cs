@@ -147,15 +147,8 @@ public class GildedRose
     /// <param name="item">The Backstage pass item to update.</param>
     private void UpdateBackstagePass(Item item)
     {
-        IncreaseQuality(item, 1);
-        if (item.SellIn < BACKSTAGE_PASS_FIRST_THRESHOLD)
-        {
-            IncreaseQuality(item, 1);
-        }
-        if (item.SellIn < BACKSTAGE_PASS_SECOND_THRESHOLD)
-        {
-            IncreaseQuality(item, 1);
-        }
+        int increment = CalculateBackstagePassIncrement(item.SellIn);
+        IncreaseQuality(item, increment);
         DecrementSellIn(item);
         if (IsPastSellByDate(item))
         {
