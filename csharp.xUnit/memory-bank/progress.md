@@ -138,4 +138,5 @@
 - **Decision 36**: Step 11 completed - Extracted method IncreaseQuality(Item item, int amount) to encapsulate quality increase logic with boundary checking. All 23 tests pass. Mutation score 44.86% (48 killed, 0 survived). Method extracted but not yet used - will replace inline operations in Step 13.
 - **Decision 37**: Step 12 completed - Replaced 2 inline quality decrease operations with DecreaseQuality method calls. All 23 tests pass. Mutation score 46.53% (49 killed, 0 survived). Reduced code duplication and improved maintainability by using extracted method.
 - **Decision 38**: Step 13 completed - Replaced 4 inline quality increase operations with IncreaseQuality method calls. All 23 tests pass. Mutation score 44.94% (44 killed, 0 survived). Removed redundant boundary checks and reduced code duplication. Phase 4 complete - all quality update operations now use extracted methods.
+- **Decision 39**: Step 14 completed - Extracted UpdateNormalItem method to encapsulate normal item update logic. All 23 tests pass. Mutation score 42.11% (44 killed, 0 survived). Method extracted but not yet used - will replace inline logic in Step 17.
 

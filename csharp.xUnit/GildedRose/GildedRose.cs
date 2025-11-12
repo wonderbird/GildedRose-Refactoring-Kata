@@ -93,4 +93,14 @@ public class GildedRose
             }
         }
     }
+
+    private void UpdateNormalItem(Item item)
+    {
+        DecreaseQuality(item, 1);
+        item.SellIn = item.SellIn - 1;
+        if (item.SellIn < 0)
+        {
+            DecreaseQuality(item, 1);
+        }
+    }
 }
