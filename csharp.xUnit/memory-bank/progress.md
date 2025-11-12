@@ -103,9 +103,9 @@
 
 **Phase**: 🔄 APP-GUIDED REFACTORING - IN PROGRESS
 **Tests**: 23 passing  
-**Mutation Score**: **48.45%** (47 killed, 6 survived, 1 no coverage) - 2025-11-12 21:07
-**Coverage Quality**: 6 surviving mutants identified (1 in DecreaseQuality, others in various methods)
-**Code Mass**: Reduced from ~177 baseline. DecreaseQuality simplified from 20 to 12 mass using Math.Max.
+**Mutation Score**: **48.94%** (48 killed, 3 survived, 0 no coverage) - 2025-11-12 21:08
+**Coverage Quality**: 3 surviving mutants identified (equality mutations in conditions)
+**Code Mass**: Reduced from ~177 baseline. DecreaseQuality and IncreaseQuality simplified from 20 to 12 mass each (16 total mass reduction).
 **Next Action**: Continue with IncreaseQuality simplification, then extract IsPastSellByDate helper.
 **Blockers**: None - survivors will be addressed after completing planned refactorings.
 
@@ -162,4 +162,5 @@
 - **Decision 45**: Analyzed code for further improvements. Identified 8 opportunities categorized by priority: High (quick wins - magic operation, SellIn decrement, documentation), Medium (structural - dictionary dispatch, type helpers, logic simplification), and Lower (advanced patterns - strategy pattern, calculation extraction). Recommended sequence follows strict TDD with incremental improvements.
 - **Decision 46**: Conducted comprehensive APP-based analysis of current code. Calculated mass for all methods and identified 6 refactorings prioritized by mass reduction potential. High priority: Simplify DecreaseQuality/IncreaseQuality with Math.Max/Math.Min (16 mass reduction), Replace if-else chain with dictionary dispatch (~18 mass reduction). Medium priority: Extract common pattern (5 mass), Extract IsPastSellByDate (0 mass, readability). Low priority: Replace for loop with foreach (2 mass). Total expected reduction: ~41 mass, targeting final mass of ~80-90.
 - **Decision 47**: Step 20 completed - Simplified DecreaseQuality with Math.Max, reducing from 20 to 12 mass (8 mass reduction). Replaced nested conditionals with Math.Max(MIN_QUALITY, item.Quality - amount). Added `using System;` for Math class. All 23 tests pass. Mutation score 48.45% (47 killed, 6 survived). One survivor in DecreaseQuality condition (line 56) - equality mutation on `item.Quality > MIN_QUALITY`. Will address survivors after completing planned refactorings.
+- **Decision 48**: Step 21 completed - Simplified IncreaseQuality with Math.Min, reducing from 20 to 12 mass (8 mass reduction). Replaced nested conditionals with Math.Min(MAX_QUALITY, item.Quality + amount). All 23 tests pass. Mutation score improved to 48.94% (48 killed, 3 survived). Reduced survivors from 6 to 3, demonstrating continued improvement. Total mass reduction from both methods: 16 mass (from 40 to 24).
 

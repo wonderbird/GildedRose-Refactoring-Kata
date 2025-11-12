@@ -68,11 +68,7 @@ public class GildedRose
     {
         if (item.Quality < MAX_QUALITY)
         {
-            item.Quality = item.Quality + amount;
-            if (item.Quality > MAX_QUALITY)
-            {
-                item.Quality = MAX_QUALITY;
-            }
+            item.Quality = Math.Min(MAX_QUALITY, item.Quality + amount);
         }
     }
 
