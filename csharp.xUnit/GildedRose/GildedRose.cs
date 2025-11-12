@@ -10,6 +10,7 @@ public class GildedRose
     private const int MAX_QUALITY = 50;
     private const int MIN_QUALITY = 0;
     private const int BACKSTAGE_PASS_FIRST_THRESHOLD = 11;
+    private const int BACKSTAGE_PASS_SECOND_THRESHOLD = 6;
     IList<Item> Items;
 
     public GildedRose(IList<Item> Items)
@@ -91,7 +92,7 @@ public class GildedRose
         {
             IncreaseQuality(item, 1);
         }
-        if (item.SellIn < 6)
+        if (item.SellIn < BACKSTAGE_PASS_SECOND_THRESHOLD)
         {
             IncreaseQuality(item, 1);
         }
