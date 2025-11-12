@@ -101,13 +101,13 @@
 
 ## Current Status
 
-**Phase**: ✅ PRODUCTION CODE REFACTORING - COMPLETE!
+**Phase**: 🔄 APP-GUIDED REFACTORING - IN PROGRESS
 **Tests**: 23 passing  
-**Mutation Score**: **45.83%** (51 killed, 0 survived, 45 no coverage) - Final 2025-11-12 19:33
-**Coverage Quality**: 100% of covered code mutants killed (0 survivors!)
-**Code Mass**: Significantly reduced from ~177 baseline through systematic refactoring
-**Next Action**: Further code quality improvements identified - see "Future Considerations" section for prioritized list of next steps.
-**Blockers**: None
+**Mutation Score**: **48.45%** (47 killed, 6 survived, 1 no coverage) - 2025-11-12 21:07
+**Coverage Quality**: 6 surviving mutants identified (1 in DecreaseQuality, others in various methods)
+**Code Mass**: Reduced from ~177 baseline. DecreaseQuality simplified from 20 to 12 mass using Math.Max.
+**Next Action**: Continue with IncreaseQuality simplification, then extract IsPastSellByDate helper.
+**Blockers**: None - survivors will be addressed after completing planned refactorings.
 
 ## Known Issues
 - No issues! Test coverage is perfect for business logic
@@ -161,4 +161,5 @@
 - **Decision 44**: Step 19 completed - Extracted constant BACKSTAGE_PASS_SECOND_THRESHOLD for magic number 6. All 23 tests pass. Mutation score 45.83% (51 killed, 0 survived). Phase 6 complete - all backstage pass thresholds now use named constants. ALL 19 REFACTORING STEPS COMPLETE!
 - **Decision 45**: Analyzed code for further improvements. Identified 8 opportunities categorized by priority: High (quick wins - magic operation, SellIn decrement, documentation), Medium (structural - dictionary dispatch, type helpers, logic simplification), and Lower (advanced patterns - strategy pattern, calculation extraction). Recommended sequence follows strict TDD with incremental improvements.
 - **Decision 46**: Conducted comprehensive APP-based analysis of current code. Calculated mass for all methods and identified 6 refactorings prioritized by mass reduction potential. High priority: Simplify DecreaseQuality/IncreaseQuality with Math.Max/Math.Min (16 mass reduction), Replace if-else chain with dictionary dispatch (~18 mass reduction). Medium priority: Extract common pattern (5 mass), Extract IsPastSellByDate (0 mass, readability). Low priority: Replace for loop with foreach (2 mass). Total expected reduction: ~41 mass, targeting final mass of ~80-90.
+- **Decision 47**: Step 20 completed - Simplified DecreaseQuality with Math.Max, reducing from 20 to 12 mass (8 mass reduction). Replaced nested conditionals with Math.Max(MIN_QUALITY, item.Quality - amount). Added `using System;` for Math class. All 23 tests pass. Mutation score 48.45% (47 killed, 6 survived). One survivor in DecreaseQuality condition (line 56) - equality mutation on `item.Quality > MIN_QUALITY`. Will address survivors after completing planned refactorings.
 
