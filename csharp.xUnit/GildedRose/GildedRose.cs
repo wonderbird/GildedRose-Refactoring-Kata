@@ -24,48 +24,17 @@ public class GildedRose
             {
                 continue;
             }
-
-            if (Items[i].Name != AGED_BRIE && Items[i].Name != BACKSTAGE_PASSES)
+            else if (Items[i].Name == AGED_BRIE)
             {
-                DecreaseQuality(Items[i], 1);
+                UpdateAgedBrie(Items[i]);
+            }
+            else if (Items[i].Name == BACKSTAGE_PASSES)
+            {
+                UpdateBackstagePass(Items[i]);
             }
             else
             {
-                IncreaseQuality(Items[i], 1);
-
-                if (Items[i].Name == BACKSTAGE_PASSES)
-                {
-                    if (Items[i].SellIn < 11)
-                    {
-                        IncreaseQuality(Items[i], 1);
-                    }
-
-                    if (Items[i].SellIn < 6)
-                    {
-                        IncreaseQuality(Items[i], 1);
-                    }
-                }
-            }
-
-            Items[i].SellIn = Items[i].SellIn - 1;
-
-            if (Items[i].SellIn < 0)
-            {
-                if (Items[i].Name != AGED_BRIE)
-                {
-                    if (Items[i].Name != BACKSTAGE_PASSES)
-                    {
-                        DecreaseQuality(Items[i], 1);
-                    }
-                    else
-                    {
-                        Items[i].Quality = Items[i].Quality - Items[i].Quality;
-                    }
-                }
-                else
-                {
-                    IncreaseQuality(Items[i], 1);
-                }
+                UpdateNormalItem(Items[i]);
             }
         }
     }

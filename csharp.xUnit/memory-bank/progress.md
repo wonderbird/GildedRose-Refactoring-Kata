@@ -141,4 +141,5 @@
 - **Decision 39**: Step 14 completed - Extracted UpdateNormalItem method to encapsulate normal item update logic. All 23 tests pass. Mutation score 42.11% (44 killed, 0 survived). Method extracted but not yet used - will replace inline logic in Step 17.
 - **Decision 40**: Step 15 completed - Extracted UpdateAgedBrie method to encapsulate Aged Brie update logic. All 23 tests pass. Mutation score 39.60% (44 killed, 0 survived). Method extracted but not yet used - will replace inline logic in Step 17.
 - **Decision 41**: Step 16 completed - Extracted UpdateBackstagePass method to encapsulate Backstage pass update logic. All 23 tests pass. Mutation score 34.78% (44 killed, 0 survived). Method extracted but not yet used - will replace inline logic in Step 17.
+- **Decision 42**: Step 17 completed - Replaced complex if-else logic in UpdateQuality with method calls to UpdateNormalItem, UpdateAgedBrie, and UpdateBackstagePass. All 23 tests pass. Mutation score improved to 45.83% (51 killed, 0 survived). Main loop now much simpler with clear separation of item type behaviors. Phase 5 complete!
 
