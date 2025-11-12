@@ -21,7 +21,8 @@ public class GildedRose
         _updateStrategies = new Dictionary<string, Action<Item>>
         {
             { AGED_BRIE, UpdateAgedBrie },
-            { BACKSTAGE_PASSES, UpdateBackstagePass }
+            { BACKSTAGE_PASSES, UpdateBackstagePass },
+            { SULFURAS, UpdateSulfuras }
         };
     }
 
@@ -33,11 +34,6 @@ public class GildedRose
     {
         foreach (var item in Items)
         {
-            if (IsSulfuras(item))
-            {
-                continue;
-            }
-            
             if (_updateStrategies.TryGetValue(item.Name, out var updateStrategy))
             {
                 updateStrategy(item);
@@ -83,9 +79,13 @@ public class GildedRose
         return item.SellIn < 0;
     }
 
-    private bool IsSulfuras(Item item)
+    /// <summary>
+    /// Updates Sulfuras: legendary item that never changes (no-op).
+    /// </summary>
+    /// <param name="item">The Sulfuras item to update.</param>
+    private void UpdateSulfuras(Item item)
     {
-        return item.Name == SULFURAS;
+        // Sulfuras never changes - no operation needed
     }
 
 
