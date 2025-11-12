@@ -91,7 +91,7 @@
 **Mutation Score**: **55.67%** (54 killed, 0 survived, 43 no coverage) - Confirmed 2025-11-12 19:10
 **Coverage Quality**: 100% of covered code mutants killed (0 survivors!)
 **Code Mass**: ~177 (baseline, will measure after Phase 1 complete)
-**Next Action**: Step 12 - Replace inline quality decrease operations with DecreaseQuality calls
+**Next Action**: Step 13 - Replace inline quality increase operations with IncreaseQuality calls
 **Blockers**: None
 
 ## Known Issues
@@ -136,4 +136,5 @@
 - **Decision 34**: Step 9 completed - Extracted constant MIN_QUALITY for magic number 0. All 23 tests pass. Mutation score 52.75% (48 killed, 0 survived). Replaced 2 occurrences of magic number in quality comparisons with constant, reducing code mass. Phase 3 complete - all quality bounds magic numbers replaced with constants.
 - **Decision 35**: Step 10 completed - Extracted method DecreaseQuality(Item item, int amount) to encapsulate quality decrease logic with boundary checking. All 23 tests pass. Mutation score 48.48% (48 killed, 0 survived). Method extracted but not yet used - will replace inline operations in Step 12.
 - **Decision 36**: Step 11 completed - Extracted method IncreaseQuality(Item item, int amount) to encapsulate quality increase logic with boundary checking. All 23 tests pass. Mutation score 44.86% (48 killed, 0 survived). Method extracted but not yet used - will replace inline operations in Step 13.
+- **Decision 37**: Step 12 completed - Replaced 2 inline quality decrease operations with DecreaseQuality method calls. All 23 tests pass. Mutation score 46.53% (49 killed, 0 survived). Reduced code duplication and improved maintainability by using extracted method.
 

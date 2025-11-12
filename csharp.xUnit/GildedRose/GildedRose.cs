@@ -27,10 +27,7 @@ public class GildedRose
 
             if (Items[i].Name != AGED_BRIE && Items[i].Name != BACKSTAGE_PASSES)
             {
-                if (Items[i].Quality > MIN_QUALITY)
-                {
-                    Items[i].Quality = Items[i].Quality - 1;
-                }
+                DecreaseQuality(Items[i], 1);
             }
             else
             {
@@ -67,10 +64,7 @@ public class GildedRose
                 {
                     if (Items[i].Name != BACKSTAGE_PASSES)
                     {
-                        if (Items[i].Quality > MIN_QUALITY)
-                        {
-                            Items[i].Quality = Items[i].Quality - 1;
-                        }
+                        DecreaseQuality(Items[i], 1);
                     }
                     else
                     {
