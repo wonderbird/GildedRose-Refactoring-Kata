@@ -79,6 +79,10 @@ public class GildedRose
         }
     }
 
+    /// <summary>
+    /// Decrements the sell-in value of an item by 1.
+    /// </summary>
+    /// <param name="item">The item whose sell-in value should be decremented.</param>
     private void DecrementSellIn(Item item)
     {
         item.SellIn = item.SellIn - 1;
