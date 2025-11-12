@@ -18,26 +18,12 @@ public class GildedRose
     private const int BACKSTAGE_PASS_FIRST_THRESHOLD = 11;
     private const int BACKSTAGE_PASS_SECOND_THRESHOLD = 6;
     IList<Item> Items;
-    private readonly Dictionary<string, Action<Item>> _updateStrategies;
+    private readonly ItemUpdateStrategyRegistry _strategyRegistry;
 
     public GildedRose(IList<Item> Items)
     {
         this.Items = Items;
-        _updateStrategies = CreateUpdateStrategies();
-    }
-
-    /// <summary>
-    /// Creates the dictionary of update strategies for different item types.
-    /// </summary>
-    /// <returns>A dictionary mapping item names to their update strategies.</returns>
-    private Dictionary<string, Action<Item>> CreateUpdateStrategies()
-    {
-        return new Dictionary<string, Action<Item>>
-        {
-            { AGED_BRIE, UpdateAgedBrie },
-            { BACKSTAGE_PASSES, UpdateBackstagePass },
-            { SULFURAS, UpdateSulfuras }
-        };
+        _strategyRegistry = new ItemUpdateStrategyRegistry();
     }
 
     /// <summary>
@@ -48,14 +34,8 @@ public class GildedRose
     {
         foreach (var item in Items)
         {
-            if (_updateStrategies.TryGetValue(item.Name, out var updateStrategy))
-            {
-                updateStrategy(item);
-            }
-            else
-            {
-                UpdateNormalItem(item);
-            }
+            var strategy = _strategyRegistry.GetStrategy(item.Name);
+            strategy.Update(item);
         }
     }
 
