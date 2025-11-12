@@ -1,46 +1,65 @@
 # Active Context
 
 ## Current Work Focus
-**Test Readability Refactoring Phase** - Improving test code for junior developer comprehension before refactoring production code.
+
+**Production Code Refactoring Phase** - Refactoring UpdateQuality method using Absolute Priority Premise to guide incremental improvements. Each refactoring step is a single technique with independent commit.
 
 ## Recent Changes
+
 - ✅ Test characterization phase COMPLETE (23 tests, 100% mutation coverage of business logic)
-- ✅ Completed review of test code for readability and junior developer friendliness
-- ✅ Identified 5 key improvement areas in test suite
-- ✅ Mutation tests re-run: 57% score confirmed (57 killed, 0 survived in covered code)
+- ✅ Analyzed UpdateQuality method using Absolute Priority Premise
+- ✅ Current code mass: ~177 (16 conditionals, 8 assignments, 1 loop)
+- ✅ Identified 6 refactoring options ranked by mass reduction potential
+- ✅ Goal changed: Skip test refactoring, proceed directly to production refactoring
 
-## Next Steps - Test Refactoring (Immediate)
-1. **Extract helper methods** to reduce duplication
-   - Create helper methods like `CreateItemAndUpdateQuality(name, sellIn, quality)`
-   - Consider builder pattern for complex test scenarios
-2. **Add descriptive constants** for magic numbers
-   - `MaxQuality = 50`, `MinQuality = 0`, `SulfurasQuality = 80`
-   - Item name constants (e.g., `AgedBrie`, `BackstagePasses`, `Sulfuras`)
-3. **Add test class documentation** explaining business rules
-   - Quality bounds (0-50, except Sulfuras)
-   - Sell-by date concept (SellIn = 0)
-   - Item type behaviors overview
-4. **Make assertions more expressive** with named variables
-5. **Consider parameterized tests** for similar test patterns
+## Next Steps - Production Code Refactoring (Immediate)
 
-## Production Code Refactoring (After Test Improvements)
-1. Extract item type behaviors into separate methods or use strategy pattern
-2. Maintain all tests green throughout refactoring
-3. Re-run mutation tests after refactoring to ensure test effectiveness maintained
+Following APP-guided sequence with strict TDD (one refactoring technique per commit):
+
+### Phase 1: Extract Guard Clauses (Mass reduction: ~12-16)
+
+1. Extract guard clause for Sulfuras at start of loop body
+2. Remove now-unreachable Sulfuras checks in quality update logic
+3. Remove now-unreachable Sulfuras check in SellIn decrement
+4. Remove now-unreachable Sulfuras check in post-sell-by-date logic
+
+### Phase 2: Extract Item Type Constants (Mass reduction: ~3-5)
+
+5. Extract constant for "Aged Brie" name
+6. Extract constant for "Backstage passes to a TAFKAL80ETC concert" name
+7. Extract constant for "Sulfuras, Hand of Ragnaros" name
+
+### Phase 3: Extract Quality Bounds Constants (Mass reduction: ~2)
+
+8. Extract constant for MAX_QUALITY = 50
+9. Extract constant for MIN_QUALITY = 0
+
+### Phase 4: Extract Quality Update Methods (Mass reduction: ~20-30)
+
+10. Extract method: DecreaseQuality(Item item, int amount)
+11. Extract method: IncreaseQuality(Item item, int amount)
+12. Replace inline quality decrease operations with DecreaseQuality calls
+13. Replace inline quality increase operations with IncreaseQuality calls
+
+### Phase 5: Extract Item Type Behavior Methods (Mass reduction: ~30-40)
+
+14. Extract method: UpdateNormalItem(Item item)
+15. Extract method: UpdateAgedBrie(Item item)
+16. Extract method: UpdateBackstagePass(Item item)
+17. Inline the extracted methods into main loop
+
+### Phase 6: Extract SellIn Boundaries Constants (Mass reduction: ~2)
+
+18. Extract constant for BACKSTAGE_PASS_FIRST_THRESHOLD = 10
+19. Extract constant for BACKSTAGE_PASS_SECOND_THRESHOLD = 5
 
 ## Active Decisions
-- **New Priority**: Improve test readability BEFORE refactoring production code
-- Rationale: Clean, understandable tests are essential for maintaining confidence during production refactoring
-- Following strict TDD: red-green-refactor with commits after each phase
-- Test improvements will be done in small refactoring steps with green tests maintained
-- After test improvements complete, will proceed to production code refactoring
 
-## Test Readability Issues Identified
-1. **Excessive duplication** (High Impact): Every test repeats List<Item>, GildedRose, UpdateQuality(), items[0] boilerplate
-2. **Magic numbers without context** (High Impact): Values like 20, 49, 80, 10 lack explanation of significance
-3. **Calculated assertions not self-documenting** (Medium Impact): Assert.Equal(19, ...) requires mental math from Quality=20
-4. **Missing business rules documentation** (Medium Impact): No overview of quality bounds, sell-by date, item behaviors
-5. **Long string literals repeated** (Low Impact): "Backstage passes to a TAFKAL80ETC concert" appears 9 times
+- **Goal Change**: Skip test refactoring to focus on production code refactoring
+- **Rationale**: Tests are sufficient for refactoring safety despite readability issues
+- **Approach**: APP-guided incremental refactoring with mass reduction as objective measure
+- **Constraints**: Each refactoring step must be single technique, maintain green tests, commit immediately
+- **Target**: Reduce code mass from ~177 to ~90-120 range through systematic refactoring
 
 ## Important Patterns
 - Arrange-Act-Assert test structure

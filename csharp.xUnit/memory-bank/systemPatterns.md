@@ -12,15 +12,36 @@ Simple object-oriented design with two main classes:
 - Item properties are mutable (get/set)
 
 ## Design Patterns in Use
-Current implementation uses procedural conditional logic:
-- Nested if-else statements
-- Item type discrimination via Name string comparison
-- In-place mutation of item properties
 
-Future refactoring targets:
-- Strategy pattern or polymorphism for item type behaviors
-- Value object pattern for quality/sellin calculations
-- Possibly visitor pattern for update operations
+### Current Implementation (Mass: ~177)
+
+Procedural conditional logic with high complexity:
+- **16 conditionals** (64 mass) - nested if-else statements
+- **8 assignments** (48 mass) - in-place quality/SellIn mutations
+- **1 loop** (5 mass) - iterate through items
+- **~20 invocations** (40 mass) - property accesses, comparisons
+- **~15 constants** (15 mass) - string literals, numbers
+- **~5 bindings** (5 mass) - variables and parameters
+
+Key complexity drivers:
+- Item type discrimination via string comparison
+- Deeply nested conditionals (up to 5 levels)
+- Duplicated quality boundary checks
+- Repeated Sulfuras special-case handling
+
+### Refactoring Plan (Target Mass: ~84-110)
+
+**Phase 1**: Guard clauses for Sulfuras (-12 to -16 mass)
+**Phase 2**: Item name constants (-3 to -5 mass)
+**Phase 3**: Quality bounds constants (-2 mass)
+**Phase 4**: Quality update methods (-20 to -30 mass)
+**Phase 5**: Item type behavior methods (-30 to -40 mass)
+**Phase 6**: SellIn threshold constants (-2 mass)
+
+Future patterns under consideration:
+- Strategy pattern for item type behaviors
+- Dictionary-based type dispatch
+- Value object pattern for quality calculations
 
 ## Component Relationships
 ```
