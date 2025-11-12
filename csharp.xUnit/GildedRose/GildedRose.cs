@@ -9,6 +9,7 @@ public class GildedRose
     private const string SULFURAS = "Sulfuras, Hand of Ragnaros";
     private const int MAX_QUALITY = 50;
     private const int MIN_QUALITY = 0;
+    private const int BACKSTAGE_PASS_FIRST_THRESHOLD = 11;
     IList<Item> Items;
 
     public GildedRose(IList<Item> Items)
@@ -86,7 +87,7 @@ public class GildedRose
     private void UpdateBackstagePass(Item item)
     {
         IncreaseQuality(item, 1);
-        if (item.SellIn < 11)
+        if (item.SellIn < BACKSTAGE_PASS_FIRST_THRESHOLD)
         {
             IncreaseQuality(item, 1);
         }
