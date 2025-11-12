@@ -98,6 +98,10 @@ public class GildedRose
         }
     }
 
+    /// <summary>
+    /// Updates Aged Brie: increases quality by 1, decrements sell-in, and increases quality by 1 again if past sell-by date.
+    /// </summary>
+    /// <param name="item">The Aged Brie item to update.</param>
     private void UpdateAgedBrie(Item item)
     {
         IncreaseQuality(item, 1);
