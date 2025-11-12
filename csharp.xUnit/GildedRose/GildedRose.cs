@@ -18,6 +18,10 @@ public class GildedRose
         this.Items = Items;
     }
 
+    /// <summary>
+    /// Updates the quality and sell-in values for all items in the inventory.
+    /// Each item type follows specific rules for quality degradation or improvement.
+    /// </summary>
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
