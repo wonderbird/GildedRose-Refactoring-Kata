@@ -88,6 +88,11 @@ public class GildedRose
         item.SellIn = item.SellIn - 1;
     }
 
+    private bool IsSulfuras(Item item)
+    {
+        return item.Name == SULFURAS;
+    }
+
     /// <summary>
     /// Updates a normal item: decreases quality by 1, decrements sell-in, and decreases quality by 1 again if past sell-by date.
     /// </summary>
