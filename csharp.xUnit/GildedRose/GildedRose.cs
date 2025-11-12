@@ -62,6 +62,11 @@ public class GildedRose
         }
     }
 
+    /// <summary>
+    /// Increases the quality of an item by the specified amount, ensuring it does not exceed the maximum quality.
+    /// </summary>
+    /// <param name="item">The item whose quality should be increased.</param>
+    /// <param name="amount">The amount by which to increase the quality.</param>
     private void IncreaseQuality(Item item, int amount)
     {
         if (item.Quality < MAX_QUALITY)
