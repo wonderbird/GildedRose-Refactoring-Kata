@@ -31,27 +31,18 @@ public class GildedRose
             }
             else
             {
-                if (Items[i].Quality < MAX_QUALITY)
+                IncreaseQuality(Items[i], 1);
+
+                if (Items[i].Name == BACKSTAGE_PASSES)
                 {
-                    Items[i].Quality = Items[i].Quality + 1;
-
-                    if (Items[i].Name == BACKSTAGE_PASSES)
+                    if (Items[i].SellIn < 11)
                     {
-                        if (Items[i].SellIn < 11)
-                        {
-                            if (Items[i].Quality < MAX_QUALITY)
-                            {
-                                Items[i].Quality = Items[i].Quality + 1;
-                            }
-                        }
+                        IncreaseQuality(Items[i], 1);
+                    }
 
-                        if (Items[i].SellIn < 6)
-                        {
-                            if (Items[i].Quality < MAX_QUALITY)
-                            {
-                                Items[i].Quality = Items[i].Quality + 1;
-                            }
-                        }
+                    if (Items[i].SellIn < 6)
+                    {
+                        IncreaseQuality(Items[i], 1);
                     }
                 }
             }
@@ -73,10 +64,7 @@ public class GildedRose
                 }
                 else
                 {
-                    if (Items[i].Quality < MAX_QUALITY)
-                    {
-                        Items[i].Quality = Items[i].Quality + 1;
-                    }
+                    IncreaseQuality(Items[i], 1);
                 }
             }
         }
