@@ -87,4 +87,16 @@ public class GildedRose
             }
         }
     }
+
+    private void DecreaseQuality(Item item, int amount)
+    {
+        if (item.Quality > MIN_QUALITY)
+        {
+            item.Quality = item.Quality - amount;
+            if (item.Quality < MIN_QUALITY)
+            {
+                item.Quality = MIN_QUALITY;
+            }
+        }
+    }
 }

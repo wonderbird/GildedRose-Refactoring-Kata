@@ -91,7 +91,7 @@
 **Mutation Score**: **55.67%** (54 killed, 0 survived, 43 no coverage) - Confirmed 2025-11-12 19:10
 **Coverage Quality**: 100% of covered code mutants killed (0 survivors!)
 **Code Mass**: ~177 (baseline, will measure after Phase 1 complete)
-**Next Action**: Step 10 - Extract method: DecreaseQuality(Item item, int amount)
+**Next Action**: Step 11 - Extract method: IncreaseQuality(Item item, int amount)
 **Blockers**: None
 
 ## Known Issues
@@ -134,4 +134,5 @@
 - **Decision 32**: Step 7 completed - Extracted constant SULFURAS for "Sulfuras, Hand of Ragnaros" string literal. All 23 tests pass. Mutation score 52.75% (48 killed, 0 survived). Phase 2 complete - all item type string literals replaced with constants, reducing code mass.
 - **Decision 33**: Step 8 completed - Extracted constant MAX_QUALITY for magic number 50. All 23 tests pass. Mutation score 52.75% (48 killed, 0 survived). Replaced 4 occurrences of magic number with constant, reducing code mass.
 - **Decision 34**: Step 9 completed - Extracted constant MIN_QUALITY for magic number 0. All 23 tests pass. Mutation score 52.75% (48 killed, 0 survived). Replaced 2 occurrences of magic number in quality comparisons with constant, reducing code mass. Phase 3 complete - all quality bounds magic numbers replaced with constants.
+- **Decision 35**: Step 10 completed - Extracted method DecreaseQuality(Item item, int amount) to encapsulate quality decrease logic with boundary checking. All 23 tests pass. Mutation score 48.48% (48 killed, 0 survived). Method extracted but not yet used - will replace inline operations in Step 12.
 

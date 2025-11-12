@@ -20,6 +20,7 @@
 - ✅ Step 7 COMPLETE: Extracted constant for "Sulfuras, Hand of Ragnaros" name
 - ✅ Step 8 COMPLETE: Extracted constant for MAX_QUALITY = 50
 - ✅ Step 9 COMPLETE: Extracted constant for MIN_QUALITY = 0
+- ✅ Step 10 COMPLETE: Extracted method: DecreaseQuality(Item item, int amount)
 
 ## Next Steps - Production Code Refactoring (Immediate)
 
@@ -45,7 +46,7 @@ Following APP-guided sequence with strict TDD (one refactoring technique per com
 
 ### Phase 4: Extract Quality Update Methods (Mass reduction: ~20-30)
 
-10. Extract method: DecreaseQuality(Item item, int amount)
+10. ✅ Extract method: DecreaseQuality(Item item, int amount)
 11. Extract method: IncreaseQuality(Item item, int amount)
 12. Replace inline quality decrease operations with DecreaseQuality calls
 13. Replace inline quality increase operations with IncreaseQuality calls
