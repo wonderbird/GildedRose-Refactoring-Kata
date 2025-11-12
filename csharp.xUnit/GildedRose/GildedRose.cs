@@ -13,10 +13,16 @@ public class GildedRose
     private const int BACKSTAGE_PASS_FIRST_THRESHOLD = 11;
     private const int BACKSTAGE_PASS_SECOND_THRESHOLD = 6;
     IList<Item> Items;
+    private readonly Dictionary<string, Action<Item>> _updateStrategies;
 
     public GildedRose(IList<Item> Items)
     {
         this.Items = Items;
+        _updateStrategies = new Dictionary<string, Action<Item>>
+        {
+            { AGED_BRIE, UpdateAgedBrie },
+            { BACKSTAGE_PASSES, UpdateBackstagePass }
+        };
     }
 
     /// <summary>
