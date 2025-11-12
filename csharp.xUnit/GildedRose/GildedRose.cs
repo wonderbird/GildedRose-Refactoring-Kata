@@ -80,7 +80,7 @@ public class GildedRose
     /// <param name="item">The item whose sell-in value should be decremented.</param>
     private void DecrementSellIn(Item item)
     {
-        item.SellIn = item.SellIn - 1;
+        item.SellIn--;
     }
 
     private bool IsPastSellByDate(Item item)
