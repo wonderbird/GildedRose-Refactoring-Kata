@@ -103,4 +103,14 @@ public class GildedRose
             DecreaseQuality(item, 1);
         }
     }
+
+    private void UpdateAgedBrie(Item item)
+    {
+        IncreaseQuality(item, 1);
+        item.SellIn = item.SellIn - 1;
+        if (item.SellIn < 0)
+        {
+            IncreaseQuality(item, 1);
+        }
+    }
 }
