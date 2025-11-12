@@ -112,6 +112,10 @@ public class GildedRose
         }
     }
 
+    /// <summary>
+    /// Updates Backstage passes: increases quality based on sell-in thresholds, decrements sell-in, and sets quality to 0 if past concert date.
+    /// </summary>
+    /// <param name="item">The Backstage pass item to update.</param>
     private void UpdateBackstagePass(Item item)
     {
         IncreaseQuality(item, 1);
