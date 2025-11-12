@@ -78,21 +78,26 @@
 
 **Total Expected Mass Reduction**: ~67-93 (from ~177 to ~84-110)
 
-### Future Considerations - Next Improvement Opportunities
+### Future Considerations - APP-Guided Refactorings (Prioritized by Mass Reduction)
 
-**High Priority Quick Wins:**
-- Replace magic operation `item.Quality = item.Quality - item.Quality;` with clearer method
-- Extract `DecrementSellIn` method to reduce duplication
-- Add XML documentation comments to all methods
+**High Priority (Significant Mass Reduction - ~34 mass):**
+1. Simplify DecreaseQuality/IncreaseQuality with Math.Max/Math.Min (16 mass reduction)
+2. Replace if-else chain with dictionary dispatch (~18 mass reduction per call)
 
-**Medium Priority Structural Improvements:**
-- Replace if-else chain with dictionary-based dispatch for extensibility
-- Extract item type identification helper methods
-- Simplify UpdateBackstagePass logic structure
+**Medium Priority (Moderate Reduction or Readability - ~5 mass):**
+3. Extract common pattern from UpdateNormalItem/UpdateAgedBrie (5 mass reduction)
+4. Extract IsPastSellByDate helper method (0 mass, readability improvement)
 
-**Lower Priority Advanced Patterns:**
-- Strategy pattern for item behaviors (requires more structural changes)
-- Extract quality calculation logic for better testability
+**Low Priority (Minimal Impact - ~2 mass):**
+5. Replace for loop with foreach (2 mass reduction)
+
+**Not Recommended:**
+- Extract threshold check methods (increases mass by 8, readability only)
+- Extract SetQualityToZero method (increases mass, already using MIN_QUALITY)
+
+**Total Expected Mass Reduction: ~41 mass**
+**Current Estimated Mass: ~120-130**
+**Target Mass: ~80-90**
 
 ## Current Status
 
@@ -155,4 +160,5 @@
 - **Decision 43**: Step 18 completed - Extracted constant BACKSTAGE_PASS_FIRST_THRESHOLD for magic number 11. All 23 tests pass. Mutation score 45.83% (51 killed, 0 survived). Replaced 1 occurrence of magic number with constant, improving code clarity.
 - **Decision 44**: Step 19 completed - Extracted constant BACKSTAGE_PASS_SECOND_THRESHOLD for magic number 6. All 23 tests pass. Mutation score 45.83% (51 killed, 0 survived). Phase 6 complete - all backstage pass thresholds now use named constants. ALL 19 REFACTORING STEPS COMPLETE!
 - **Decision 45**: Analyzed code for further improvements. Identified 8 opportunities categorized by priority: High (quick wins - magic operation, SellIn decrement, documentation), Medium (structural - dictionary dispatch, type helpers, logic simplification), and Lower (advanced patterns - strategy pattern, calculation extraction). Recommended sequence follows strict TDD with incremental improvements.
+- **Decision 46**: Conducted comprehensive APP-based analysis of current code. Calculated mass for all methods and identified 6 refactorings prioritized by mass reduction potential. High priority: Simplify DecreaseQuality/IncreaseQuality with Math.Max/Math.Min (16 mass reduction), Replace if-else chain with dictionary dispatch (~18 mass reduction). Medium priority: Extract common pattern (5 mass), Extract IsPastSellByDate (0 mass, readability). Low priority: Replace for loop with foreach (2 mass). Total expected reduction: ~41 mass, targeting final mass of ~80-90.
 

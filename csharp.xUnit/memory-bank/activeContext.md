@@ -28,38 +28,71 @@
 - ✅ Step 13 COMPLETE: Replaced inline quality increase operations with IncreaseQuality calls
 - ✅ Step 14-19 COMPLETE: Extracted item type behavior methods and completed all refactorings
 
-## Next Steps - Further Code Quality Improvements
+## Next Steps - APP-Guided Refactorings (Prioritized by Mass Reduction)
 
-### High Priority - Quick Wins
+### Current Code Mass Analysis
+- **UpdateQuality**: 29 mass (1 loop, 4 conditionals, 4 invocations)
+- **Update methods**: 20 mass in conditionals (3 × `SellIn < 0` checks, 2 threshold checks)
+- **DecreaseQuality/IncreaseQuality**: 40 mass (4 conditionals, 4 assignments)
+- **Estimated Total Mass**: ~120-130
 
-1. **Replace magic operation in UpdateBackstagePass**: Line 102 uses `item.Quality = item.Quality - item.Quality;` to set quality to 0. Extract `SetQualityToZero` method or use `item.Quality = MIN_QUALITY` for clarity.
+### High Priority (Significant Mass Reduction)
 
-2. **Extract SellIn decrement logic**: `item.SellIn = item.SellIn - 1;` is duplicated in multiple methods. Extract `DecrementSellIn(Item item)` method.
+1. **Simplify DecreaseQuality/IncreaseQuality with Math.Max/Math.Min**
+   - **Mass Reduction**: 16 total
+   - **Current**: 2 conditionals + 2 assignments each = 40 mass
+   - **After**: 1 conditional + 1 assignment + Math.Max/Min = 24 mass
+   - **Impact**: Reduces conditionals, improves clarity
+   - **Steps**: Refactor DecreaseQuality, refactor IncreaseQuality (2 commits)
 
-3. **Add XML documentation comments**: Methods lack documentation. Add XML comments explaining each method's purpose and behavior.
+2. **Replace If-Else Chain with Dictionary Dispatch**
+   - **Mass Reduction**: ~18 per call
+   - **Current**: 4 conditionals in UpdateQuality = 16 mass
+   - **After**: 1 dictionary lookup + 1 null check = ~6 mass
+   - **Impact**: High extensibility, significant mass reduction
+   - **Steps**: Extract dictionary initialization, replace if-else chain (2-3 commits)
 
-### Medium Priority - Structural Improvements
+### Medium Priority (Moderate Mass Reduction or Readability)
 
-4. **Replace if-else chain with dictionary dispatch**: The if-else chain in `UpdateQuality` requires modification for new item types. Use `Dictionary<string, Action<Item>>` for item type dispatch to improve extensibility.
+3. **Extract Common Pattern from UpdateNormalItem and UpdateAgedBrie**
+   - **Mass Reduction**: 5 total
+   - **Current**: 2 methods × 10 mass = 20 mass
+   - **After**: 1 generic method + 2 specific calls = 15 mass
+   - **Impact**: Reduces duplication
+   - **Steps**: Extract generic UpdateItem method (2-3 commits)
 
-5. **Extract item type identification**: String comparisons are scattered. Create helper methods like `IsAgedBrie(Item item)`, `IsBackstagePass(Item item)`, etc.
+4. **Extract IsPastSellByDate Helper Method**
+   - **Mass Reduction**: 0 (readability improvement)
+   - **Current**: 3 conditionals `item.SellIn < 0` = 12 mass
+   - **After**: 1 method + 1 conditional + 3 invocations = 12 mass
+   - **Impact**: Reduces duplication, improves clarity
+   - **Steps**: Extract method, replace 3 occurrences (1 commit)
 
-6. **Simplify UpdateBackstagePass logic**: Reorder operations or extract threshold checks into named methods for better readability.
+### Low Priority (Minimal or Negative Mass Impact)
 
-### Lower Priority - Advanced Patterns
+5. **Replace For Loop with ForEach**
+   - **Mass Reduction**: 2 total
+   - **Impact**: Modern C# style
+   - **Steps**: Replace for loop with foreach (1 commit)
 
-7. **Strategy pattern for item behaviors**: Create `IItemUpdateStrategy` interface with implementations for each item type. High extensibility but requires more structural changes.
+6. **Extract Threshold Check Methods for Backstage Passes**
+   - **Mass Reduction**: -8 (increases mass)
+   - **Impact**: Readability only, not recommended
+   - **Priority**: Skip (increases mass without benefit)
 
-8. **Extract quality calculation logic**: Extract calculation methods that return new quality values (more functional approach) to improve testability.
+### Recommended Implementation Sequence
 
-### Recommended Sequence
+Following strict TDD and APP-guided prioritization:
+1. Simplify DecreaseQuality with Math.Max (1 commit)
+2. Simplify IncreaseQuality with Math.Min (1 commit)
+3. Extract IsPastSellByDate helper (1 commit)
+4. Extract common pattern from UpdateNormalItem/UpdateAgedBrie (2-3 commits)
+5. Replace if-else chain with dictionary dispatch (2-3 commits)
+6. Replace for loop with foreach (1 commit)
 
-Following strict TDD and incremental improvements:
-1. Replace magic operation (1 commit)
-2. Extract SellIn decrement (1 commit)
-3. Add XML documentation (1 commit)
-4. Extract item type identification helpers (2-3 commits)
-5. Dictionary-based dispatch (2-3 commits)
+**Total Expected Mass Reduction: ~41 mass**
+**Current Estimated Total Mass: ~120-130**
+**Target Mass After Refactorings: ~80-90**
 
 ## Active Decisions
 
