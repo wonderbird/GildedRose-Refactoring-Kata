@@ -65,6 +65,11 @@ public class GildedRose
         }
     }
 
+    private void DecrementSellIn(Item item)
+    {
+        item.SellIn = item.SellIn - 1;
+    }
+
     private void UpdateNormalItem(Item item)
     {
         DecreaseQuality(item, 1);
