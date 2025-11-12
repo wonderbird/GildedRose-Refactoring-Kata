@@ -99,7 +99,7 @@ public class GildedRose
         item.SellIn = item.SellIn - 1;
         if (item.SellIn < 0)
         {
-            item.Quality = item.Quality - item.Quality;
+            item.Quality = MIN_QUALITY;
         }
     }
 }
