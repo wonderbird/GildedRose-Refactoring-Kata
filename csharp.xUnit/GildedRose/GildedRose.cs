@@ -102,17 +102,27 @@ public class GildedRose
     }
 
     /// <summary>
+    /// Updates an item with a common pattern: updates quality, decrements sell-in, and updates quality again if past sell-by date.
+    /// </summary>
+    /// <param name="item">The item to update.</param>
+    /// <param name="updateQuality">The quality update function to use.</param>
+    private void UpdateItem(Item item, Action<Item, int> updateQuality)
+    {
+        updateQuality(item, 1);
+        DecrementSellIn(item);
+        if (IsPastSellByDate(item))
+        {
+            updateQuality(item, 1);
+        }
+    }
+
+    /// <summary>
     /// Updates a normal item: decreases quality by 1, decrements sell-in, and decreases quality by 1 again if past sell-by date.
     /// </summary>
     /// <param name="item">The normal item to update.</param>
     private void UpdateNormalItem(Item item)
     {
-        DecreaseQuality(item, 1);
-        DecrementSellIn(item);
-        if (IsPastSellByDate(item))
-        {
-            DecreaseQuality(item, 1);
-        }
+        UpdateItem(item, DecreaseQuality);
     }
 
     /// <summary>
@@ -121,12 +131,7 @@ public class GildedRose
     /// <param name="item">The Aged Brie item to update.</param>
     private void UpdateAgedBrie(Item item)
     {
-        IncreaseQuality(item, 1);
-        DecrementSellIn(item);
-        if (IsPastSellByDate(item))
-        {
-            IncreaseQuality(item, 1);
-        }
+        UpdateItem(item, IncreaseQuality);
     }
 
     /// <summary>
