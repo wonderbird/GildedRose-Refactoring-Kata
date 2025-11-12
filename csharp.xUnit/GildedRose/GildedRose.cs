@@ -101,7 +101,7 @@ public class GildedRose
         {
             IncreaseQuality(item, 1);
         }
-        item.SellIn = item.SellIn - 1;
+        DecrementSellIn(item);
         if (item.SellIn < 0)
         {
             item.Quality = MIN_QUALITY;
