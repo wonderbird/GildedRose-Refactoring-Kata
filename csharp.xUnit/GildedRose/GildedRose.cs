@@ -83,7 +83,7 @@ public class GildedRose
     private void UpdateAgedBrie(Item item)
     {
         IncreaseQuality(item, 1);
-        item.SellIn = item.SellIn - 1;
+        DecrementSellIn(item);
         if (item.SellIn < 0)
         {
             IncreaseQuality(item, 1);
