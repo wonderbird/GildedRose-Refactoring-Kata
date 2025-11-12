@@ -98,6 +98,11 @@ public class GildedRose
         return item.Name == AGED_BRIE;
     }
 
+    private bool IsBackstagePass(Item item)
+    {
+        return item.Name == BACKSTAGE_PASSES;
+    }
+
     /// <summary>
     /// Updates a normal item: decreases quality by 1, decrements sell-in, and decreases quality by 1 again if past sell-by date.
     /// </summary>
