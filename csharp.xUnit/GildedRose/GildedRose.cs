@@ -26,7 +26,7 @@ public class GildedRose
     {
         for (var i = 0; i < Items.Count; i++)
         {
-            if (Items[i].Name == SULFURAS)
+            if (IsSulfuras(Items[i]))
             {
                 continue;
             }
