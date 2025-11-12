@@ -56,10 +56,7 @@ public class GildedRose
     /// <param name="amount">The amount by which to decrease the quality.</param>
     private void DecreaseQuality(Item item, int amount)
     {
-        if (item.Quality > MIN_QUALITY)
-        {
-            item.Quality = Math.Max(MIN_QUALITY, item.Quality - amount);
-        }
+        item.Quality = Math.Max(MIN_QUALITY, item.Quality - amount);
     }
 
     /// <summary>
