@@ -84,6 +84,10 @@ public class GildedRose
         item.SellIn = item.SellIn - 1;
     }
 
+    /// <summary>
+    /// Updates a normal item: decreases quality by 1, decrements sell-in, and decreases quality by 1 again if past sell-by date.
+    /// </summary>
+    /// <param name="item">The normal item to update.</param>
     private void UpdateNormalItem(Item item)
     {
         DecreaseQuality(item, 1);
