@@ -26,11 +26,16 @@ public class GildedRose
         return item.Name == AGED_BRIE;
     }
 
+    private bool IsBackstagePasses(Item item)
+    {
+        return item.Name == BACKSTAGE_PASSES;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
         {
-            if (!IsAgedBrie(Items[i]) && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+            if (!IsAgedBrie(Items[i]) && !IsBackstagePasses(Items[i]))
             {
                 if (Items[i].Quality > MIN_QUALITY)
                 {
@@ -46,7 +51,7 @@ public class GildedRose
                 {
                     Items[i].Quality = Items[i].Quality + 1;
 
-                    if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
+                    if (IsBackstagePasses(Items[i]))
                     {
                         if (Items[i].SellIn < BACKSTAGE_TIER2_THRESHOLD)
                         {
@@ -76,7 +81,7 @@ public class GildedRose
             {
                 if (!IsAgedBrie(Items[i]))
                 {
-                    if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+                    if (!IsBackstagePasses(Items[i]))
                     {
                         if (Items[i].Quality > MIN_QUALITY)
                         {
