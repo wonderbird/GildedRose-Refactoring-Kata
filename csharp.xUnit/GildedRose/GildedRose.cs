@@ -41,13 +41,18 @@ public class GildedRose
         return item.Quality < MAX_QUALITY;
     }
 
+    private bool IsQualityAboveMin(Item item)
+    {
+        return item.Quality > MIN_QUALITY;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
         {
             if (!IsAgedBrie(Items[i]) && !IsBackstagePasses(Items[i]))
             {
-                if (Items[i].Quality > MIN_QUALITY)
+                if (IsQualityAboveMin(Items[i]))
                 {
                     if (!IsSulfuras(Items[i]))
                     {
@@ -93,7 +98,7 @@ public class GildedRose
                 {
                     if (!IsBackstagePasses(Items[i]))
                     {
-                        if (Items[i].Quality > MIN_QUALITY)
+                        if (IsQualityAboveMin(Items[i]))
                         {
                             if (!IsSulfuras(Items[i]))
                             {
