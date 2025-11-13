@@ -31,6 +31,11 @@ public class GildedRose
         return item.Name == BACKSTAGE_PASSES;
     }
 
+    private bool IsSulfuras(Item item)
+    {
+        return item.Name == SULFURAS;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -39,7 +44,7 @@ public class GildedRose
             {
                 if (Items[i].Quality > MIN_QUALITY)
                 {
-                    if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                    if (!IsSulfuras(Items[i]))
                     {
                         Items[i].Quality = Items[i].Quality - 1;
                     }
@@ -85,7 +90,7 @@ public class GildedRose
                     {
                         if (Items[i].Quality > MIN_QUALITY)
                         {
-                            if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+                            if (!IsSulfuras(Items[i]))
                             {
                                 Items[i].Quality = Items[i].Quality - 1;
                             }
