@@ -98,7 +98,7 @@ public class GildedRose
                     }
                     else
                     {
-                        Items[i].Quality = Items[i].Quality - Items[i].Quality;
+                        Items[i].Quality = MIN_QUALITY;
                     }
                 }
                 else
