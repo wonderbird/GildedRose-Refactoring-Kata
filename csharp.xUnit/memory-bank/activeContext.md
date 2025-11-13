@@ -19,6 +19,9 @@
 - ✅ **Extracted IsNormalItem method** - Consolidates !IsAgedBrie && !IsBackstagePasses pattern (-6 mass)
 - ✅ **Extracted UpdateNormalItemQuality method** - Separates normal item quality logic (-6 mass)
 - ✅ **Extracted UpdateAgedBrieQuality method** - Separates Aged Brie quality logic (-2 mass)
+- ✅ **Extracted UpdateBackstagePassesQuality method** - Consolidates complex tier logic (-10 mass)
+- ✅ Mutation tests after refactoring: 55.21% score (53 tested, 0 survived, all tests passing)
+- ✅ **Extracted IsPastSellByDate helper method** - Improves readability, self-documenting (-2 mass)
 
 ## Next Steps - Test Refactoring (Immediate)
 1. ~~**Extract helper methods** to reduce duplication~~ ✅ **COMPLETE**
@@ -66,12 +69,12 @@
    - **Mass Reduction**: Replaces nested conditionals (4×2=8) with single conditional + invocation (4+2=6) = -2 mass
    - **Benefit**: Separates Aged Brie logic, improves clarity
 
-4. **Extract UpdateBackstagePassesQuality method**
+4. ✅ **Extract UpdateBackstagePassesQuality method** - COMPLETE
    - Handles Backstage passes quality logic (tier-based increases, reset after concert)
    - **Mass Reduction**: Replaces deeply nested conditionals (4×4=16) with single conditional + invocation (4+2=6) = -10 mass
    - **Benefit**: Consolidates complex tier logic, major simplification
 
-5. **Extract IsPastSellByDate helper method**
+5. ✅ **Extract IsPastSellByDate helper method** - COMPLETE
    - `IsPastSellByDate(Item item)` → replaces `item.SellIn < SELL_BY_DATE`
    - **Mass Reduction**: Replaces conditional (4) with invocation (2) = -2 mass per use (appears 1 time)
    - **Benefit**: Improves readability, self-documenting
@@ -121,7 +124,7 @@
 4. Extract UpdateBackstagePassesQuality method (Priority 2) - Major simplification, -10 mass
 
 **Short-term (Medium Mass Reduction, High Clarity)**:
-5. Extract IsPastSellByDate helper method (Priority 2) - Improves readability, -2 mass
+5. ✅ Extract IsPastSellByDate helper method (Priority 2) - COMPLETE - Improves readability, -2 mass
 6. Simplify Backstage passes tier logic (Priority 4) - Reduces nesting, improves clarity
 
 **Medium-term (Structural Improvements, High Impact)**:

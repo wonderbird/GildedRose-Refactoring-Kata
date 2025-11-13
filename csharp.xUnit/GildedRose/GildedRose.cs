@@ -41,6 +41,11 @@ public class GildedRose
         return !IsAgedBrie(item) && !IsBackstagePasses(item);
     }
 
+    private bool IsPastSellByDate(Item item)
+    {
+        return item.SellIn < SELL_BY_DATE;
+    }
+
     private bool IsQualityBelowMax(Item item)
     {
         return item.Quality < MAX_QUALITY;
@@ -87,6 +92,30 @@ public class GildedRose
         }
     }
 
+    private void UpdateBackstagePassesQuality(Item item)
+    {
+        if (IsQualityBelowMax(item))
+        {
+            IncreaseQuality(item);
+
+            if (item.SellIn < BACKSTAGE_TIER2_THRESHOLD)
+            {
+                if (IsQualityBelowMax(item))
+                {
+                    IncreaseQuality(item);
+                }
+            }
+
+            if (item.SellIn < BACKSTAGE_TIER3_THRESHOLD)
+            {
+                if (IsQualityBelowMax(item))
+                {
+                    IncreaseQuality(item);
+                }
+            }
+        }
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -108,32 +137,13 @@ public class GildedRose
                 }
                 else if (IsBackstagePasses(Items[i]))
                 {
-                    if (IsQualityBelowMax(Items[i]))
-                    {
-                        IncreaseQuality(Items[i]);
-
-                        if (Items[i].SellIn < BACKSTAGE_TIER2_THRESHOLD)
-                        {
-                            if (IsQualityBelowMax(Items[i]))
-                            {
-                                IncreaseQuality(Items[i]);
-                            }
-                        }
-
-                        if (Items[i].SellIn < BACKSTAGE_TIER3_THRESHOLD)
-                        {
-                            if (IsQualityBelowMax(Items[i]))
-                            {
-                                IncreaseQuality(Items[i]);
-                            }
-                        }
-                    }
+                    UpdateBackstagePassesQuality(Items[i]);
                 }
             }
 
             UpdateSellIn(Items[i]);
 
-            if (Items[i].SellIn < SELL_BY_DATE)
+            if (IsPastSellByDate(Items[i]))
             {
                 if (!IsAgedBrie(Items[i]))
                 {

@@ -61,7 +61,7 @@
 - Extract UpdateBackstagePassesQuality method - Consolidates complex tier logic (-10 mass)
 
 **Short-term (Medium Mass Reduction, High Clarity)**:
-- Extract IsPastSellByDate helper method - Improves readability (-2 mass)
+- ✅ Extract IsPastSellByDate helper method - COMPLETE - Improves readability (-2 mass)
 - Simplify Backstage passes tier logic - Reduces nesting
 
 **Medium-term (Structural Improvements)**:
@@ -78,7 +78,7 @@
 ## Current Status
 **Phase**: 🔄 PRODUCTION CODE REFACTORING
 **Tests**: 23 passing
-**Mutation Score**: **54.74%** (49 tested, all tests passing) - After extracting UpdateAgedBrieQuality
+**Mutation Score**: **55.21%** (53 tested, 0 survived, all tests passing) - After extracting IsPastSellByDate
 **Coverage Quality**: All tests passing, behavior maintained
 **Next Action**: Continue production code refactoring using APP-based prioritization:
   1. Extract IsNormalItem method
