@@ -51,6 +51,11 @@ public class GildedRose
         item.Quality = item.Quality - amount;
     }
 
+    private void IncreaseQuality(Item item, int amount = 1)
+    {
+        item.Quality = item.Quality + amount;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -69,7 +74,7 @@ public class GildedRose
             {
                 if (IsQualityBelowMax(Items[i]))
                 {
-                    Items[i].Quality = Items[i].Quality + 1;
+                    IncreaseQuality(Items[i]);
 
                     if (IsBackstagePasses(Items[i]))
                     {
@@ -77,7 +82,7 @@ public class GildedRose
                         {
                             if (IsQualityBelowMax(Items[i]))
                             {
-                                Items[i].Quality = Items[i].Quality + 1;
+                                IncreaseQuality(Items[i]);
                             }
                         }
 
@@ -85,7 +90,7 @@ public class GildedRose
                         {
                             if (IsQualityBelowMax(Items[i]))
                             {
-                                Items[i].Quality = Items[i].Quality + 1;
+                                IncreaseQuality(Items[i]);
                             }
                         }
                     }
@@ -120,7 +125,7 @@ public class GildedRose
                 {
                     if (IsQualityBelowMax(Items[i]))
                     {
-                        Items[i].Quality = Items[i].Quality + 1;
+                        IncreaseQuality(Items[i]);
                     }
                 }
             }
