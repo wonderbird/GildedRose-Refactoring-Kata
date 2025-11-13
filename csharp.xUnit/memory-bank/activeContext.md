@@ -16,6 +16,7 @@
   - ✅ Fixed inefficient quality reset
 - ✅ Mutation tests after refactoring: 52.22% score (47 tested, all tests passing)
 - ✅ **Completed comprehensive APP-based refactoring analysis** - Identified remaining refactorings prioritized by mass reduction
+- ✅ **Extracted IsNormalItem method** - Consolidates !IsAgedBrie && !IsBackstagePasses pattern (-6 mass)
 
 ## Next Steps - Test Refactoring (Immediate)
 1. ~~**Extract helper methods** to reduce duplication~~ ✅ **COMPLETE**
@@ -46,7 +47,7 @@
 
 #### Priority 1: Complete Item Type Checks (Low Mass Impact, Completes Pattern)
 **Mass Impact**: Small reduction (Conditional: 4 → Invocation: 2), improves consistency
-1. **Extract IsNormalItem method**
+1. ✅ **Extract IsNormalItem method** - COMPLETE
    - `IsNormalItem(Item item)` → consolidates `!IsAgedBrie(item) && !IsBackstagePasses(item)`
    - **Mass Reduction**: Replaces compound conditional (4+4=8) with single invocation (2) = -6 mass
    - **Benefit**: Completes the item type check pattern, improves readability

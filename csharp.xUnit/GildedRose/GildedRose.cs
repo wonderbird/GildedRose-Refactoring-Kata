@@ -36,6 +36,11 @@ public class GildedRose
         return item.Name == SULFURAS;
     }
 
+    private bool IsNormalItem(Item item)
+    {
+        return !IsAgedBrie(item) && !IsBackstagePasses(item);
+    }
+
     private bool IsQualityBelowMax(Item item)
     {
         return item.Quality < MAX_QUALITY;
@@ -75,7 +80,7 @@ public class GildedRose
                 continue;
             }
 
-            if (!IsAgedBrie(Items[i]) && !IsBackstagePasses(Items[i]))
+            if (IsNormalItem(Items[i]))
             {
                 if (IsQualityAboveMin(Items[i]))
                 {
@@ -115,7 +120,7 @@ public class GildedRose
             {
                 if (!IsAgedBrie(Items[i]))
                 {
-                    if (!IsBackstagePasses(Items[i]))
+                    if (IsNormalItem(Items[i]))
                     {
                         if (IsQualityAboveMin(Items[i]))
                         {
