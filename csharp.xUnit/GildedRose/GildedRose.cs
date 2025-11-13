@@ -56,6 +56,11 @@ public class GildedRose
         item.Quality = item.Quality + amount;
     }
 
+    private void ResetQualityToZero(Item item)
+    {
+        item.Quality = MIN_QUALITY;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -118,7 +123,7 @@ public class GildedRose
                     }
                     else
                     {
-                        Items[i].Quality = MIN_QUALITY;
+                        ResetQualityToZero(Items[i]);
                     }
                 }
                 else
