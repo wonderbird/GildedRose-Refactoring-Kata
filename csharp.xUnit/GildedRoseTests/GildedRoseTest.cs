@@ -11,6 +11,10 @@ public class GildedRoseTest
     private const string SULFURAS = "Sulfuras, Hand of Ragnaros";
     private const string NORMAL_ITEM = "Normal Item";
 
+    private const int MAX_QUALITY = 50;
+    private const int MIN_QUALITY = 0;
+    private const int SULFURAS_QUALITY = 80;
+
     private Item CreateItemAndUpdateQuality(string name, int sellIn, int quality)
     {
         var items = new List<Item> { new Item { Name = name, SellIn = sellIn, Quality = quality } };
@@ -53,10 +57,10 @@ public class GildedRoseTest
     public void NormalItem_QualityNeverNegative()
     {
         // Arrange & Act
-        var item = CreateItemAndUpdateQuality(NORMAL_ITEM, 5, 0);
+        var item = CreateItemAndUpdateQuality(NORMAL_ITEM, 5, MIN_QUALITY);
         
         // Assert
-        Assert.Equal(0, item.Quality);
+        Assert.Equal(MIN_QUALITY, item.Quality);
     }
 
     [Fact]
@@ -83,10 +87,10 @@ public class GildedRoseTest
     public void AgedBrie_QualityNeverExceedsFifty()
     {
         // Arrange & Act
-        var item = CreateItemAndUpdateQuality(AGED_BRIE, 10, 50);
+        var item = CreateItemAndUpdateQuality(AGED_BRIE, 10, MAX_QUALITY);
         
         // Assert
-        Assert.Equal(50, item.Quality);
+        Assert.Equal(MAX_QUALITY, item.Quality);
     }
 
     [Fact]
@@ -126,17 +130,17 @@ public class GildedRoseTest
         var item = CreateItemAndUpdateQuality(BACKSTAGE_PASSES, 0, 20);
         
         // Assert
-        Assert.Equal(0, item.Quality);
+        Assert.Equal(MIN_QUALITY, item.Quality);
     }
 
     [Fact]
     public void Sulfuras_NeverChanges()
     {
         // Arrange & Act
-        var item = CreateItemAndUpdateQuality(SULFURAS, 10, 80);
+        var item = CreateItemAndUpdateQuality(SULFURAS, 10, SULFURAS_QUALITY);
         
         // Assert
-        Assert.Equal(80, item.Quality);
+        Assert.Equal(SULFURAS_QUALITY, item.Quality);
         Assert.Equal(10, item.SellIn);
     }
 
@@ -147,7 +151,7 @@ public class GildedRoseTest
         var item = CreateItemAndUpdateQuality(BACKSTAGE_PASSES, 10, 49);
         
         // Assert
-        Assert.Equal(50, item.Quality);
+        Assert.Equal(MAX_QUALITY, item.Quality);
     }
 
     [Fact]
@@ -157,7 +161,7 @@ public class GildedRoseTest
         var item = CreateItemAndUpdateQuality(BACKSTAGE_PASSES, 5, 48);
         
         // Assert
-        Assert.Equal(50, item.Quality);
+        Assert.Equal(MAX_QUALITY, item.Quality);
     }
 
     [Fact]
@@ -167,7 +171,7 @@ public class GildedRoseTest
         var item = CreateItemAndUpdateQuality(AGED_BRIE, 0, 49);
         
         // Assert
-        Assert.Equal(50, item.Quality);
+        Assert.Equal(MAX_QUALITY, item.Quality);
     }
 
     [Fact]
@@ -177,7 +181,7 @@ public class GildedRoseTest
         var item = CreateItemAndUpdateQuality(NORMAL_ITEM, 0, 1);
         
         // Assert
-        Assert.Equal(0, item.Quality);
+        Assert.Equal(MIN_QUALITY, item.Quality);
     }
 
     [Fact]
@@ -204,10 +208,10 @@ public class GildedRoseTest
     public void NormalItem_QualityNeverNegative_AfterSellByDateWithQualityZero()
     {
         // Arrange & Act
-        var item = CreateItemAndUpdateQuality(NORMAL_ITEM, 0, 0);
+        var item = CreateItemAndUpdateQuality(NORMAL_ITEM, 0, MIN_QUALITY);
         
         // Assert
-        Assert.Equal(0, item.Quality);
+        Assert.Equal(MIN_QUALITY, item.Quality);
     }
 
     [Fact]
@@ -244,10 +248,10 @@ public class GildedRoseTest
     public void Sulfuras_NeverChanges_WithNegativeSellIn()
     {
         // Arrange & Act
-        var item = CreateItemAndUpdateQuality(SULFURAS, -1, 80);
+        var item = CreateItemAndUpdateQuality(SULFURAS, -1, SULFURAS_QUALITY);
         
         // Assert
-        Assert.Equal(80, item.Quality);
+        Assert.Equal(SULFURAS_QUALITY, item.Quality);
         Assert.Equal(-1, item.SellIn);
     }
 }

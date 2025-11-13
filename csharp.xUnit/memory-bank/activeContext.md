@@ -12,6 +12,8 @@
 - ✅ **Refactored all 23 tests** to use helper method - reduced duplication significantly
 - ✅ **Added item name constants** (AGED_BRIE, BACKSTAGE_PASSES, SULFURAS, NORMAL_ITEM)
 - ✅ **Replaced all string literals** in tests with constants - eliminates magic strings
+- ✅ **Added quality constants** (MAX_QUALITY, MIN_QUALITY, SULFURAS_QUALITY)
+- ✅ **Replaced quality magic numbers** in assertions and test setup with constants
 
 ## Next Steps - Test Refactoring (Immediate)
 1. ~~**Extract helper methods** to reduce duplication~~ ✅ **COMPLETE**
