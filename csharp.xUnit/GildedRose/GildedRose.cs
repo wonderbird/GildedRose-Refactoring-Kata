@@ -61,6 +61,11 @@ public class GildedRose
         item.Quality = MIN_QUALITY;
     }
 
+    private void UpdateSellIn(Item item)
+    {
+        item.SellIn = item.SellIn - 1;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -104,7 +109,7 @@ public class GildedRose
 
             if (!IsSulfuras(Items[i]))
             {
-                Items[i].SellIn = Items[i].SellIn - 1;
+                UpdateSellIn(Items[i]);
             }
 
             if (Items[i].SellIn < SELL_BY_DATE)
