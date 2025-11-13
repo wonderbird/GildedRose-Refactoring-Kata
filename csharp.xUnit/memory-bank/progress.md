@@ -52,26 +52,39 @@
   - **100% of covered code mutants killed** - ready for refactoring phase
 
 ## What's Left to Build
-### Test Readability Refactoring (CURRENT PHASE)
-- **Priority 1**: Extract helper methods to reduce test duplication
-- **Priority 2**: Add descriptive constants for magic numbers and item names
-- **Priority 3**: Add test class documentation explaining business rules
-- **Priority 4**: Make assertions more expressive with named variables
-- **Priority 5**: Consider parameterized tests for similar patterns
+### Production Code Refactoring (CURRENT PHASE - APP-Based Prioritization)
 
-### Production Code Refactoring (AFTER TEST IMPROVEMENTS)
-- Refactor UpdateQuality method for clarity and maintainability
-- Extract item type behaviors into separate methods or use strategy pattern
-- Maintain all tests green throughout refactoring
-- Re-run mutation tests after refactoring to verify test effectiveness maintained
-- Consider applying patterns: Strategy, Command, or polymorphic dispatch
+**Immediate (High Mass Reduction, Low Risk)**:
+- Extract IsNormalItem method - Completes item type check pattern (-6 mass)
+- Extract UpdateNormalItemQuality method - Separates normal item logic (-6 mass)
+- Extract UpdateAgedBrieQuality method - Separates Aged Brie logic (-2 mass)
+- Extract UpdateBackstagePassesQuality method - Consolidates complex tier logic (-10 mass)
+
+**Short-term (Medium Mass Reduction, High Clarity)**:
+- Extract IsPastSellByDate helper method - Improves readability (-2 mass)
+- Simplify Backstage passes tier logic - Reduces nesting
+
+**Medium-term (Structural Improvements)**:
+- Extract ApplyPastSellByDateEffects method - Consolidates past-sell-by-date logic
+  - This will call the item type behavior methods
+
+**Long-term (Architectural, Final Increment)**:
+- Refactor to Strategy Pattern - Final architectural improvement
+  - Net mass reduction: -20 mass
+  - Provides extensibility for future item types
+  - Clear separation of concerns
+  - Each strategy independently testable
 
 ## Current Status
-**Phase**: 🔄 TEST READABILITY REFACTORING
+**Phase**: 🔄 PRODUCTION CODE REFACTORING
 **Tests**: 23 passing
-**Mutation Score**: **57%** (57 killed, 0 survived, 43 no coverage) - Confirmed 2025-11-07 22:34
-**Coverage Quality**: **🎉 100% of covered code mutants killed!**
-**Next Action**: Refactor tests for junior developer comprehension (extract helpers, add constants, add documentation)
+**Mutation Score**: **52.22%** (47 tested, all tests passing) - After initial refactoring phase
+**Coverage Quality**: All tests passing, behavior maintained
+**Next Action**: Continue production code refactoring using APP-based prioritization:
+  1. Extract IsNormalItem method
+  2. Extract item type behavior methods (UpdateNormalItemQuality, UpdateAgedBrieQuality, UpdateBackstagePassesQuality)
+  3. Extract ApplyPastSellByDateEffects method
+  4. Refactor to Strategy pattern (final increment)
 **Blockers**: None
 
 ## Known Issues
@@ -105,4 +118,6 @@
 - **Decision 23**: Test 23 kills the last surviving mutant by testing Sulfuras with negative SellIn=-1 - the mutant was a string mutation on line 68. Mutation score **57%** with **0 survivors** - achieved 100% coverage of tested business logic code! Characterization phase complete, ready for refactoring.
 - **Decision 24**: Before refactoring production code, will first refactor tests for readability. Conducted comprehensive review and identified 5 improvement areas. Clean, understandable tests are essential foundation for confident production code refactoring. Will address: duplication (high impact), magic numbers (high impact), calculated assertions (medium), missing documentation (medium), and repeated strings (low).
 - **Decision 25**: Completed production code refactoring analysis using Absolute Priority Premise. Identified 12 refactorings prioritized by mass reduction potential and risk. Analysis documented in activeContext.md. Ready to implement refactorings after test improvements complete.
+- **Decision 26**: Completed initial production code refactoring phase - 13 refactorings implemented (constants, helper methods, guard clauses). Mutation score: 52.22%. All tests passing.
+- **Decision 27**: Completed comprehensive APP-based refactoring analysis. Identified 8 remaining refactorings prioritized by mass reduction. Strategy pattern planned as final increment for extensibility. Analysis documented in activeContext.md.
 

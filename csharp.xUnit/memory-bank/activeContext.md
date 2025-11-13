@@ -1,20 +1,21 @@
 # Active Context
 
 ## Current Work Focus
-**Test Readability Refactoring Phase** - Improving test code for junior developer comprehension before refactoring production code.
+**Production Code Refactoring Phase** - Improving business logic code for readability, maintainability, and extensibility using Absolute Priority Premise.
 
 ## Recent Changes
 - ✅ Test characterization phase COMPLETE (23 tests, 100% mutation coverage of business logic)
-- ✅ Completed review of test code for readability and junior developer friendliness
-- ✅ Identified 5 key improvement areas in test suite
-- ✅ Mutation tests re-run: 57% score confirmed (57 killed, 0 survived in covered code)
-- ✅ **Extracted helper method** `CreateItemAndUpdateQuality()` to eliminate test boilerplate
-- ✅ **Refactored all 23 tests** to use helper method - reduced duplication significantly
-- ✅ **Added item name constants** (AGED_BRIE, BACKSTAGE_PASSES, SULFURAS, NORMAL_ITEM)
-- ✅ **Replaced all string literals** in tests with constants - eliminates magic strings
-- ✅ **Added quality constants** (MAX_QUALITY, MIN_QUALITY, SULFURAS_QUALITY)
-- ✅ **Replaced quality magic numbers** in assertions and test setup with constants
-- ✅ **Added test class XML documentation** explaining business rules and item behaviors
+- ✅ Test readability improvements COMPLETE (helper methods, constants, documentation)
+- ✅ **Production code refactoring started** - Completed 13 refactorings:
+  - ✅ Extracted all magic number constants (MAX_QUALITY, MIN_QUALITY, BACKSTAGE_TIER2_THRESHOLD, BACKSTAGE_TIER3_THRESHOLD, SELL_BY_DATE)
+  - ✅ Extracted item type check methods (IsAgedBrie, IsBackstagePasses, IsSulfuras)
+  - ✅ Extracted quality boundary check methods (IsQualityBelowMax, IsQualityAboveMin)
+  - ✅ Extracted quality calculation methods (DecreaseQuality, IncreaseQuality, ResetQualityToZero)
+  - ✅ Extracted UpdateSellIn method
+  - ✅ Applied guard clause for Sulfuras (early continue)
+  - ✅ Fixed inefficient quality reset
+- ✅ Mutation tests after refactoring: 52.22% score (47 tested, all tests passing)
+- ✅ **Completed comprehensive APP-based refactoring analysis** - Identified remaining refactorings prioritized by mass reduction
 
 ## Next Steps - Test Refactoring (Immediate)
 1. ~~**Extract helper methods** to reduce duplication~~ ✅ **COMPLETE**
@@ -30,110 +31,106 @@
 4. **Make assertions more expressive** with named variables
 5. **Consider parameterized tests** for similar test patterns
 
-## Production Code Refactoring Analysis (After Test Improvements)
+## Production Code Refactoring Analysis (APP-Based Prioritization)
 
-### Identified Refactorings (Prioritized by Absolute Priority Premise)
+### Completed Refactorings ✅
+1. ✅ **Extract constants** - All magic numbers and strings extracted
+2. ✅ **Extract item type check methods** - IsAgedBrie, IsBackstagePasses, IsSulfuras
+3. ✅ **Extract quality boundary methods** - IsQualityBelowMax, IsQualityAboveMin
+4. ✅ **Extract quality calculation methods** - DecreaseQuality, IncreaseQuality, ResetQualityToZero
+5. ✅ **Extract UpdateSellIn method** - Separated SellIn update logic
+6. ✅ **Apply guard clause for Sulfuras** - Early continue reduces nesting
+7. ✅ **Fix inefficient quality reset** - Replaced with MIN_QUALITY constant
 
-#### Priority 1: Extract Constants (Low Mass Impact, High Clarity)
-**Mass Impact**: Neutral (Constants: 1 → Bindings: 1), but improves maintainability
-1. **Extract item name constants**
-   - `const string AGED_BRIE = "Aged Brie";`
-   - `const string BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";`
-   - `const string SULFURAS = "Sulfuras, Hand of Ragnaros";`
-   - **Benefit**: Eliminates magic strings, reduces typos, improves maintainability
+### Remaining Refactorings (Prioritized by Absolute Priority Premise)
 
-2. **Extract magic number constants**
-   - `const int MAX_QUALITY = 50;`
-   - `const int MIN_QUALITY = 0;`
-   - `const int SULFURAS_QUALITY = 80;`
-   - `const int BACKSTAGE_PASSES_TIER_2_THRESHOLD = 11;`
-   - `const int BACKSTAGE_PASSES_TIER_3_THRESHOLD = 6;`
-   - `const int SELL_BY_DATE = 0;`
-   - **Benefit**: Self-documenting code, easier to modify business rules
+#### Priority 1: Complete Item Type Checks (Low Mass Impact, Completes Pattern)
+**Mass Impact**: Small reduction (Conditional: 4 → Invocation: 2), improves consistency
+1. **Extract IsNormalItem method**
+   - `IsNormalItem(Item item)` → consolidates `!IsAgedBrie(item) && !IsBackstagePasses(item)`
+   - **Mass Reduction**: Replaces compound conditional (4+4=8) with single invocation (2) = -6 mass
+   - **Benefit**: Completes the item type check pattern, improves readability
 
-#### Priority 2: Extract Helper Methods (Reduces Mass: Conditionals → Invocations)
-**Mass Impact**: High reduction (Conditionals: 4 → Invocations: 2 per extraction)
-3. **Extract item type check methods**
-   - `IsAgedBrie(Item item)` → replaces `item.Name != "Aged Brie"` (conditional → invocation)
-   - `IsBackstagePasses(Item item)` → replaces long string comparison
-   - `IsSulfuras(Item item)` → replaces repeated checks
-   - `IsNormalItem(Item item)` → consolidates negative checks
-   - **Mass Reduction**: Each extraction replaces conditional (4) with invocation (2) = -2 mass per use
+#### Priority 2: Extract Item Type Behavior Methods (High Mass Reduction)
+**Mass Impact**: High reduction (Nested conditionals → Single conditional + invocation)
+2. **Extract UpdateNormalItemQuality method**
+   - Handles normal item quality logic (before and after sell-by date)
+   - **Mass Reduction**: Replaces nested conditionals (4×3=12) with single conditional + invocation (4+2=6) = -6 mass
+   - **Benefit**: Separates normal item logic, reduces UpdateQuality complexity
 
-4. **Extract quality boundary check methods**
-   - `IsQualityBelowMax(Item item)` → replaces `item.Quality < 50` (appears 4 times)
-   - `IsQualityAboveMin(Item item)` → replaces `item.Quality > 0` (appears 3 times)
-   - **Mass Reduction**: Reduces repeated conditionals, improves clarity
+3. **Extract UpdateAgedBrieQuality method**
+   - Handles Aged Brie quality logic (before and after sell-by date)
+   - **Mass Reduction**: Replaces nested conditionals (4×2=8) with single conditional + invocation (4+2=6) = -2 mass
+   - **Benefit**: Separates Aged Brie logic, improves clarity
 
-5. **Extract quality calculation methods**
-   - `DecreaseQuality(Item item, int amount = 1)` → consolidates quality decrements
-   - `IncreaseQuality(Item item, int amount = 1)` → consolidates quality increments
-   - `ResetQualityToZero(Item item)` → replaces inefficient `item.Quality - item.Quality`
-   - **Mass Reduction**: Reduces assignments (6) by moving to separate method context
+4. **Extract UpdateBackstagePassesQuality method**
+   - Handles Backstage passes quality logic (tier-based increases, reset after concert)
+   - **Mass Reduction**: Replaces deeply nested conditionals (4×4=16) with single conditional + invocation (4+2=6) = -10 mass
+   - **Benefit**: Consolidates complex tier logic, major simplification
 
-#### Priority 3: Simplify Complex Logic (Reduces Mass: Conditionals + Assignments)
-**Mass Impact**: High reduction (removes nested conditionals and assignments)
-6. **Fix inefficient quality reset**
-   - Current: `Items[i].Quality = Items[i].Quality - Items[i].Quality;` (assignment: 6)
-   - Replace with: `Items[i].Quality = 0;` or use helper method
-   - **Mass Reduction**: Same assignment count but clearer intent
+5. **Extract IsPastSellByDate helper method**
+   - `IsPastSellByDate(Item item)` → replaces `item.SellIn < SELL_BY_DATE`
+   - **Mass Reduction**: Replaces conditional (4) with invocation (2) = -2 mass per use (appears 1 time)
+   - **Benefit**: Improves readability, self-documenting
 
-7. **Extract item type behavior methods** (Strategy pattern preparation)
-   - `UpdateNormalItemQuality(Item item)` → handles normal item logic
-   - `UpdateAgedBrieQuality(Item item)` → handles Aged Brie logic
-   - `UpdateBackstagePassesQuality(Item item)` → handles Backstage passes logic
-   - `UpdateSulfurasQuality(Item item)` → handles Sulfuras (no-op)
-   - **Mass Reduction**: Replaces nested conditionals (4×n) with single conditional + invocation (4 + 2)
+#### Priority 3: Extract Past-Sell-By-Date Logic (Consolidates Complex Logic)
+**Mass Impact**: Medium reduction (Moves nested conditionals to separate method)
+6. **Extract ApplyPastSellByDateEffects method**
+   - Consolidates all past-sell-by-date logic (lines 114-137)
+   - **Mass Reduction**: Moves nested conditionals (4×4=16) to separate method context
+   - **Benefit**: Separates concerns, reduces UpdateQuality method complexity significantly
+   - **Note**: This method will call the item type behavior methods
 
-8. **Extract SellIn update logic**
-   - `UpdateSellIn(Item item)` → separates SellIn decrement from quality logic
-   - **Benefit**: Separates concerns, reduces complexity in main method
+#### Priority 4: Simplify Backstage Passes Tier Logic (Reduce Nesting)
+**Mass Impact**: Small reduction, high clarity improvement
+7. **Simplify Backstage passes tier checks**
+   - Current: Two separate if statements checking SellIn thresholds
+   - Option: Combine into single method `GetBackstagePassesQualityIncrease(Item item)`
+   - **Mass Reduction**: Reduces nested conditionals, improves clarity
+   - **Benefit**: Makes tier logic more explicit and testable
 
-#### Priority 4: Reduce Nesting (Guard Clauses / Early Returns)
-**Mass Impact**: May reduce conditionals, definitely improves clarity
-9. **Apply guard clauses for special items**
-   - Early return for Sulfuras (never changes)
-   - Early handling of special items (Aged Brie, Backstage passes)
-   - **Benefit**: Reduces nesting depth, improves readability (Simple Design Rule #2)
+#### Priority 5: Strategy Pattern (Final Architectural Improvement)
+**Mass Impact**: Increases mass initially (classes/interfaces), but provides extensibility
+8. **Refactor to Strategy Pattern** (Final increment)
+   - Create `IItemUpdateStrategy` interface with `UpdateQuality(Item item)` method
+   - Implement strategies:
+     - `NormalItemStrategy` - handles normal items
+     - `AgedBrieStrategy` - handles Aged Brie
+     - `BackstagePassesStrategy` - handles Backstage passes
+     - `SulfurasStrategy` - no-op (or can be removed with guard clause)
+   - Create `ItemStrategyFactory` to select strategy based on item name
+   - **Mass Impact**: 
+     - Adds: 4 classes (4×2=8), 1 interface (2), factory method (2) = +12 mass
+     - Removes: Complex conditionals in UpdateQuality (4×8=32) = -32 mass
+     - **Net Reduction**: -20 mass, plus improved extensibility
+   - **Benefit**: 
+     - Open/Closed Principle: Easy to add new item types without modifying existing code
+     - Single Responsibility: Each strategy handles one item type
+     - Testability: Each strategy can be tested independently
+     - Maintainability: Clear separation of concerns
 
-10. **Extract past-sell-by-date logic**
-    - `ApplyPastSellByDateEffects(Item item)` → consolidates SellIn < 0 logic
-    - **Mass Reduction**: Moves nested conditionals to separate method
-
-#### Priority 5: Structural Refactoring (Higher Mass Initially, Better Long-term)
-**Mass Impact**: May increase mass initially (class structure), but improves maintainability
-11. **Extract item type behavior into separate methods per type**
-    - `UpdateQualityForNormalItem(Item item, bool isPastSellBy)`
-    - `UpdateQualityForAgedBrie(Item item, bool isPastSellBy)`
-    - `UpdateQualityForBackstagePasses(Item item, bool isPastSellBy)`
-    - `UpdateQualityForSulfuras(Item item)` → no-op
-    - **Benefit**: Clear separation of concerns, easier to extend
-
-12. **Consider Strategy Pattern** (Future consideration)
-    - Create IItemUpdateStrategy interface
-    - Implement per item type (NormalItemStrategy, AgedBrieStrategy, etc.)
-    - **Note**: Increases mass initially but provides extensibility
-    - **Decision**: Defer until after simpler refactorings prove insufficient
-
-### Refactoring Priority Summary (APP-Based)
+### Refactoring Priority Summary (APP-Based, Updated)
 
 **Immediate (High Mass Reduction, Low Risk)**:
-1. Extract constants (Priority 1) - No behavior change, high clarity gain
-2. Extract item type check methods (Priority 2, #3) - Reduces conditionals → invocations
-3. Extract quality boundary methods (Priority 2, #4) - Reduces repeated conditionals
-4. Fix inefficient quality reset (Priority 3, #6) - Simple bug fix
+1. Extract IsNormalItem method (Priority 1) - Completes pattern, -6 mass
+2. Extract UpdateNormalItemQuality method (Priority 2) - Major simplification, -6 mass
+3. Extract UpdateAgedBrieQuality method (Priority 2) - Separates logic, -2 mass
+4. Extract UpdateBackstagePassesQuality method (Priority 2) - Major simplification, -10 mass
 
-**Short-term (Medium Mass Reduction, Medium Risk)**:
-5. Extract quality calculation methods (Priority 2, #5) - Reduces assignments
-6. Extract SellIn update logic (Priority 3, #8) - Separates concerns
-7. Apply guard clauses (Priority 4, #9) - Reduces nesting
+**Short-term (Medium Mass Reduction, High Clarity)**:
+5. Extract IsPastSellByDate helper method (Priority 2) - Improves readability, -2 mass
+6. Simplify Backstage passes tier logic (Priority 4) - Reduces nesting, improves clarity
 
-**Medium-term (Structural Improvements)**:
-8. Extract item type behavior methods (Priority 3, #7) - Major simplification
-9. Extract past-sell-by-date logic (Priority 4, #10) - Consolidates complex logic
+**Medium-term (Structural Improvements, High Impact)**:
+7. Extract ApplyPastSellByDateEffects method (Priority 3) - Consolidates complex logic, major simplification
+   - This will call the item type behavior methods extracted in steps 2-4
 
-**Long-term (Architectural)**:
-10. Full strategy pattern (Priority 5, #12) - Only if needed for extensibility
+**Long-term (Architectural, Final Increment)**:
+8. Refactor to Strategy Pattern (Priority 5) - Final architectural improvement
+   - Net mass reduction: -20 mass
+   - Provides extensibility for future item types
+   - Clear separation of concerns
+   - Each strategy independently testable
 
 ### Implementation Strategy
 - Maintain all tests green throughout refactoring
@@ -143,11 +140,13 @@
 - Prioritize clarity (Simple Design Rule #2) over absolute mass reduction
 
 ## Active Decisions
-- **New Priority**: Improve test readability BEFORE refactoring production code
-- Rationale: Clean, understandable tests are essential for maintaining confidence during production refactoring
-- Following strict TDD: red-green-refactor with commits after each phase
-- Test improvements will be done in small refactoring steps with green tests maintained
-- After test improvements complete, will proceed to production code refactoring
+- ✅ **Completed**: Test readability improvements before production refactoring
+- ✅ **Completed**: Initial production code refactoring (13 refactorings)
+- **Current Priority**: Continue production code refactoring using APP-based prioritization
+- **Rationale**: Remaining refactorings will significantly reduce code complexity and improve maintainability
+- **Strategy Pattern Decision**: Plan to implement Strategy pattern as final increment for extensibility
+- Following strict TDD: one refactoring step per commit
+- Re-run mutation tests after major refactoring phases to verify test effectiveness
 
 ## Test Readability Issues Identified
 1. ~~**Excessive duplication** (High Impact): Every test repeats List<Item>, GildedRose, UpdateQuality(), items[0] boilerplate~~ ✅ **FIXED** - Extracted helper method
