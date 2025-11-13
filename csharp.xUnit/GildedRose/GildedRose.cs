@@ -12,6 +12,7 @@ public class GildedRose
     private const int MIN_QUALITY = 0;
     private const int BACKSTAGE_TIER2_THRESHOLD = 11;
     private const int BACKSTAGE_TIER3_THRESHOLD = 6;
+    private const int SELL_BY_DATE = 0;
 
     IList<Item> Items;
 
@@ -66,7 +67,7 @@ public class GildedRose
                 Items[i].SellIn = Items[i].SellIn - 1;
             }
 
-            if (Items[i].SellIn < 0)
+            if (Items[i].SellIn < SELL_BY_DATE)
             {
                 if (Items[i].Name != "Aged Brie")
                 {
