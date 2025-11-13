@@ -116,6 +116,31 @@ public class GildedRose
         }
     }
 
+    private void ApplyPastSellByDateEffects(Item item)
+    {
+        if (!IsAgedBrie(item))
+        {
+            if (IsNormalItem(item))
+            {
+                if (IsQualityAboveMin(item))
+                {
+                    DecreaseQuality(item);
+                }
+            }
+            else
+            {
+                ResetQualityToZero(item);
+            }
+        }
+        else
+        {
+            if (IsQualityBelowMax(item))
+            {
+                IncreaseQuality(item);
+            }
+        }
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -145,27 +170,7 @@ public class GildedRose
 
             if (IsPastSellByDate(Items[i]))
             {
-                if (!IsAgedBrie(Items[i]))
-                {
-                    if (IsNormalItem(Items[i]))
-                    {
-                        if (IsQualityAboveMin(Items[i]))
-                        {
-                            DecreaseQuality(Items[i]);
-                        }
-                    }
-                    else
-                    {
-                        ResetQualityToZero(Items[i]);
-                    }
-                }
-                else
-                {
-                    if (IsQualityBelowMax(Items[i]))
-                    {
-                        IncreaseQuality(Items[i]);
-                    }
-                }
+                ApplyPastSellByDateEffects(Items[i]);
             }
         }
     }

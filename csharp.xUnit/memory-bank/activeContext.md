@@ -22,6 +22,7 @@
 - ✅ **Extracted UpdateBackstagePassesQuality method** - Consolidates complex tier logic (-10 mass)
 - ✅ Mutation tests after refactoring: 55.21% score (53 tested, 0 survived, all tests passing)
 - ✅ **Extracted IsPastSellByDate helper method** - Improves readability, self-documenting (-2 mass)
+- ✅ **Extracted ApplyPastSellByDateEffects method** - Consolidates past-sell-by-date logic, major simplification
 
 ## Next Steps - Test Refactoring (Immediate)
 1. ~~**Extract helper methods** to reduce duplication~~ ✅ **COMPLETE**
@@ -81,11 +82,11 @@
 
 #### Priority 3: Extract Past-Sell-By-Date Logic (Consolidates Complex Logic)
 **Mass Impact**: Medium reduction (Moves nested conditionals to separate method)
-6. **Extract ApplyPastSellByDateEffects method**
-   - Consolidates all past-sell-by-date logic (lines 114-137)
-   - **Mass Reduction**: Moves nested conditionals (4×4=16) to separate method context
+6. ✅ **Extract ApplyPastSellByDateEffects method** - COMPLETE
+   - Consolidates all past-sell-by-date logic
+   - **Mass Reduction**: Moves nested conditionals to separate method context
    - **Benefit**: Separates concerns, reduces UpdateQuality method complexity significantly
-   - **Note**: This method will call the item type behavior methods
+   - **Note**: This method handles all past-sell-by-date effects for different item types
 
 #### Priority 4: Simplify Backstage Passes Tier Logic (Reduce Nesting)
 **Mass Impact**: Small reduction, high clarity improvement
@@ -128,8 +129,7 @@
 6. Simplify Backstage passes tier logic (Priority 4) - Reduces nesting, improves clarity
 
 **Medium-term (Structural Improvements, High Impact)**:
-7. Extract ApplyPastSellByDateEffects method (Priority 3) - Consolidates complex logic, major simplification
-   - This will call the item type behavior methods extracted in steps 2-4
+7. ✅ Extract ApplyPastSellByDateEffects method (Priority 3) - COMPLETE - Consolidates complex logic, major simplification
 
 **Long-term (Architectural, Final Increment)**:
 8. Refactor to Strategy Pattern (Priority 5) - Final architectural improvement

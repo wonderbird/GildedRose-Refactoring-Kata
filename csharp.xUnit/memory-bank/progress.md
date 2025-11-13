@@ -65,8 +65,7 @@
 - Simplify Backstage passes tier logic - Reduces nesting
 
 **Medium-term (Structural Improvements)**:
-- Extract ApplyPastSellByDateEffects method - Consolidates past-sell-by-date logic
-  - This will call the item type behavior methods
+- ✅ Extract ApplyPastSellByDateEffects method - COMPLETE - Consolidates past-sell-by-date logic
 
 **Long-term (Architectural, Final Increment)**:
 - Refactor to Strategy Pattern - Final architectural improvement
@@ -78,7 +77,7 @@
 ## Current Status
 **Phase**: 🔄 PRODUCTION CODE REFACTORING
 **Tests**: 23 passing
-**Mutation Score**: **55.21%** (53 tested, 0 survived, all tests passing) - After extracting IsPastSellByDate
+**Mutation Score**: **55.67%** (54 tested, 0 survived, all tests passing) - After extracting ApplyPastSellByDateEffects
 **Coverage Quality**: All tests passing, behavior maintained
 **Next Action**: Continue production code refactoring using APP-based prioritization:
   1. Extract IsNormalItem method
