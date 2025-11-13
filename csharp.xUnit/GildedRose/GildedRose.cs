@@ -71,6 +71,14 @@ public class GildedRose
         item.SellIn = item.SellIn - 1;
     }
 
+    private void UpdateNormalItemQuality(Item item)
+    {
+        if (IsQualityAboveMin(item))
+        {
+            DecreaseQuality(item);
+        }
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -82,10 +90,7 @@ public class GildedRose
 
             if (IsNormalItem(Items[i]))
             {
-                if (IsQualityAboveMin(Items[i]))
-                {
-                    DecreaseQuality(Items[i]);
-                }
+                UpdateNormalItemQuality(Items[i]);
             }
             else
             {

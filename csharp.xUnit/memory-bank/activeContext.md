@@ -17,6 +17,7 @@
 - ✅ Mutation tests after refactoring: 52.22% score (47 tested, all tests passing)
 - ✅ **Completed comprehensive APP-based refactoring analysis** - Identified remaining refactorings prioritized by mass reduction
 - ✅ **Extracted IsNormalItem method** - Consolidates !IsAgedBrie && !IsBackstagePasses pattern (-6 mass)
+- ✅ **Extracted UpdateNormalItemQuality method** - Separates normal item quality logic (-6 mass)
 
 ## Next Steps - Test Refactoring (Immediate)
 1. ~~**Extract helper methods** to reduce duplication~~ ✅ **COMPLETE**
@@ -54,8 +55,8 @@
 
 #### Priority 2: Extract Item Type Behavior Methods (High Mass Reduction)
 **Mass Impact**: High reduction (Nested conditionals → Single conditional + invocation)
-2. **Extract UpdateNormalItemQuality method**
-   - Handles normal item quality logic (before and after sell-by date)
+2. ✅ **Extract UpdateNormalItemQuality method** - COMPLETE
+   - Handles normal item quality logic (before sell-by date)
    - **Mass Reduction**: Replaces nested conditionals (4×3=12) with single conditional + invocation (4+2=6) = -6 mass
    - **Benefit**: Separates normal item logic, reduces UpdateQuality complexity
 
