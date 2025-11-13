@@ -10,6 +10,8 @@ public class GildedRose
 
     private const int MAX_QUALITY = 50;
     private const int MIN_QUALITY = 0;
+    private const int BACKSTAGE_TIER2_THRESHOLD = 11;
+    private const int BACKSTAGE_TIER3_THRESHOLD = 6;
 
     IList<Item> Items;
 
@@ -40,7 +42,7 @@ public class GildedRose
 
                     if (Items[i].Name == "Backstage passes to a TAFKAL80ETC concert")
                     {
-                        if (Items[i].SellIn < 11)
+                        if (Items[i].SellIn < BACKSTAGE_TIER2_THRESHOLD)
                         {
                             if (Items[i].Quality < MAX_QUALITY)
                             {
@@ -48,7 +50,7 @@ public class GildedRose
                             }
                         }
 
-                        if (Items[i].SellIn < 6)
+                        if (Items[i].SellIn < BACKSTAGE_TIER3_THRESHOLD)
                         {
                             if (Items[i].Quality < MAX_QUALITY)
                             {
