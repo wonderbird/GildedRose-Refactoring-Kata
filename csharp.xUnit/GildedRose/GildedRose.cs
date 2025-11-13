@@ -79,6 +79,14 @@ public class GildedRose
         }
     }
 
+    private void UpdateAgedBrieQuality(Item item)
+    {
+        if (IsQualityBelowMax(item))
+        {
+            IncreaseQuality(item);
+        }
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -94,12 +102,16 @@ public class GildedRose
             }
             else
             {
-                if (IsQualityBelowMax(Items[i]))
+                if (IsAgedBrie(Items[i]))
                 {
-                    IncreaseQuality(Items[i]);
-
-                    if (IsBackstagePasses(Items[i]))
+                    UpdateAgedBrieQuality(Items[i]);
+                }
+                else if (IsBackstagePasses(Items[i]))
+                {
+                    if (IsQualityBelowMax(Items[i]))
                     {
+                        IncreaseQuality(Items[i]);
+
                         if (Items[i].SellIn < BACKSTAGE_TIER2_THRESHOLD)
                         {
                             if (IsQualityBelowMax(Items[i]))

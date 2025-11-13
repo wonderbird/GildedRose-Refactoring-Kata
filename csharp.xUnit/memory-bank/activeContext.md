@@ -18,6 +18,7 @@
 - ✅ **Completed comprehensive APP-based refactoring analysis** - Identified remaining refactorings prioritized by mass reduction
 - ✅ **Extracted IsNormalItem method** - Consolidates !IsAgedBrie && !IsBackstagePasses pattern (-6 mass)
 - ✅ **Extracted UpdateNormalItemQuality method** - Separates normal item quality logic (-6 mass)
+- ✅ **Extracted UpdateAgedBrieQuality method** - Separates Aged Brie quality logic (-2 mass)
 
 ## Next Steps - Test Refactoring (Immediate)
 1. ~~**Extract helper methods** to reduce duplication~~ ✅ **COMPLETE**
@@ -60,8 +61,8 @@
    - **Mass Reduction**: Replaces nested conditionals (4×3=12) with single conditional + invocation (4+2=6) = -6 mass
    - **Benefit**: Separates normal item logic, reduces UpdateQuality complexity
 
-3. **Extract UpdateAgedBrieQuality method**
-   - Handles Aged Brie quality logic (before and after sell-by date)
+3. ✅ **Extract UpdateAgedBrieQuality method** - COMPLETE
+   - Handles Aged Brie quality logic (before sell-by date)
    - **Mass Reduction**: Replaces nested conditionals (4×2=8) with single conditional + invocation (4+2=6) = -2 mass
    - **Benefit**: Separates Aged Brie logic, improves clarity
 

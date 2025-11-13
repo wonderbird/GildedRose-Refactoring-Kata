@@ -57,7 +57,7 @@
 **Immediate (High Mass Reduction, Low Risk)**:
 - ✅ Extract IsNormalItem method - Completes item type check pattern (-6 mass) - COMPLETE
 - ✅ Extract UpdateNormalItemQuality method - Separates normal item logic (-6 mass) - COMPLETE
-- Extract UpdateAgedBrieQuality method - Separates Aged Brie logic (-2 mass)
+- ✅ Extract UpdateAgedBrieQuality method - Separates Aged Brie logic (-2 mass) - COMPLETE
 - Extract UpdateBackstagePassesQuality method - Consolidates complex tier logic (-10 mass)
 
 **Short-term (Medium Mass Reduction, High Clarity)**:
@@ -78,7 +78,7 @@
 ## Current Status
 **Phase**: 🔄 PRODUCTION CODE REFACTORING
 **Tests**: 23 passing
-**Mutation Score**: **52.75%** (48 tested, all tests passing) - After extracting UpdateNormalItemQuality
+**Mutation Score**: **54.74%** (49 tested, all tests passing) - After extracting UpdateAgedBrieQuality
 **Coverage Quality**: All tests passing, behavior maintained
 **Next Action**: Continue production code refactoring using APP-based prioritization:
   1. Extract IsNormalItem method
