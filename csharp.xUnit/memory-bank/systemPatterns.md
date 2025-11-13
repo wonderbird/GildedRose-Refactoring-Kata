@@ -17,10 +17,12 @@ Current implementation uses procedural conditional logic:
 - Item type discrimination via Name string comparison
 - In-place mutation of item properties
 
-Future refactoring targets:
-- Strategy pattern or polymorphism for item type behaviors
-- Value object pattern for quality/sellin calculations
-- Possibly visitor pattern for update operations
+Future refactoring targets (prioritized by Absolute Priority Premise):
+- **Immediate**: Extract constants, extract item type check methods, extract quality boundary methods
+- **Short-term**: Extract quality calculation methods, extract SellIn update logic, apply guard clauses
+- **Medium-term**: Extract item type behavior methods, extract past-sell-by-date logic
+- **Long-term**: Strategy pattern or polymorphism for item type behaviors (if needed for extensibility)
+- See activeContext.md for detailed prioritized refactoring analysis
 
 ## Component Relationships
 ```
