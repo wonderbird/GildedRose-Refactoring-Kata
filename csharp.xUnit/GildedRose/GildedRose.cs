@@ -46,6 +46,11 @@ public class GildedRose
         return item.Quality > MIN_QUALITY;
     }
 
+    private void DecreaseQuality(Item item, int amount = 1)
+    {
+        item.Quality = item.Quality - amount;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -56,7 +61,7 @@ public class GildedRose
                 {
                     if (!IsSulfuras(Items[i]))
                     {
-                        Items[i].Quality = Items[i].Quality - 1;
+                        DecreaseQuality(Items[i]);
                     }
                 }
             }
@@ -102,7 +107,7 @@ public class GildedRose
                         {
                             if (!IsSulfuras(Items[i]))
                             {
-                                Items[i].Quality = Items[i].Quality - 1;
+                                DecreaseQuality(Items[i]);
                             }
                         }
                     }
