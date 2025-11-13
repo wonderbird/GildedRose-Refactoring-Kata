@@ -36,6 +36,11 @@ public class GildedRose
         return item.Name == SULFURAS;
     }
 
+    private bool IsQualityBelowMax(Item item)
+    {
+        return item.Quality < MAX_QUALITY;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
@@ -52,7 +57,7 @@ public class GildedRose
             }
             else
             {
-                if (Items[i].Quality < MAX_QUALITY)
+                if (IsQualityBelowMax(Items[i]))
                 {
                     Items[i].Quality = Items[i].Quality + 1;
 
@@ -60,7 +65,7 @@ public class GildedRose
                     {
                         if (Items[i].SellIn < BACKSTAGE_TIER2_THRESHOLD)
                         {
-                            if (Items[i].Quality < MAX_QUALITY)
+                            if (IsQualityBelowMax(Items[i]))
                             {
                                 Items[i].Quality = Items[i].Quality + 1;
                             }
@@ -68,7 +73,7 @@ public class GildedRose
 
                         if (Items[i].SellIn < BACKSTAGE_TIER3_THRESHOLD)
                         {
-                            if (Items[i].Quality < MAX_QUALITY)
+                            if (IsQualityBelowMax(Items[i]))
                             {
                                 Items[i].Quality = Items[i].Quality + 1;
                             }
@@ -103,7 +108,7 @@ public class GildedRose
                 }
                 else
                 {
-                    if (Items[i].Quality < MAX_QUALITY)
+                    if (IsQualityBelowMax(Items[i]))
                     {
                         Items[i].Quality = Items[i].Quality + 1;
                     }
