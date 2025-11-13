@@ -102,7 +102,7 @@ public class GildedRose
                 }
             }
 
-            if (Items[i].Name != "Sulfuras, Hand of Ragnaros")
+            if (!IsSulfuras(Items[i]))
             {
                 Items[i].SellIn = Items[i].SellIn - 1;
             }
