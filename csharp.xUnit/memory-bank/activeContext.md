@@ -10,6 +10,8 @@
 - ✅ Mutation tests re-run: 57% score confirmed (57 killed, 0 survived in covered code)
 - ✅ **Extracted helper method** `CreateItemAndUpdateQuality()` to eliminate test boilerplate
 - ✅ **Refactored all 23 tests** to use helper method - reduced duplication significantly
+- ✅ **Added item name constants** (AGED_BRIE, BACKSTAGE_PASSES, SULFURAS, NORMAL_ITEM)
+- ✅ **Replaced all string literals** in tests with constants - eliminates magic strings
 
 ## Next Steps - Test Refactoring (Immediate)
 1. ~~**Extract helper methods** to reduce duplication~~ ✅ **COMPLETE**
@@ -149,7 +151,7 @@
 2. **Magic numbers without context** (High Impact): Values like 20, 49, 80, 10 lack explanation of significance
 3. **Calculated assertions not self-documenting** (Medium Impact): Assert.Equal(19, ...) requires mental math from Quality=20
 4. **Missing business rules documentation** (Medium Impact): No overview of quality bounds, sell-by date, item behaviors
-5. **Long string literals repeated** (Low Impact): "Backstage passes to a TAFKAL80ETC concert" appears 9 times
+5. ~~**Long string literals repeated** (Low Impact): "Backstage passes to a TAFKAL80ETC concert" appears 9 times~~ ✅ **FIXED** - Replaced with constants
 
 ## Important Patterns
 - Arrange-Act-Assert test structure
