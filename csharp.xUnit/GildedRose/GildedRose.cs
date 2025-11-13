@@ -70,14 +70,16 @@ public class GildedRose
     {
         for (var i = 0; i < Items.Count; i++)
         {
+            if (IsSulfuras(Items[i]))
+            {
+                continue;
+            }
+
             if (!IsAgedBrie(Items[i]) && !IsBackstagePasses(Items[i]))
             {
                 if (IsQualityAboveMin(Items[i]))
                 {
-                    if (!IsSulfuras(Items[i]))
-                    {
-                        DecreaseQuality(Items[i]);
-                    }
+                    DecreaseQuality(Items[i]);
                 }
             }
             else
@@ -107,10 +109,7 @@ public class GildedRose
                 }
             }
 
-            if (!IsSulfuras(Items[i]))
-            {
-                UpdateSellIn(Items[i]);
-            }
+            UpdateSellIn(Items[i]);
 
             if (Items[i].SellIn < SELL_BY_DATE)
             {
@@ -120,10 +119,7 @@ public class GildedRose
                     {
                         if (IsQualityAboveMin(Items[i]))
                         {
-                            if (!IsSulfuras(Items[i]))
-                            {
-                                DecreaseQuality(Items[i]);
-                            }
+                            DecreaseQuality(Items[i]);
                         }
                     }
                     else
