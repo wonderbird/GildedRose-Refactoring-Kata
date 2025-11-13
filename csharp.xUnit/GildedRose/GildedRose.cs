@@ -21,11 +21,16 @@ public class GildedRose
         this.Items = Items;
     }
 
+    private bool IsAgedBrie(Item item)
+    {
+        return item.Name == AGED_BRIE;
+    }
+
     public void UpdateQuality()
     {
         for (var i = 0; i < Items.Count; i++)
         {
-            if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
+            if (!IsAgedBrie(Items[i]) && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
             {
                 if (Items[i].Quality > MIN_QUALITY)
                 {
@@ -69,7 +74,7 @@ public class GildedRose
 
             if (Items[i].SellIn < SELL_BY_DATE)
             {
-                if (Items[i].Name != "Aged Brie")
+                if (!IsAgedBrie(Items[i]))
                 {
                     if (Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
                     {
