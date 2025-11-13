@@ -4,6 +4,25 @@ using GildedRoseKata;
 
 namespace GildedRoseTests;
 
+/// <summary>
+/// Tests for the Gilded Rose inventory management system.
+/// 
+/// Business Rules:
+/// - Quality bounds: Most items have quality between 0 and 50 (inclusive).
+///   Sulfuras is an exception with quality fixed at 80.
+/// - Sell-by date: When SellIn reaches 0, the item is past its sell-by date.
+///   Negative SellIn values indicate items well past their sell-by date.
+/// 
+/// Item Type Behaviors:
+/// - Normal items: Quality decreases by 1 per day, by 2 after sell-by date.
+/// - Aged Brie: Quality increases by 1 per day, by 2 after sell-by date.
+/// - Backstage passes: Quality increases based on SellIn:
+///   * SellIn > 10: +1 per day
+///   * 6 <= SellIn <= 10: +2 per day
+///   * 1 <= SellIn <= 5: +3 per day
+///   * SellIn <= 0: Quality drops to 0
+/// - Sulfuras: Legendary item that never changes (quality and SellIn remain constant).
+/// </summary>
 public class GildedRoseTest
 {
     private const string AGED_BRIE = "Aged Brie";
