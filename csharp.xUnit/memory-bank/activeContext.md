@@ -23,6 +23,7 @@
 - ✅ Mutation tests after refactoring: 55.21% score (53 tested, 0 survived, all tests passing)
 - ✅ **Extracted IsPastSellByDate helper method** - Improves readability, self-documenting (-2 mass)
 - ✅ **Extracted ApplyPastSellByDateEffects method** - Consolidates past-sell-by-date logic, major simplification
+- ✅ **Simplified Backstage passes tier logic** - Extracted GetBackstagePassesQualityIncrease method, reduces nesting and improves clarity
 
 ## Next Steps - Test Refactoring (Immediate)
 1. ~~**Extract helper methods** to reduce duplication~~ ✅ **COMPLETE**
@@ -90,11 +91,10 @@
 
 #### Priority 4: Simplify Backstage Passes Tier Logic (Reduce Nesting)
 **Mass Impact**: Small reduction, high clarity improvement
-7. **Simplify Backstage passes tier checks**
-   - Current: Two separate if statements checking SellIn thresholds
-   - Option: Combine into single method `GetBackstagePassesQualityIncrease(Item item)`
+7. ✅ **Simplify Backstage passes tier checks** - COMPLETE
+   - Extracted `GetBackstagePassesQualityIncrease(Item item)` method
    - **Mass Reduction**: Reduces nested conditionals, improves clarity
-   - **Benefit**: Makes tier logic more explicit and testable
+   - **Benefit**: Makes tier logic more explicit and testable, calculates total increase amount
 
 #### Priority 5: Strategy Pattern (Final Architectural Improvement)
 **Mass Impact**: Increases mass initially (classes/interfaces), but provides extensibility
@@ -126,7 +126,7 @@
 
 **Short-term (Medium Mass Reduction, High Clarity)**:
 5. ✅ Extract IsPastSellByDate helper method (Priority 2) - COMPLETE - Improves readability, -2 mass
-6. Simplify Backstage passes tier logic (Priority 4) - Reduces nesting, improves clarity
+6. ✅ Simplify Backstage passes tier logic (Priority 4) - COMPLETE - Reduces nesting, improves clarity
 
 **Medium-term (Structural Improvements, High Impact)**:
 7. ✅ Extract ApplyPastSellByDateEffects method (Priority 3) - COMPLETE - Consolidates complex logic, major simplification

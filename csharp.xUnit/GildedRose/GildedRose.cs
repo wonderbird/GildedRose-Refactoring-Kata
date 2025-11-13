@@ -92,27 +92,27 @@ public class GildedRose
         }
     }
 
+    private int GetBackstagePassesQualityIncrease(Item item)
+    {
+        if (item.SellIn < BACKSTAGE_TIER3_THRESHOLD)
+        {
+            return 3;
+        }
+        if (item.SellIn < BACKSTAGE_TIER2_THRESHOLD)
+        {
+            return 2;
+        }
+        return 1;
+    }
+
     private void UpdateBackstagePassesQuality(Item item)
     {
         if (IsQualityBelowMax(item))
         {
-            IncreaseQuality(item);
-
-            if (item.SellIn < BACKSTAGE_TIER2_THRESHOLD)
-            {
-                if (IsQualityBelowMax(item))
-                {
-                    IncreaseQuality(item);
-                }
-            }
-
-            if (item.SellIn < BACKSTAGE_TIER3_THRESHOLD)
-            {
-                if (IsQualityBelowMax(item))
-                {
-                    IncreaseQuality(item);
-                }
-            }
+            int increaseAmount = GetBackstagePassesQualityIncrease(item);
+            int maxIncrease = MAX_QUALITY - item.Quality;
+            int actualIncrease = increaseAmount < maxIncrease ? increaseAmount : maxIncrease;
+            IncreaseQuality(item, actualIncrease);
         }
     }
 

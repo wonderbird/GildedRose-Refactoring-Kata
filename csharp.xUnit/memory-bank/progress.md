@@ -62,7 +62,7 @@
 
 **Short-term (Medium Mass Reduction, High Clarity)**:
 - ✅ Extract IsPastSellByDate helper method - COMPLETE - Improves readability (-2 mass)
-- Simplify Backstage passes tier logic - Reduces nesting
+- ✅ Simplify Backstage passes tier logic - COMPLETE - Reduces nesting, improves clarity
 
 **Medium-term (Structural Improvements)**:
 - ✅ Extract ApplyPastSellByDateEffects method - COMPLETE - Consolidates past-sell-by-date logic
@@ -77,7 +77,7 @@
 ## Current Status
 **Phase**: 🔄 PRODUCTION CODE REFACTORING
 **Tests**: 23 passing
-**Mutation Score**: **55.67%** (54 tested, 0 survived, all tests passing) - After extracting ApplyPastSellByDateEffects
+**Mutation Score**: **56.00%** (57 tested, 0 survived, all tests passing) - After simplifying Backstage passes tier logic
 **Coverage Quality**: All tests passing, behavior maintained
 **Next Action**: Continue production code refactoring using APP-based prioritization:
   1. Extract IsNormalItem method
