@@ -104,10 +104,10 @@ public class GildedRose
         {
             return new BackstagePassUpdater();
         }
-        if (item.Name != "Sulfuras, Hand of Ragnaros")
+        if (item.Name == "Sulfuras, Hand of Ragnaros")
         {
-            return new RegularItemUpdater();
+            return new SulfurasUpdater();
         }
-        return null;
+        return new RegularItemUpdater();
     }
 }
