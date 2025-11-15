@@ -34,4 +34,24 @@ public class GildedRoseTest
         Assert.Equal(8, Items[0].Quality);
         Assert.Equal(-1, Items[0].SellIn);
     }
+
+    [Fact]
+    public void AgedBrie_QualityIncreasesByOne_WhenSellInIsPositive()
+    {
+        IList<Item> Items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 5, Quality = 10 } };
+        GildedRose app = new GildedRose(Items);
+        app.UpdateQuality();
+        Assert.Equal(11, Items[0].Quality);
+        Assert.Equal(4, Items[0].SellIn);
+    }
+
+    [Fact]
+    public void AgedBrie_QualityIncreasesByTwo_WhenExpired()
+    {
+        IList<Item> Items = new List<Item> { new Item { Name = "Aged Brie", SellIn = 0, Quality = 10 } };
+        GildedRose app = new GildedRose(Items);
+        app.UpdateQuality();
+        Assert.Equal(12, Items[0].Quality);
+        Assert.Equal(-1, Items[0].SellIn);
+    }
 }
