@@ -111,5 +111,45 @@ public class ItemUpdaterTest
         Assert.Equal(50, item.Quality);
         Assert.Equal(-1, item.SellIn);
     }
+
+    [Fact]
+    public void BackstagePassUpdater_IncreasesQualityByOne_WhenSellInGreaterThanTen()
+    {
+        var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 15, Quality = 10 };
+        IItemUpdater updater = new BackstagePassUpdater();
+        updater.Update(item);
+        Assert.Equal(11, item.Quality);
+        Assert.Equal(14, item.SellIn);
+    }
+
+    [Fact]
+    public void BackstagePassUpdater_IncreasesQualityByTwo_WhenSellInBetweenSixAndTen()
+    {
+        var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 10, Quality = 10 };
+        IItemUpdater updater = new BackstagePassUpdater();
+        updater.Update(item);
+        Assert.Equal(12, item.Quality);
+        Assert.Equal(9, item.SellIn);
+    }
+
+    [Fact]
+    public void BackstagePassUpdater_IncreasesQualityByThree_WhenSellInBetweenOneAndFive()
+    {
+        var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 10 };
+        IItemUpdater updater = new BackstagePassUpdater();
+        updater.Update(item);
+        Assert.Equal(13, item.Quality);
+        Assert.Equal(4, item.SellIn);
+    }
+
+    [Fact]
+    public void BackstagePassUpdater_DropsQualityToZero_WhenExpired()
+    {
+        var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 0, Quality = 10 };
+        IItemUpdater updater = new BackstagePassUpdater();
+        updater.Update(item);
+        Assert.Equal(0, item.Quality);
+        Assert.Equal(-1, item.SellIn);
+    }
 }
 
