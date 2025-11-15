@@ -15,6 +15,13 @@ public class GildedRose
     {
         for (var i = 0; i < Items.Count; i++)
         {
+            var updater = GetUpdater(Items[i]);
+            if (updater != null)
+            {
+                updater.Update(Items[i]);
+                continue;
+            }
+
             if (Items[i].Name != "Aged Brie" && Items[i].Name != "Backstage passes to a TAFKAL80ETC concert")
             {
                 if (Items[i].Quality > 0)
@@ -85,5 +92,16 @@ public class GildedRose
                 }
             }
         }
+    }
+
+    private IItemUpdater GetUpdater(Item item)
+    {
+        if (item.Name != "Aged Brie" && 
+            item.Name != "Backstage passes to a TAFKAL80ETC concert" && 
+            item.Name != "Sulfuras, Hand of Ragnaros")
+        {
+            return new RegularItemUpdater();
+        }
+        return null;
     }
 }
