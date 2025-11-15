@@ -8,8 +8,10 @@ Implementing comprehensive test coverage before refactoring production code with
 - Fixed ApprovalTest.Foo verification file (was empty, now matches received output)
 - Task 1.2 completed: Added tests for regular items (quality decrease when sellIn > 0, double decrease when expired)
 - Task 1.3 completed: Added tests for Aged Brie (quality increase when sellIn > 0, double increase when expired)
-- All tests passing (7/7)
-- Mutation test score: 99.00% (1 surviving mutant in Program.cs - false positive)
+- Task 1.4 completed: Added tests for Backstage passes (all 4 scenarios covered)
+- Task 1.5 completed: Added test for Sulfuras (verifies never changes - quality=80, sellIn unchanged)
+- All tests passing (12/12)
+- Mutation test score: 99.00% (1 surviving mutant - false positive in Program.cs)
 
 ## Next Steps
 
@@ -35,20 +37,20 @@ Before any code changes, ensure comprehensive test coverage. Each test follows T
 - Green: Verify existing code passes ✅
 - Refactor: N/A (tests only)
 
-**Task 1.4: Test Backstage Passes**
-- Red: Write test for Backstage pass with sellIn > 10
-- Green: Verify existing code passes
-- Red: Write test for Backstage pass with sellIn 6-10 (double increase)
-- Green: Verify existing code passes
-- Red: Write test for Backstage pass with sellIn 1-5 (triple increase)
-- Green: Verify existing code passes
-- Red: Write test for expired Backstage pass (quality = 0)
-- Green: Verify existing code passes
+**Task 1.4: Test Backstage Passes** ✅ COMPLETED
+- Red: Write test for Backstage pass with sellIn > 10 ✅
+- Green: Verify existing code passes ✅
+- Red: Write test for Backstage pass with sellIn 6-10 (double increase) ✅
+- Green: Verify existing code passes ✅
+- Red: Write test for Backstage pass with sellIn 1-5 (triple increase) ✅
+- Green: Verify existing code passes ✅
+- Red: Write test for expired Backstage pass (quality = 0) ✅
+- Green: Verify existing code passes ✅
 - Refactor: N/A (tests only)
 
-**Task 1.5: Test Sulfuras**
-- Red: Write test verifying Sulfuras never changes
-- Green: Verify existing code passes
+**Task 1.5: Test Sulfuras** ✅ COMPLETED
+- Red: Write test verifying Sulfuras never changes ✅
+- Green: Verify existing code passes ✅
 - Refactor: N/A (tests only)
 
 **Task 1.6: Test Conjured items (if applicable)**
