@@ -6,7 +6,8 @@ Implementing comprehensive test coverage before refactoring production code with
 ## Recent Changes
 - Task 1.1 completed: Fixed GildedRoseTest.foo assertion (changed from "fixme" to "foo")
 - Fixed ApprovalTest.Foo verification file (was empty, now matches received output)
-- All tests passing (3/3)
+- Task 1.2 completed: Added tests for regular items (quality decrease when sellIn > 0, double decrease when expired)
+- All tests passing (5/5)
 - Mutation test score: 99.00% (1 surviving mutant in Program.cs - false positive)
 
 ## Next Steps
@@ -19,11 +20,11 @@ Before any code changes, ensure comprehensive test coverage. Each test follows T
 - Green: Fixed assertion to verify name remains "foo" ✅
 - Also fixed ApprovalTest.Foo verification file ✅
 
-**Task 1.2: Test regular items**
-- Red: Write test for regular item quality decrease
-- Green: Verify existing code passes
-- Red: Write test for expired regular item (double decrease)
-- Green: Verify existing code passes
+**Task 1.2: Test regular items** ✅ COMPLETED
+- Red: Write test for regular item quality decrease ✅
+- Green: Verify existing code passes ✅
+- Red: Write test for expired regular item (double decrease) ✅
+- Green: Verify existing code passes ✅
 - Refactor: N/A (tests only)
 
 **Task 1.3: Test Aged Brie**
