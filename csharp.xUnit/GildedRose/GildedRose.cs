@@ -100,8 +100,11 @@ public class GildedRose
         {
             return new AgedBrieUpdater();
         }
-        if (item.Name != "Backstage passes to a TAFKAL80ETC concert" && 
-            item.Name != "Sulfuras, Hand of Ragnaros")
+        if (item.Name == "Backstage passes to a TAFKAL80ETC concert")
+        {
+            return new BackstagePassUpdater();
+        }
+        if (item.Name != "Sulfuras, Hand of Ragnaros")
         {
             return new RegularItemUpdater();
         }
