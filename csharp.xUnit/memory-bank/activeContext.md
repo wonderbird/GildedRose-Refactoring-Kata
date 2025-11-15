@@ -10,7 +10,8 @@ Implementing comprehensive test coverage before refactoring production code with
 - Task 1.3 completed: Added tests for Aged Brie (quality increase when sellIn > 0, double increase when expired)
 - Task 1.4 completed: Added tests for Backstage passes (all 4 scenarios covered)
 - Task 1.5 completed: Added test for Sulfuras (verifies never changes - quality=80, sellIn unchanged)
-- All tests passing (12/12)
+- Task 1.6 completed: Added tests for Conjured items (verifies current behavior - same as regular items)
+- All tests passing (14/14)
 - Mutation test score: 99.00% (1 surviving mutant - false positive in Program.cs)
 
 ## Next Steps
@@ -53,9 +54,10 @@ Before any code changes, ensure comprehensive test coverage. Each test follows T
 - Green: Verify existing code passes ✅
 - Refactor: N/A (tests only)
 
-**Task 1.6: Test Conjured items (if applicable)**
-- Red: Write test for Conjured item behavior
-- Green: Verify or document expected behavior
+**Task 1.6: Test Conjured items** ✅ COMPLETED
+- Red: Write test for Conjured item behavior ✅
+- Green: Verify or document expected behavior ✅
+- Note: Current implementation treats Conjured items like regular items (decreases by 1 when sellIn > 0, by 2 when expired). The "twice as fast" requirement mentioned in product context is not yet implemented.
 - Refactor: N/A (tests only)
 
 ### Phase 2: Refactoring with Strategy Pattern (TDD)
