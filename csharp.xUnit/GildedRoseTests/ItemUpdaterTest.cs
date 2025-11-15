@@ -71,5 +71,45 @@ public class ItemUpdaterTest
         Assert.Equal(9, item.Quality);
         Assert.Equal(0, item.SellIn);
     }
+
+    [Fact]
+    public void AgedBrieUpdater_IncreasesQualityByOne_WhenSellInIsPositive()
+    {
+        var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 10 };
+        IItemUpdater updater = new AgedBrieUpdater();
+        updater.Update(item);
+        Assert.Equal(11, item.Quality);
+        Assert.Equal(4, item.SellIn);
+    }
+
+    [Fact]
+    public void AgedBrieUpdater_IncreasesQualityByTwo_WhenExpired()
+    {
+        var item = new Item { Name = "Aged Brie", SellIn = 0, Quality = 10 };
+        IItemUpdater updater = new AgedBrieUpdater();
+        updater.Update(item);
+        Assert.Equal(12, item.Quality);
+        Assert.Equal(-1, item.SellIn);
+    }
+
+    [Fact]
+    public void AgedBrieUpdater_DoesNotIncreaseQuality_WhenQualityIsFifty()
+    {
+        var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 50 };
+        IItemUpdater updater = new AgedBrieUpdater();
+        updater.Update(item);
+        Assert.Equal(50, item.Quality);
+        Assert.Equal(4, item.SellIn);
+    }
+
+    [Fact]
+    public void AgedBrieUpdater_DoesNotIncreaseQualityAboveFifty_WhenExpired()
+    {
+        var item = new Item { Name = "Aged Brie", SellIn = 0, Quality = 49 };
+        IItemUpdater updater = new AgedBrieUpdater();
+        updater.Update(item);
+        Assert.Equal(50, item.Quality);
+        Assert.Equal(-1, item.SellIn);
+    }
 }
 
