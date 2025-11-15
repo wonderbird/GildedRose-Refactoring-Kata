@@ -151,5 +151,15 @@ public class ItemUpdaterTest
         Assert.Equal(0, item.Quality);
         Assert.Equal(-1, item.SellIn);
     }
+
+    [Fact]
+    public void SulfurasUpdater_NeverChanges_WhenUpdated()
+    {
+        var item = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 };
+        IItemUpdater updater = new SulfurasUpdater();
+        updater.Update(item);
+        Assert.Equal(80, item.Quality);
+        Assert.Equal(0, item.SellIn);
+    }
 }
 
