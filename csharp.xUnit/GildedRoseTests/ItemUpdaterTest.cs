@@ -161,5 +161,37 @@ public class ItemUpdaterTest
         Assert.Equal(80, item.Quality);
         Assert.Equal(0, item.SellIn);
     }
+
+    [Fact]
+    public void UpdaterFactory_ReturnsAgedBrieUpdater_ForAgedBrie()
+    {
+        var item = new Item { Name = "Aged Brie", SellIn = 5, Quality = 10 };
+        var updater = UpdaterFactory.GetUpdater(item);
+        Assert.IsType<AgedBrieUpdater>(updater);
+    }
+
+    [Fact]
+    public void UpdaterFactory_ReturnsBackstagePassUpdater_ForBackstagePass()
+    {
+        var item = new Item { Name = "Backstage passes to a TAFKAL80ETC concert", SellIn = 5, Quality = 10 };
+        var updater = UpdaterFactory.GetUpdater(item);
+        Assert.IsType<BackstagePassUpdater>(updater);
+    }
+
+    [Fact]
+    public void UpdaterFactory_ReturnsSulfurasUpdater_ForSulfuras()
+    {
+        var item = new Item { Name = "Sulfuras, Hand of Ragnaros", SellIn = 0, Quality = 80 };
+        var updater = UpdaterFactory.GetUpdater(item);
+        Assert.IsType<SulfurasUpdater>(updater);
+    }
+
+    [Fact]
+    public void UpdaterFactory_ReturnsRegularItemUpdater_ForRegularItem()
+    {
+        var item = new Item { Name = "Regular Item", SellIn = 5, Quality = 10 };
+        var updater = UpdaterFactory.GetUpdater(item);
+        Assert.IsType<RegularItemUpdater>(updater);
+    }
 }
 
